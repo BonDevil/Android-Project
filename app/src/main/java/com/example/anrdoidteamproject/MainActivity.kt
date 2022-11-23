@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.anrdoidteamproject.ui.theme.AnrdoidTeamProjectTheme
+import com.example.anrdoidteamproject.interfaces.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,11 +19,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             AnrdoidTeamProjectTheme {
                 // A surface container using the 'background' color from the theme
+                var bscren = BaseScreen()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    bscren.mainScreen()
                 }
             }
         }
@@ -37,7 +38,8 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
+    var jd = BaseScreen()
     AnrdoidTeamProjectTheme {
-        Greeting("Android")
+        jd.mainScreen()
     }
 }

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 class Stats : BaseScreen() {
 
     @Composable
-    override fun topBar(){
+    override fun topBar(message: String) {
 
     }
 

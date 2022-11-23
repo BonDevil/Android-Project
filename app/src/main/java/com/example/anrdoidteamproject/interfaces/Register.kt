@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 class Register : BaseScreen() {
 
     @Composable
-    override fun topBar(){
+    override fun topBar(message: String) {
 
     }
 

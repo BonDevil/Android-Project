@@ -5,17 +5,17 @@ import androidx.compose.runtime.Composable
 class AddCategory : BaseScreen() {
 
     @Composable
-    override fun topBar(){
+    override fun topBar(message: String) {
 
     }
 
     @Composable
-    override fun bottomBar(){
+    override fun bottomBar() {
 
     }
 
     @Composable
-    override fun mainScreen(){
+    override fun mainScreen() {
 
     }
 }

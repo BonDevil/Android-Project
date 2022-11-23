@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -17,6 +18,9 @@ import com.example.anrdoidteamproject.R
 
 open class BaseScreen {
 
+    val FontCentury = FontFamily(
+        Font(R.font.century_gothic)
+    )
     @Composable
     open fun topBar(message: String) {
         Row(
@@ -30,7 +34,8 @@ open class BaseScreen {
             Text(
                 text = message,
 //                zmienic fonta na ten century gothic, cos nie wyszukuje
-                fontFamily = FontFamily.SansSerif,
+//                chyba działa juz ale nie wiem czy poprawnie
+                fontFamily = FontCentury,
                 fontSize = 40.sp,
                 fontWeight = FontWeight(750),
                 color = Color.White
@@ -81,7 +86,7 @@ open class BaseScreen {
                 modifier = Modifier
                     .fillMaxWidth()
 //                        zrobic zeby to sie robilo dynamicznie
-                    .height(500.dp)
+                    .height(1010.dp)
                     .background(color = Color(0xff181f36))){
 
             }

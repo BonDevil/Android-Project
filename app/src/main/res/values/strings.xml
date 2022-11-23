@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">AnrdoidTeamProject</string>
+    <string name="znajomi">ZNAJOMI</string>
+    <string name="dodaj_znajomych">DODAJ ZNAJOMYCH</string>
+    <string name="dodaj_wycieczke">DODAJ WYCIECZKĘ</string>
+    <string name="dodaj_kategorie">DODAJ KATEGORIĘ</string>
+    <string name="wycieczki">WYCIECZKI</string>
+    <string name="konto">KONTO</string>
+    <string name="zwroc_koszty">ZWRÓĆ KOSZTY</string>
+    <string name="historia">HISTORIA</string>
+    <string name="bilans">BILANS</string>
+    <string name="ustawienia">USTAWIENIA</string>
+    <string name="logowanie">LOGOWANIE</string>
+    <string name="rejestracja">REJESTRACJA</string>
+    <string name="edytuj_wydatek">EDYTUJ WYDATEK</string>
+    <string name="email">E-mail</string>
+    <string name="haslo">Hasło</string>
+    <string name="powtorz_haslo">Powtórz hasło</string>
+    <string name="telefon">Numer telefonu</string>
+    <string name="jezyk">Język</string>
+    <string name="nazwa">Nazwa</string>
+    <string name="imie">Imię</string>
+    <string name="nazwisko">Nazwisko</string>
+    <string name="kategoria">Kategoria</string>
+    <string name="kwota">Kwota</string>
+    <string name="opis">Opis</string>
+    <string name="planowana_kwota">Planowana kwota</string>
+    <string name="ilosc_dni">Ilość dni</string>
+    <string name="dodaj_ikone">Dodaj ikonę</string>
+    <string name="wybierz_kolor">Wybierz kolor</string>
+    <string name="email_zacheta">Podaj e-mail lub numer telefonu znajomego</string>
+    <string name="powinien_zwrocic">powinien(na) zwrócić dla</string>
+    <string name="logwanie_zacheta">Zaloguj się</string>
+    <string name="rejestracja_zacheta">Zarejestruj się</string>
 </resources>

@@ -2,14 +2,19 @@ package com.example.anrdoidteamproject.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.anrdoidteamproject.R
 
 // Set of Material typography styles to start with
+val FontCentury = FontFamily(
+    Font(R.font.century_gothic)
+)
 val Typography = Typography(
     body1 = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = FontCentury,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     )

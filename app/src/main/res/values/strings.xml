@@ -39,4 +39,12 @@
     <string name="niemiecki">Niemiecki</string>
     <string name="wloski">Włoski</string>
     <string name="hiszpanski">Hiszpański</string>
+    <string name="cat_jedzenie">Jedzenie</string>
+    <string name="cat_spanie">Spanie</string>
+    <string name="cat_napoje">Napoje</string>
+    <string name="cat_atrakcje">Atrakcje</string>
+    <string name="cat_samolot">Samolot</string>
+    <string name="cat_transport">Transport</string>
+
+
 </resources>

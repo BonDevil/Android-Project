@@ -15,14 +15,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.ui.theme.PasswordTextField
+import com.example.anrdoidteamproject.ui.theme.SimpleTextField
 import com.example.anrdoidteamproject.ui.theme.topBar
 
 
@@ -62,7 +60,7 @@ fun LogInList() {
             fontSize = 30.sp,
         )
         Spacer(modifier = Modifier.height(15.dp))
-        RegisterPasswordTextField()
+        PasswordTextField(KeyboardOptions())
 
         Spacer(modifier = Modifier.height(60.dp))
         OutlinedButton(
@@ -92,45 +90,6 @@ fun LogInList() {
     }
 }
 
-
-@Composable
-fun LogInPasswordTextField() {
-    Column(
-    ) {
-        var password by rememberSaveable { mutableStateOf("") }
-        var passwordVisibility by remember { mutableStateOf(false) }
-
-        val icon = if (passwordVisibility)
-            painterResource(id = R.drawable.design_ic_visibility)
-        else
-            painterResource(id = R.drawable.design_ic_visibility_off)
-        OutlinedTextField(
-            value = password,
-            onValueChange = {
-                password = it
-            },
-            textStyle = TextStyle(color = Color.White, fontSize = 30.sp),
-            placeholder = { Text(text = "Password", color = Color.White, fontSize = 30.sp) },
-
-            trailingIcon = {
-                IconButton(onClick = {
-                    passwordVisibility = !passwordVisibility
-                }) {
-                    Icon(
-                        painter = icon,
-                        contentDescription = "Visibility Icon"
-                    )
-                }
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password
-            ),
-            visualTransformation = if (passwordVisibility) VisualTransformation.None
-            else PasswordVisualTransformation()
-
-        )
-    }
-}
 
 @Composable
 fun LogIn() {

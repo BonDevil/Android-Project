@@ -1,5 +1,8 @@
 package com.example.anrdoidteamproject
 
+import androidx.compose.runtime.Composable
+import com.example.anrdoidteamproject.ui.TripsList
+
 enum class AppScreens() {
     AddCategory,
     AddExpense,
@@ -18,4 +21,9 @@ enum class AppScreens() {
     TransferFunds,
     TripsList,
     UserInfo
+}
+
+@Composable
+fun MainApp(){
+    TripsList()
 }

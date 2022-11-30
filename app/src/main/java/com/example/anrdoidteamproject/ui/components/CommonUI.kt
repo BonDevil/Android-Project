@@ -162,3 +162,24 @@ fun PasswordTextField(
         )
     }
 }
+
+
+@Composable
+fun PromptButton(
+    @StringRes label: Int,
+    ) {
+    OutlinedButton(
+        onClick = { /*TODO*/ },
+        Modifier.width(250.dp),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color(26, 51, 101),
+            disabledBackgroundColor = Color(70, 99, 255),
+        )
+    ) {
+        Text(
+            text = stringResource(label),
+            fontSize = 30.sp,
+            color = Color.White
+        )
+    }
+}

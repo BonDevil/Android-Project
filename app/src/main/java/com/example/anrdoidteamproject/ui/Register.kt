@@ -17,10 +17,7 @@ import com.example.anrdoidteamproject.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.anrdoidteamproject.ui.theme.PasswordTextField
-import com.example.anrdoidteamproject.ui.theme.SimpleTextField
-import com.example.anrdoidteamproject.ui.theme.TextFieldWithLabel
-import com.example.anrdoidteamproject.ui.theme.topBar
+import com.example.anrdoidteamproject.ui.theme.*
 
 
 @Composable
@@ -95,18 +92,7 @@ fun RegisterList() {
         )
 
         Spacer(modifier = Modifier.height(60.dp))
-        OutlinedButton(
-            onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color(89, 128, 255),
-                disabledBackgroundColor = Color(70, 99, 255),
-            )
-        ) {
-            Text(
-                text = stringResource(R.string.rejestracja_zacheta),
-                fontSize = 24.sp,
-                color = Color.White
-            )
-        }
+        PromptButton(label = R.string.rejestracja_zacheta)
     }
 }
 

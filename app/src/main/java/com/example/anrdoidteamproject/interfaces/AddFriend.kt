@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 
-class AddCategory : BaseScreen() {
+class AddFriend : BaseScreen() {
 
 
     @Composable
-    open fun category_valus() {
+    open fun add() {
 
         Column(
             modifier = Modifier
@@ -37,37 +37,12 @@ class AddCategory : BaseScreen() {
         {
 
             Text(
-                text = stringResource(R.string.nazwa),
+                text = stringResource(R.string.podaj_e_mail_itd),
                 color = Color.White,
                 fontSize = 30.sp,
             )
             Spacer(modifier = Modifier.height(15.dp))
             SimpleTextField()
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(R.string.opis),
-                color = Color.White,
-                fontSize = 30.sp,
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            SimpleTextField()
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(R.string.dodaj_ikone),
-                color = Color.White,
-                fontSize = 30.sp,
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            /// TODO:  Dodac dodawanie ikony
-            Spacer(modifier = Modifier.height(60.dp))
-            Text(
-                text = stringResource(R.string.wybierz_kolor),
-                color = Color.White,
-                fontSize = 30.sp,
-            )
-            Spacer(modifier = Modifier.height(60.dp))
-            // TODO: Dodac wybieranie koloru 
-            Spacer(modifier = Modifier.height(60.dp))
 
         }
     }
@@ -93,13 +68,13 @@ class AddCategory : BaseScreen() {
     @Composable
     override fun mainScreen() {
         Column() {
-            topBar(message = stringResource(R.string.dodaj_kategorie))
+            topBar(message = stringResource(R.string.dodaj_znajomych))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(0.925f)
                     .background(color = Color(0xff181f36))){
-                    category_valus()
+                    add()
             }
             bottomBar()
         }

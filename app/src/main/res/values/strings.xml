@@ -33,4 +33,10 @@
     <string name="powinien_zwrocic">powinien(na) zwrócić dla</string>
     <string name="logwanie_zacheta">Zaloguj się</string>
     <string name="rejestracja_zacheta">Zarejestruj się</string>
+    <string name="podaj_e_mail_itd">Podaj e-mail/numer telefonu znajomego</string>
+    <string name="polski">Polski</string>
+    <string name="angielski">Angielski</string>
+    <string name="niemiecki">Niemiecki</string>
+    <string name="wloski">Włoski</string>
+    <string name="hiszpanski">Hiszpański</string>
 </resources>

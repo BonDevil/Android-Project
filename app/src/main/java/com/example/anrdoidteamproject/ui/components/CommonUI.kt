@@ -36,9 +36,6 @@ fun topBar(message: String) {
     ) {
         Text(
             text = message,
-//                zmienic fonta na ten century gothic, cos nie wyszukuje
-//                chyba działa juz ale nie wiem czy poprawnie
-            fontFamily = FontCentury,
             fontSize = 40.sp,
             fontWeight = FontWeight(750),
             color = Color.White

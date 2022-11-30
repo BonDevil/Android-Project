@@ -28,7 +28,7 @@ open class BaseScreen {
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .background(Color(44, 57, 100))
-                .height(60.dp)
+                .fillMaxHeight(0.075f)
                 .fillMaxWidth()
         ) {
             Text(
@@ -51,7 +51,7 @@ open class BaseScreen {
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
                 .background(Color(44, 57, 100))
-                .height(60.dp)
+                .fillMaxHeight()
                 .fillMaxWidth()
         ) {
             Image(
@@ -85,8 +85,7 @@ open class BaseScreen {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-//                        zrobic zeby to sie robilo dynamicznie
-                    .height(1010.dp)
+                    .fillMaxHeight(0.925f)
                     .background(color = Color(0xff181f36))){
 
             }

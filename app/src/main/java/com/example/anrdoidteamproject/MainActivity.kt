@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AnrdoidTeamProjectTheme {
                 // A surface container using the 'background' color from the theme
-                var bscren = BaseScreen()
+                var bscren = LogIn()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {

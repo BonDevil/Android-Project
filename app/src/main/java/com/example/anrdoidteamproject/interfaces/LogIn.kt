@@ -47,6 +47,7 @@ class LogIn : BaseScreen() {
                     .clip(CircleShape)
                     .border(10.dp, color = Color.White, CircleShape))
 
+            Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = stringResource(R.string.email),
                 color = Color.White,

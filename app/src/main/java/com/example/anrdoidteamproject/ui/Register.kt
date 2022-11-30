@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.anrdoidteamproject.ui.theme.PasswordTextField
 import com.example.anrdoidteamproject.ui.theme.SimpleTextField
+import com.example.anrdoidteamproject.ui.theme.TextFieldWithLabel
 import com.example.anrdoidteamproject.ui.theme.topBar
 
 
@@ -33,61 +34,34 @@ fun RegisterList() {
 
         )
     {
-
-        Text(
-            text = stringResource(R.string.imie),
-            color = Color.White,
-            fontSize = 30.sp,
-        )
         Spacer(modifier = Modifier.height(15.dp))
 
-        SimpleTextField(
+        TextFieldWithLabel(
             KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
             ),
+            label = R.string.imie
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Text(
-            text = stringResource(R.string.nazwisko),
-            color = Color.White,
-            fontSize = 30.sp,
-        )
-
-        Spacer(modifier = Modifier.height(15.dp))
-
-        SimpleTextField(
+        TextFieldWithLabel(
             KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
             ),
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text(
-            text = stringResource(R.string.email),
-            color = Color.White,
-            fontSize = 30.sp,
+            label = R.string.nazwisko
         )
 
         Spacer(modifier = Modifier.height(15.dp))
 
-        SimpleTextField(
+        TextFieldWithLabel(
             KeyboardOptions(
                 keyboardType = KeyboardType.Email,
                 imeAction = ImeAction.Next
             ),
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text(
-            text = stringResource(R.string.haslo),
-            color = Color.White,
-            fontSize = 30.sp,
+            label = R.string.email
         )
 
         Spacer(modifier = Modifier.height(15.dp))
@@ -96,37 +70,31 @@ fun RegisterList() {
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Next
-            )
+            ),
+            label = R.string.haslo
         )
-        Spacer(modifier = Modifier.height(20.dp))
 
-        Text(
-            text = stringResource(R.string.powtorz_haslo),
-            color = Color.White,
-            fontSize = 30.sp,
-        )
         Spacer(modifier = Modifier.height(15.dp))
 
         PasswordTextField(
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Next
-            )
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text(
-            text = stringResource(R.string.telefon),
-            color = Color.White,
-            fontSize = 30.sp,
+            ),
+            label = R.string.powtorz_haslo
         )
         Spacer(modifier = Modifier.height(15.dp))
 
-        SimpleTextField()
+        TextFieldWithLabel(
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
+            label = R.string.telefon,
+
+        )
 
         Spacer(modifier = Modifier.height(60.dp))
-
         OutlinedButton(
             onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color(89, 128, 255),
@@ -135,7 +103,8 @@ fun RegisterList() {
         ) {
             Text(
                 text = stringResource(R.string.rejestracja_zacheta),
-                fontSize = 30.sp
+                fontSize = 24.sp,
+                color = Color.White
             )
         }
     }

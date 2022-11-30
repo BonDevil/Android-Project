@@ -79,7 +79,7 @@ fun bottomBar() {
 }
 
 @Composable
-fun SimpleTextField(keyboardOptions: KeyboardOptions) {
+fun SimpleTextField(keyboardOptions: KeyboardOptions = KeyboardOptions()) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
 
     TextField(

@@ -41,7 +41,12 @@ fun RegisterList() {
         )
         Spacer(modifier = Modifier.height(15.dp))
 
-        SimpleTextField()
+        SimpleTextField(
+            KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            ),
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -53,7 +58,12 @@ fun RegisterList() {
 
         Spacer(modifier = Modifier.height(15.dp))
 
-        SimpleTextField()
+        SimpleTextField(
+            KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next
+            ),
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -65,7 +75,12 @@ fun RegisterList() {
 
         Spacer(modifier = Modifier.height(15.dp))
 
-        SimpleTextField()
+        SimpleTextField(
+            KeyboardOptions(
+                keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Next
+            ),
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -92,10 +107,12 @@ fun RegisterList() {
         )
         Spacer(modifier = Modifier.height(15.dp))
 
-        PasswordTextField(keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password,
-            imeAction = ImeAction.Next
-        ))
+        PasswordTextField(
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Next
+            )
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 

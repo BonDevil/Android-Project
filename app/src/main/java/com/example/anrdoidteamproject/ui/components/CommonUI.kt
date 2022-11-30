@@ -36,9 +36,6 @@ fun topBar(message: String) {
     ) {
         Text(
             text = message,
-//                zmienic fonta na ten century gothic, cos nie wyszukuje
-//                chyba działa juz ale nie wiem czy poprawnie
-            fontFamily = FontCentury,
             fontSize = 40.sp,
             fontWeight = FontWeight(750),
             color = Color.White
@@ -159,6 +156,27 @@ fun PasswordTextField(
             },
             visualTransformation = if (passwordVisibility) VisualTransformation.None
             else PasswordVisualTransformation()
+        )
+    }
+}
+
+
+@Composable
+fun PromptButton(
+    @StringRes label: Int,
+    ) {
+    OutlinedButton(
+        onClick = { /*TODO*/ },
+        Modifier.width(250.dp),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color(26, 51, 101),
+            disabledBackgroundColor = Color(70, 99, 255),
+        )
+    ) {
+        Text(
+            text = stringResource(label),
+            fontSize = 30.sp,
+            color = Color.White
         )
     }
 }

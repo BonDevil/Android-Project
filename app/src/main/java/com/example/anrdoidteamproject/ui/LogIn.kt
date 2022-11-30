@@ -15,18 +15,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
-import com.example.anrdoidteamproject.ui.theme.PasswordTextField
-import com.example.anrdoidteamproject.ui.theme.SimpleTextField
-import com.example.anrdoidteamproject.ui.theme.topBar
+import com.example.anrdoidteamproject.ui.theme.*
 
 
 @Composable
 fun LogInList() {
-
     Column(
         modifier = Modifier
             .padding(20.dp)
@@ -38,55 +37,33 @@ fun LogInList() {
     {
         Image(
             painter = painterResource(R.drawable.img_user), contentDescription = "user",
-
             modifier = Modifier
-                .size(200.dp)
-                .clip(CircleShape)
-                .border(10.dp, color = Color.White, CircleShape)
+                .fillMaxSize(0.2f)
         )
-
         Spacer(modifier = Modifier.height(20.dp))
-        Text(
-            text = stringResource(R.string.email),
-            color = Color.White,
-            fontSize = 30.sp,
+
+        TextFieldWithLabel(
+            KeyboardOptions(
+                keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Next
+            ),
+            label = R.string.email
         )
         Spacer(modifier = Modifier.height(15.dp))
-        SimpleTextField()
-        Spacer(modifier = Modifier.height(20.dp))
-        Text(
-            text = stringResource(R.string.haslo),
-            color = Color.White,
-            fontSize = 30.sp,
+
+        PasswordTextField(
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Next
+            ),
+            label = R.string.haslo
         )
-        Spacer(modifier = Modifier.height(15.dp))
-        PasswordTextField(KeyboardOptions(), label = R.string.haslo)
 
-        Spacer(modifier = Modifier.height(60.dp))
-        OutlinedButton(
-            onClick = { /*TODO*/ }, Modifier.width(250.dp), colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color(89, 128, 255),
-                disabledBackgroundColor = Color(70, 99, 255),
-            )
-        ) {
-            Text(
-                text = stringResource(R.string.logwanie_zacheta),
-                fontSize = 30.sp
-            )
-        }
+        Spacer(modifier = Modifier.height(70.dp))
+        PromptButton(label = R.string.logwanie_zacheta)
+        Spacer(modifier = Modifier.height(50.dp))
+        PromptButton(label = R.string.rejestracja_zacheta)
 
-        Spacer(modifier = Modifier.height(60.dp))
-        OutlinedButton(
-            onClick = { /*TODO*/ }, Modifier.width(250.dp), colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color(89, 128, 255),
-                disabledBackgroundColor = Color(70, 99, 255),
-            )
-        ) {
-            Text(
-                text = stringResource(R.string.rejestracja_zacheta),
-                fontSize = 30.sp
-            )
-        }
     }
 }
 

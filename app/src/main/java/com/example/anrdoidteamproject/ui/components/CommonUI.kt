@@ -1,5 +1,6 @@
 package com.example.anrdoidteamproject.ui.theme
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,7 +11,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -79,7 +82,9 @@ fun bottomBar() {
 }
 
 @Composable
-fun SimpleTextField(keyboardOptions: KeyboardOptions = KeyboardOptions()) {
+fun SimpleTextField(
+    keyboardOptions: KeyboardOptions = KeyboardOptions(),
+) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
 
     TextField(
@@ -87,13 +92,39 @@ fun SimpleTextField(keyboardOptions: KeyboardOptions = KeyboardOptions()) {
         onValueChange = { newText ->
             text = newText
         },
-        textStyle = TextStyle(color = Color.White, fontSize = 30.sp),
-        keyboardOptions = keyboardOptions
+        textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
+        keyboardOptions = keyboardOptions,
     )
 }
 
 @Composable
-fun PasswordTextField(keyboardOptions: KeyboardOptions) {
+fun TextFieldWithLabel(
+    keyboardOptions: KeyboardOptions = KeyboardOptions(),
+    @StringRes label: Int
+) {
+    var text by remember { mutableStateOf(TextFieldValue("")) }
+
+    TextField(
+        label = {
+            Text(
+                stringResource(label),
+                color = Color.White,
+            )
+        },
+        value = text,
+        onValueChange = { newText ->
+            text = newText
+        },
+        keyboardOptions = keyboardOptions,
+        textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
+    )
+}
+
+@Composable
+fun PasswordTextField(
+    keyboardOptions: KeyboardOptions,
+    @StringRes label: Int
+) {
     Column(
     ) {
         var password by rememberSaveable { mutableStateOf("") }
@@ -108,25 +139,26 @@ fun PasswordTextField(keyboardOptions: KeyboardOptions) {
             onValueChange = {
                 password = it
             },
-            textStyle = TextStyle(color = Color.White, fontSize = 30.sp),
-            placeholder = { Text(text = "Password", color = Color.White, fontSize = 30.sp) },
-
+            textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
             trailingIcon = {
                 IconButton(onClick = {
                     passwordVisibility = !passwordVisibility
                 }) {
                     Icon(
-
                         painter = icon,
                         contentDescription = "Visibility Icon"
-
                     )
                 }
             },
             keyboardOptions = keyboardOptions,
+            label = {
+                Text(
+                    stringResource(label),
+                    color = Color.White,
+                )
+            },
             visualTransformation = if (passwordVisibility) VisualTransformation.None
             else PasswordVisualTransformation()
-
         )
     }
 }

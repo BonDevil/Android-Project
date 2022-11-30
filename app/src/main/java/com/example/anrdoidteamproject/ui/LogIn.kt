@@ -60,7 +60,7 @@ fun LogInList() {
             fontSize = 30.sp,
         )
         Spacer(modifier = Modifier.height(15.dp))
-        PasswordTextField(KeyboardOptions())
+        PasswordTextField(KeyboardOptions(), label = R.string.haslo)
 
         Spacer(modifier = Modifier.height(60.dp))
         OutlinedButton(

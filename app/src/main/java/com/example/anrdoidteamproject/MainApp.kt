@@ -1,6 +1,7 @@
 package com.example.anrdoidteamproject
 
 import androidx.compose.runtime.Composable
+import com.example.anrdoidteamproject.ui.FriendsList
 import com.example.anrdoidteamproject.ui.TripsList
 
 enum class AppScreens() {
@@ -25,5 +26,5 @@ enum class AppScreens() {
 
 @Composable
 fun MainApp(){
-    TripsList()
+    FriendsList()
 }

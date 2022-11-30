@@ -27,7 +27,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.Font
@@ -87,6 +90,7 @@ fun Listpersons(osobas: List<Osoba>) {
 }
 
 
+
 @Composable
 fun FriendsList() {
     Column() {
@@ -136,3 +140,15 @@ object SampleData {
         )
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+

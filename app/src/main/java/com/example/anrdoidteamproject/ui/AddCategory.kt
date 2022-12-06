@@ -22,7 +22,6 @@ import com.example.anrdoidteamproject.ui.theme.topBar
 fun categoryValues() {
     Column(
         modifier = Modifier
-            .padding(20.dp)
             .background(Color(24, 31, 54))
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -69,23 +68,22 @@ fun categoryValues() {
 
 @Composable
 fun AddCategory() {
-    Column() {
-        topBar(message = stringResource(R.string.dodaj_kategorie))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.925f)
-                .background(color = Color(0xff181f36))
-        ) {
-            categoryValues()
-        }
-        bottomBar()
+
+
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.dodaj_kategorie)) }
+
+    ) {
+        categoryValues()
     }
+
+
 }
 
 @Preview
 @Composable
-fun AddCategoryPreview(){
+fun AddCategoryPreview() {
     AddCategory()
 }
 

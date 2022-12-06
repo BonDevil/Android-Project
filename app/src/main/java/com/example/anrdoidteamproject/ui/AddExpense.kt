@@ -5,10 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Divider
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -72,6 +69,7 @@ fun add_expense() {
 
         Divider(color = Color.White, thickness = 2.dp)
         Listpersons3(SampleData3.conversationSample)
+        Spacer(modifier = Modifier.height(40.dp))
 
 
     }
@@ -102,7 +100,7 @@ fun DropdownCategories() {
                 .fillMaxWidth(0.6f)
                 .clickable(onClick = { expanded = true })
                 .background(
-                    Color.White
+                    color = Color(200,200,200)
                 ),
             fontSize = 30.sp,
 
@@ -112,6 +110,9 @@ fun DropdownCategories() {
             onDismissRequest = { expanded = false },
             modifier = Modifier
                 .fillMaxWidth()
+                .background(
+                    color = Color(200,200,200)
+                )
 
         ) {
             items.forEachIndexed { index, s ->
@@ -132,22 +133,32 @@ fun DropdownCategories() {
 
 @Composable
 fun AddExpense() {
-    Column() {
-        topBar(message = stringResource(R.string.dodaj_wydatek))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.925f)
-                .background(color = Color(0xff181f36))
-        ) {
-            add_expense()
-        }
-        bottomBar()
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) }
+
+    ) {
+        add_expense()
     }
 }
 
+
 @Preview
 @Composable
-fun AddExpensePreview(){
-    AddExpense()
+fun AddExpensePreview() {
+    Column() {
+        Scaffold(
+            bottomBar = { bottomBar() },
+            topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) }
+
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color(0xff181f36))
+            ) {
+                add_expense()
+            }
+        }
+    }
 }

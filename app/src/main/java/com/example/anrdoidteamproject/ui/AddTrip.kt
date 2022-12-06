@@ -92,17 +92,11 @@ fun trip_valus() {
 
 @Composable
 fun AddTrip() {
-    Column() {
-        topBar(message = stringResource(R.string.dodaj_wycieczke))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.925f)
-                .background(color = Color(0xff181f36))
-        ) {
-            trip_valus()
-        }
-        bottomBar()
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) }
+    ) {
+        trip_valus()
     }
 }
 
@@ -110,5 +104,23 @@ fun AddTrip() {
 @Preview
 @Composable
 fun AddTripPreview() {
-    AddTrip()
+    Column() {
+
+        Scaffold(
+            bottomBar = { bottomBar() },
+            topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) }
+
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.925f)
+                    .background(color = Color(0xff181f36))
+            ) {
+                trip_valus()
+            }
+        }
+
+
+    }
 }

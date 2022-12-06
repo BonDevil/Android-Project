@@ -108,8 +108,11 @@ fun PersonCard3(per: Osoba) {
 
 @Composable
 fun Listpersons3(osobas: List<Osoba>) {
-    LazyColumn {
+    LazyColumn( contentPadding = PaddingValues(vertical = 40.dp)
+
+    ) {
         osobas.map { item { PersonCard3(it) } }
+
     }
 }
 
@@ -136,7 +139,24 @@ object SampleData3 {
         Osoba(
             "Jan",
             "Kowalski"
+        ),
+        Osoba(
+            "Piotr",
+            "Grygoruk"
+        ),
+        Osoba(
+            "Nataliia",
+            "Martynenko"
+        ),
+        Osoba(
+            "Adam",
+            "Nowak"
+        ),
+        Osoba(
+            "Jan",
+            "Kowalski"
         )
+
     )
 }
 

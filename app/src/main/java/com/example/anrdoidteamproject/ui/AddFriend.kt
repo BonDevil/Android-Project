@@ -45,23 +45,35 @@ fun add() {
 
 @Composable
 fun AddFriend() {
-    Column() {
-        topBar(message = stringResource(R.string.dodaj_znajomych))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.925f)
-                .background(color = Color(0xff181f36))
-        ) {
-            add()
-        }
-        bottomBar()
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) }
+
+    ) {
+        add()
     }
 }
+
 
 @Preview
 @Composable
 fun AddFriendPreview() {
-    AddFriend()
+    Column() {
+
+        Scaffold(
+            bottomBar = { bottomBar() },
+            topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) }
+
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.925f)
+                    .background(color = Color(0xff181f36))
+            ) {
+                add()
+            }
+        }
+    }
 }
 

@@ -3,6 +3,7 @@ package com.example.anrdoidteamproject
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.ui.Modifier
 import com.example.anrdoidteamproject.ui.theme.AnrdoidTeamProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -10,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AnrdoidTeamProjectTheme {
-                MainApp()
+                MainApp(modifier = Modifier)
             }
         }
     }

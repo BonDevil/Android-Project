@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 
@@ -90,28 +91,36 @@ fun Listpersons(osobas: List<Osoba>) {
 }
 
 
-
 @Composable
 fun FriendsList() {
-    Column() {
-        topBar(message = stringResource(R.string.znajomi))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.925f)
-                .background(color = Color(0xff181f36))
-        ) {
-            Listpersons(SampleData.conversationSample)
 
-        }
-        bottomBar()
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.znajomi)) }
+
+    ) {
+        Listpersons(SampleData.conversationSample)
     }
 }
 
-@Preview
+
+@Preview(heightDp = 10000)
 @Composable
-fun FirendsListPreview(){
-    FriendsList()
+fun FirendsListPreview() {
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.znajomi)) }
+
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(color = Color(0xff181f36))
+        ) {
+            Listpersons(SampleData.conversationSample)
+        }
+    }
 }
 
 

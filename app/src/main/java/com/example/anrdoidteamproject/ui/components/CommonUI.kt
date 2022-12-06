@@ -31,7 +31,7 @@ fun topBar(message: String) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .background(Color(44, 57, 100))
-            .fillMaxHeight(0.075f)
+            .height(80.dp)
             .fillMaxWidth()
     ) {
         Text(
@@ -51,7 +51,7 @@ fun bottomBar() {
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .background(Color(44, 57, 100))
-            .fillMaxHeight()
+            .height(80.dp)
             .fillMaxWidth()
     ) {
         Image(

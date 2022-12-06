@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AnrdoidTeamProject</string>
+    <string name="znajomi">AMIGOS</string>
+    <string name="dodaj_znajomych">AGREGAR AMIGOS</string>
+    <string name="dodaj_wycieczke">AGREGAR TOUR</string>
+    <string name="dodaj_kategorie">AGREGAR CATEGORÍA</string>
+    <string name="dodaj_wydatek">AGREGAR GASTOS</string>
+    <string name="wycieczki">VIAJES</string>
+    <string name="konto">CUENTA</string>
+    <string name="zwroc_koszty">REEMBOLSO</string>
+    <string name="historia">HISTORIA</string>
+    <string name="bilans">BALANCE</string>
+    <string name="ustawienia">CONFIGURACIÓN</string>
+    <string name="logowanie">INICIAR SESIÓN</string>
+    <string name="rejestracja">REGISTRO</string>
+    <string name="edytuj_wydatek">EDITAR GASTOS</string>
+    <string name="email">Correo electrónico</string>
+    <string name="haslo">Contraseña</string>
+    <string name="powtorz_haslo">Repetir contraseña</string>
+    <string name="telefon">Número de teléfono</string>
+    <string name="jezyk">Idioma</string>
+    <string name="nazwa">Nombre</string>
+    <string name="imie">nombre de persona</string>
+    <string name="nazwisko">Apellido</string>
+    <string name="kategoria">Categoría</string>
+    <string name="kwota">Cantidad</string>
+    <string name="opis">Descripción</string>
+    <string name="planowana_kwota">Cantidad planificada</string>
+    <string name="ilosc_dni">Número de días</string>
+    <string name="dodaj_ikone">Añadir icono</string>
+    <string name="wybierz_kolor">Elige un color</string>
+    <string name="email_zacheta">Ingrese el correo electrónico o el número de teléfono de su amigo</string>
+    <string name="powinien_zwrocic">debería regresar para</string>
+    <string name="logwanie_zacheta">Iniciar sesión</string>
+    <string name="rejestracja_zacheta">Registrarse</string>
+    <string name="podaj_e_mail_itd">Ingrese el correo electrónico/número de teléfono de un amigo</string>
+    <string name="polski">Polaco</string>
+    <string name="angielski">Inglés</string>
+    <string name="niemiecki">Alemán</string>
+    <string name="wloski">Italiano</string>
+    <string name="hiszpanski">Español</string>
+    <string name="cat_jedzenie">Comida</string>
+    <string name="cat_spanie">Durmiendo</string>
+    <string name="cat_napoje">Bebidas</string>
+    <string name="cat_atrakcje">Atracciones</string>
+    <string name="cat_samolot">Avión</string>
+    <string name="cat_transport">Transporte</string>
+
+
+</resources>

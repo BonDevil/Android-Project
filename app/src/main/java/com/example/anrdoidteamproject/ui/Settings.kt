@@ -10,13 +10,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.ui.theme.AnrdoidTeamProjectTheme
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
+import java.util.*
+
 
 
 @Composable
@@ -43,6 +47,7 @@ fun ChooseLanguage() {
     }
 }
 
+
 @Composable
 fun DropdownDemo() {
     var expanded by remember { mutableStateOf(false) }
@@ -55,12 +60,23 @@ fun DropdownDemo() {
     )
 
     var selectedIndex by remember { mutableStateOf(0) }
+
+
+
+
+    if (selectedIndex==3){
+        translator(lan = "es")
+    }
+
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.TopStart)
     ) {
         Text(
+
 
             items[selectedIndex],
             modifier = Modifier
@@ -72,6 +88,7 @@ fun DropdownDemo() {
             fontSize = 30.sp,
 
             )
+
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
@@ -83,7 +100,9 @@ fun DropdownDemo() {
                 DropdownMenuItem(onClick = {
                     selectedIndex = index
                     expanded = false
+
                 }) {
+
                     Text(
                         text = s,
                         fontSize = 30.sp,
@@ -92,6 +111,7 @@ fun DropdownDemo() {
             }
         }
     }
+
 }
 
 @Composable
@@ -106,13 +126,29 @@ fun Settings() {
         ) {
             ChooseLanguage()
 
+
         }
         bottomBar()
     }
 }
 
+
+
 @Preview
 @Composable
 fun SettingsPreview(){
     Settings()
+}
+
+
+@Composable
+fun translator(lan:String){
+    val ct = LocalContext.current
+    val locale = Locale(lan)
+    Locale.setDefault(locale)
+    val resources = ct.resources
+    val configuration = resources.configuration
+    configuration.locale = locale
+    resources.updateConfiguration(configuration, resources.displayMetrics)
+
 }

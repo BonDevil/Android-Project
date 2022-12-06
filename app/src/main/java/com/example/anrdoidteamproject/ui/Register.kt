@@ -1,8 +1,11 @@
 package com.example.anrdoidteamproject.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,7 +29,8 @@ fun RegisterList() {
         modifier = Modifier
             .padding(20.dp)
             .background(Color(24, 31, 54))
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
 
         )
@@ -93,6 +97,7 @@ fun RegisterList() {
 
         Spacer(modifier = Modifier.height(60.dp))
         PromptButton(label = R.string.rejestracja_zacheta)
+
     }
 }
 
@@ -116,4 +121,12 @@ fun Register() {
 @Composable
 fun RegisterPreview() {
     Register()
+}
+
+
+@Preview(widthDp = 400, heightDp = 600)
+@Composable
+fun RegisterPreview2() {
+    Register()
+
 }

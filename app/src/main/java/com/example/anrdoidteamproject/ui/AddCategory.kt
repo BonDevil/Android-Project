@@ -29,6 +29,8 @@ fun categoryValues() {
         )
     {
 
+        Spacer(modifier = Modifier.height(20.dp))
+
         Text(
             text = stringResource(R.string.nazwa),
             color = Color.White,

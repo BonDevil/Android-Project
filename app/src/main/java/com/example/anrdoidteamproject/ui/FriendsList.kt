@@ -96,31 +96,25 @@ fun FriendsList() {
 
     Scaffold(
         bottomBar = { bottomBar() },
-        topBar = { topBar(message = stringResource(R.string.znajomi)) }
+        topBar = { topBar(message = stringResource(R.string.znajomi)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
 
+    ) {        Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(color = Color(0xff181f36))
     ) {
         Listpersons(SampleData.conversationSample)
+    }
     }
 }
 
 
-@Preview(heightDp = 10000)
+@Preview(heightDp = 1000)
 @Composable
 fun FirendsListPreview() {
-    Scaffold(
-        bottomBar = { bottomBar() },
-        topBar = { topBar(message = stringResource(R.string.znajomi)) }
-
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(color = Color(0xff181f36))
-        ) {
-            Listpersons(SampleData.conversationSample)
-        }
-    }
+FriendsList()
 }
 
 

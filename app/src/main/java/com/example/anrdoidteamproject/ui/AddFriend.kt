@@ -47,10 +47,18 @@ fun add() {
 fun AddFriend() {
     Scaffold(
         bottomBar = { bottomBar() },
-        topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) }
+        topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
-        add()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(color = Color(0xff181f36))
+        ) {
+            add()
+        }
     }
 }
 
@@ -58,22 +66,6 @@ fun AddFriend() {
 @Preview
 @Composable
 fun AddFriendPreview() {
-    Column() {
-
-        Scaffold(
-            bottomBar = { bottomBar() },
-            topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) }
-
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.925f)
-                    .background(color = Color(0xff181f36))
-            ) {
-                add()
-            }
-        }
-    }
+AddFriend()
 }
 

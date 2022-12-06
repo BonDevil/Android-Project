@@ -28,7 +28,6 @@ enum class AppScreens() {
 }
 
 @Composable
-fun MainApp(modifier: Modifier){
-    modifier.background(color = Color(0xff181f36))
+fun MainApp(){
     FriendsList()
 }

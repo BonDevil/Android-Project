@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,22 +18,29 @@ import com.example.anrdoidteamproject.ui.theme.topBar
 
 @Composable
 fun EditPayment() {
-    Column() {
-        topBar(message = stringResource(R.string.edytuj_wydatek))
+
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.edytuj_wydatek)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.925f)
+                .fillMaxHeight()
                 .background(color = Color(0xff181f36))
         ) {
 
+
         }
-        bottomBar()
+
     }
 }
 
+
 @Preview
 @Composable
-fun EditPaymentPreview(){
-    EditPayment()
+fun EditPaymentPreview() {
+EditPayment()
 }

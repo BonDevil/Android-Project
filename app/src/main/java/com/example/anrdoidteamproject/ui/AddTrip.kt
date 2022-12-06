@@ -26,7 +26,6 @@ fun trip_valus() {
 
     Column(
         modifier = Modifier
-            .padding(20.dp)
             .background(Color(24, 31, 54))
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -94,7 +93,8 @@ fun trip_valus() {
 fun AddTrip() {
     Scaffold(
         bottomBar = { bottomBar() },
-        topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) }
+        topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
     ) {
         trip_valus()
     }
@@ -104,23 +104,5 @@ fun AddTrip() {
 @Preview
 @Composable
 fun AddTripPreview() {
-    Column() {
-
-        Scaffold(
-            bottomBar = { bottomBar() },
-            topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) }
-
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.925f)
-                    .background(color = Color(0xff181f36))
-            ) {
-                trip_valus()
-            }
-        }
-
-
-    }
+AddTrip()
 }

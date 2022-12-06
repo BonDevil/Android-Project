@@ -180,3 +180,33 @@ fun PromptButton(
         )
     }
 }
+
+
+@Composable
+fun topBar2(message: String, message2: String) {
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier
+            .background(Color(44, 57, 100))
+            .fillMaxHeight(0.075f)
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = message,
+            fontFamily = FontCentury,
+            fontSize = 40.sp,
+            fontWeight = FontWeight(750),
+            color = Color.White
+        )
+        Text(
+            text = message2,
+            fontFamily = FontCentury,
+            fontSize = 40.sp,
+            fontWeight = FontWeight(750),
+            color = Color.White
+        )
+
+    }
+}

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -111,22 +112,24 @@ object SampleData2 {
 
 @Composable
 fun ChooseFriends() {
-    Column() {
-        topBar(message = stringResource(R.string.dodaj_znajomych))
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.925f)
+                .fillMaxHeight()
                 .background(color = Color(0xff181f36))
         ) {
-            Listpersons2(SampleData2.conversationSample)
+            Listpersons2(osobas = SampleData2.conversationSample)
         }
-        bottomBar()
     }
 }
 
 @Preview
 @Composable
 fun ChooseFriendsPreview() {
-    ChooseFriends()
+ChooseFriends()
 }

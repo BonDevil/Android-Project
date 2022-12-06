@@ -100,7 +100,7 @@ fun DropdownCategories() {
                 .fillMaxWidth(0.6f)
                 .clickable(onClick = { expanded = true })
                 .background(
-                    color = Color(200,200,200)
+                    color = Color(200, 200, 200)
                 ),
             fontSize = 30.sp,
 
@@ -111,7 +111,7 @@ fun DropdownCategories() {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = Color(200,200,200)
+                    color = Color(200, 200, 200)
                 )
 
         ) {
@@ -135,10 +135,19 @@ fun DropdownCategories() {
 fun AddExpense() {
     Scaffold(
         bottomBar = { bottomBar() },
-        topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) }
+        topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
-        add_expense()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(color = Color(0xff181f36))
+        ) {
+            add_expense()
+        }
+
     }
 }
 
@@ -146,19 +155,5 @@ fun AddExpense() {
 @Preview
 @Composable
 fun AddExpensePreview() {
-    Column() {
-        Scaffold(
-            bottomBar = { bottomBar() },
-            topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) }
-
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = Color(0xff181f36))
-            ) {
-                add_expense()
-            }
-        }
-    }
+AddExpense()
 }

@@ -21,29 +21,29 @@ import com.example.anrdoidteamproject.ui.theme.topBar2
 
 @Composable
 fun History() {
-    Column() {
-        Scaffold(
-            bottomBar = { bottomBar() },
-            topBar = {
-                topBar2(
-                    message = stringResource(R.string.historia),
-                    message2 = stringResource(R.string.bilans)
-                )
-            },
-            modifier = Modifier.background(color = Color(0xff181f36))
 
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = {
+            topBar2(
+                message = stringResource(R.string.historia),
+                message2 = stringResource(R.string.bilans)
+            )
+        },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(color = Color(0xff181f36))
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .background(color = Color(0xff181f36))
-            ) {
 
-            }
         }
-
     }
+
+
 }
 
 @Preview

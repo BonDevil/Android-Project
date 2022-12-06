@@ -70,8 +70,13 @@ fun LogInList() {
 
 @Composable
 fun LogIn() {
-    Column() {
-        topBar(message = stringResource(R.string.logowanie))
+
+    Scaffold(
+        topBar = { topBar(message = stringResource(R.string.logowanie)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -81,10 +86,11 @@ fun LogIn() {
             LogInList()
         }
     }
+
 }
 
 @Preview
 @Composable
-fun LogInPreview(){
+fun LogInPreview() {
     LogIn()
 }

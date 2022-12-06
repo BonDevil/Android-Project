@@ -104,8 +104,12 @@ fun RegisterList() {
 
 @Composable
 fun Register() {
-    Column() {
-        topBar(message = stringResource(R.string.rejestracja))
+    Scaffold(
+        topBar = { topBar(message = stringResource(R.string.rejestracja)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()

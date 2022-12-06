@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -163,8 +164,13 @@ object SampleData3 {
 
 @Composable
 fun TransferFunds() {
-    Column() {
-        topBar(message = stringResource(R.string.zwroc_koszty))
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.zwroc_koszty)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -173,7 +179,6 @@ fun TransferFunds() {
         ) {
             transferFunds()
         }
-        bottomBar()
     }
 }
 

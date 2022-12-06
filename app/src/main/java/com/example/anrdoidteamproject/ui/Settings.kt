@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,7 +21,6 @@ import com.example.anrdoidteamproject.ui.theme.AnrdoidTeamProjectTheme
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 import java.util.*
-
 
 
 @Composable
@@ -64,7 +64,7 @@ fun DropdownDemo() {
 
 
 
-    if (selectedIndex==3){
+    if (selectedIndex == 3) {
         translator(lan = "es")
     }
 
@@ -116,33 +116,35 @@ fun DropdownDemo() {
 
 @Composable
 fun Settings() {
-    Column() {
-        topBar(message = stringResource(R.string.ustawienia))
+
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.ustawienia)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.925f)
+                .fillMaxHeight()
                 .background(color = Color(0xff181f36))
         ) {
             ChooseLanguage()
-
-
         }
-        bottomBar()
     }
 }
 
 
-
 @Preview
 @Composable
-fun SettingsPreview(){
+fun SettingsPreview() {
     Settings()
 }
 
 
 @Composable
-fun translator(lan:String){
+fun translator(lan: String) {
     val ct = LocalContext.current
     val locale = Locale(lan)
     Locale.setDefault(locale)

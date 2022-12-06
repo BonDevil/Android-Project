@@ -99,14 +99,15 @@ fun FriendsList() {
         topBar = { topBar(message = stringResource(R.string.znajomi)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 
-    ) {        Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .background(color = Color(0xff181f36))
     ) {
-        Listpersons(SampleData.conversationSample)
-    }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(color = Color(0xff181f36))
+        ) {
+            Listpersons(SampleData.conversationSample)
+        }
     }
 }
 
@@ -114,7 +115,7 @@ fun FriendsList() {
 @Preview(heightDp = 1000)
 @Composable
 fun FirendsListPreview() {
-FriendsList()
+    FriendsList()
 }
 
 

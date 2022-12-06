@@ -2,8 +2,11 @@ package com.example.anrdoidteamproject.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +28,8 @@ fun userlist(imie: String, Nazwisko: String, E_mail: String, Numer: String) {
         modifier = Modifier
             .padding(20.dp)
             .background(Color(24, 31, 54))
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
 
         )
@@ -95,8 +99,13 @@ fun fText(fftekst: String) {
 
 @Composable
 fun UserInfo() {
-    Column() {
-        topBar(message = stringResource(R.string.konto))
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.konto)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -105,7 +114,6 @@ fun UserInfo() {
         ) {
             userlist("Jan", "Kowalski", "Jak_Kowalski@gmail.com", "123456789")
         }
-        bottomBar()
     }
 }
 

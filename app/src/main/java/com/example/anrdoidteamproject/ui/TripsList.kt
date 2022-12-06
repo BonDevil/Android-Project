@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -63,8 +64,13 @@ fun ListTrips(osobas: List<Wycieczka>) {
 
 @Composable
 fun TripsList() {
-    Column() {
-        topBar(message = stringResource(R.string.wycieczki))
+    Scaffold(
+        bottomBar = { bottomBar() },
+        topBar = { topBar(message = stringResource(R.string.wycieczki)) },
+        modifier = Modifier.background(color = Color(0xff181f36))
+
+    ) {
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -73,7 +79,6 @@ fun TripsList() {
         ) {
             ListTrips(SampleData_trip.conversationSample)
         }
-        bottomBar()
     }
 }
 

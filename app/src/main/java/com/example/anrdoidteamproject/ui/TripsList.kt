@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -83,10 +84,11 @@ fun TripsList(
         topBar = { topBar(message = stringResource(R.string.wycieczki)) },
         modifier = Modifier.background(color = Color(0xff181f36)),
                 floatingActionButton = {
-            FloatingActionButton(onClick = { /* ... */ }) {
+            FloatingActionButton(onClick = { /* ... */ }
+            ) {
                 Icon(
                     Icons.Filled.Add,
-                    contentDescription = "Favorite",
+                    contentDescription = "Add",
                 )
             }
         }

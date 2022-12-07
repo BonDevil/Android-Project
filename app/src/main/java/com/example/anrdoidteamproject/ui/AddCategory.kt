@@ -69,13 +69,20 @@ fun categoryValues() {
 
 
 @Composable
-fun AddCategory() {
-
-
+fun AddCategory(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.dodaj_kategorie)) }
-
     ) {
         categoryValues()
     }

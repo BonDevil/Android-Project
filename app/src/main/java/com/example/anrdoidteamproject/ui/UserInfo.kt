@@ -38,7 +38,7 @@ fun userlist(imie: String, Nazwisko: String, E_mail: String, Numer: String) {
         Text(
             text = stringResource(R.string.imie),
             color = Color.White,
-            fontSize = 30.sp,
+            fontSize = 30.sp
         )
         Spacer(modifier = Modifier.height(15.dp))
         fText(fftekst = imie)
@@ -98,9 +98,19 @@ fun fText(fftekst: String) {
 
 
 @Composable
-fun UserInfo() {
+fun UserInfo(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.konto)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 

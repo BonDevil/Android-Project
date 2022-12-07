@@ -3,12 +3,14 @@ package com.example.anrdoidteamproject.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -25,6 +27,7 @@ fun LogIn(
     registerButtonOnClick: () -> Unit = {},
     logInButtonOnClick: () -> Unit = {}
 ) {
+    val focusManager = LocalFocusManager.current
     Scaffold(
         topBar = { topBar(message = stringResource(R.string.logowanie)) },
         modifier = Modifier.background(color = Color(0xff181f36))
@@ -64,9 +67,9 @@ fun LogIn(
                 PasswordTextField(
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Next
+                        imeAction = ImeAction.Done
                     ),
-                    label = R.string.haslo
+                    label = R.string.haslo,
                 )
 
                 Spacer(modifier = Modifier.height(70.dp))
@@ -74,7 +77,7 @@ fun LogIn(
                     label = R.string.logwanie_zacheta,
                     onClick = logInButtonOnClick
                 )
-                Spacer(modifier = Modifier.height(50.dp))
+                Spacer(modifier = Modifier.fillMaxHeight(0.3f))
                 PromptButton(
                     label = R.string.rejestracja_zacheta,
                     onClick = registerButtonOnClick

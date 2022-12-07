@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -31,16 +32,15 @@ fun topBar(message: String) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .background(Color(44, 57, 100))
-            .height(80.dp)
+            .fillMaxHeight(0.075f)
             .fillMaxWidth()
     ) {
         Text(
             text = message,
-            fontSize = 40.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight(750),
             color = Color.White
         )
-
     }
 }
 
@@ -55,10 +55,10 @@ fun bottomBar(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .background(Color(44, 57, 100))
-            .height(80.dp)
+            .fillMaxHeight(0.1f)
             .fillMaxWidth()
     ) {
-        Button(
+        IconButton(
             onClick = userInfoButtonOnClick,
             modifier = Modifier
                 .width(width = 32.dp)
@@ -66,36 +66,38 @@ fun bottomBar(
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.img_user),
-                contentDescription = "fi-rr-home",
+                contentDescription = "user info button",
+                tint = Color.White,
                 modifier = Modifier
                     .width(width = 32.dp)
                     .height(height = 32.dp)
             )
         }
-
-        Button(
+        IconButton(
             onClick = homeButtonOnClick,
             modifier = Modifier
                 .width(width = 32.dp)
                 .height(height = 32.dp)
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.img_user),
-                contentDescription = "fi-rr-home",
+                painter = painterResource(id = R.drawable.img_home),
+                contentDescription = "home button",
+                tint = Color.White,
                 modifier = Modifier
                     .width(width = 32.dp)
-                    .height(height = 32.dp)
+                    .height(height = 32.dp),
             )
         }
-        Button(
+        IconButton(
             onClick = settingsButtonOnClick,
             modifier = Modifier
                 .width(width = 32.dp)
                 .height(height = 32.dp)
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.img_user),
-                contentDescription = "fi-rr-home",
+                painter = painterResource(id = R.drawable.img_settings),
+                contentDescription = "settings button",
+                tint = Color.White,
                 modifier = Modifier
                     .width(width = 32.dp)
                     .height(height = 32.dp)
@@ -146,7 +148,7 @@ fun TextFieldWithLabel(
 @Composable
 fun PasswordTextField(
     keyboardOptions: KeyboardOptions,
-    @StringRes label: Int
+    @StringRes label: Int,
 ) {
     Column(
     ) {
@@ -169,7 +171,8 @@ fun PasswordTextField(
                 }) {
                     Icon(
                         painter = icon,
-                        contentDescription = "Visibility Icon"
+                        contentDescription = "Visibility Icon",
+                        tint = Color.White,
                     )
                 }
             },
@@ -202,7 +205,7 @@ fun PromptButton(
     ) {
         Text(
             text = stringResource(label),
-            fontSize = 30.sp,
+            fontSize = 24.sp,
             color = Color.White
         )
     }

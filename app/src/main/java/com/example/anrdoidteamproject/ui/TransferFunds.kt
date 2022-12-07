@@ -163,9 +163,19 @@ object SampleData3 {
 
 
 @Composable
-fun TransferFunds() {
+fun TransferFunds(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.zwroc_koszty)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 

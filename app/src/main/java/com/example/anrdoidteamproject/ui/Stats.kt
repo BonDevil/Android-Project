@@ -17,9 +17,19 @@ import com.example.anrdoidteamproject.ui.theme.topBar
 
 
 @Composable
-fun Stats() {
+fun Stats(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = "Nazwa Wycieczki") },
         modifier = Modifier.background(color = Color(0xff181f36))
 

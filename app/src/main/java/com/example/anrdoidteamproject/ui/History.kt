@@ -20,10 +20,20 @@ import com.example.anrdoidteamproject.ui.theme.topBar2
 
 
 @Composable
-fun History() {
+fun History(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
 
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = {
             topBar2(
                 message = stringResource(R.string.historia),

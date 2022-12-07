@@ -64,7 +64,7 @@ fun LogIn(
                 PasswordTextField(
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Next
+                        imeAction = ImeAction.Done
                     ),
                     label = R.string.haslo
                 )

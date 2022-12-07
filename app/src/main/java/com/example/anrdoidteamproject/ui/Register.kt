@@ -106,7 +106,7 @@ fun Register() {
         topBar = { topBar(message = stringResource(R.string.rejestracja)) },
         modifier = Modifier
             .background(color = Color(0xff181f36))
-            .fillMaxHeight(0.2f)
+            .fillMaxHeight(1f)
 
     ) {
         Row(

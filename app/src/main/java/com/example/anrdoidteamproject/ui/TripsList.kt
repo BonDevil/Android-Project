@@ -1,11 +1,13 @@
 package com.example.anrdoidteamproject.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Divider
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +52,8 @@ fun TripCard(trip: Wycieczka) {
         Divider(color = Color.White, thickness = 2.dp)
 
     }
+    
+
 
 }
 
@@ -67,7 +71,15 @@ fun TripsList() {
     Scaffold(
         bottomBar = { bottomBar() },
         topBar = { topBar(message = stringResource(R.string.wycieczki)) },
-        modifier = Modifier.background(color = Color(0xff181f36))
+        modifier = Modifier.background(color = Color(0xff181f36)),
+                floatingActionButton = {
+            FloatingActionButton(onClick = { /* ... */ }) {
+                Icon(
+                    Icons.Filled.Add,
+                    contentDescription = "Favorite",
+                )
+            }
+        }
 
     ) {
 

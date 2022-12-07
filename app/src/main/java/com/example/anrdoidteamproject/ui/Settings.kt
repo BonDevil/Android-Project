@@ -8,6 +8,7 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -59,13 +60,16 @@ fun DropdownDemo() {
         stringResource(R.string.niemiecki)
     )
 
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by rememberSaveable { mutableStateOf(0) }
 
 
 
 
     if (selectedIndex == 3) {
         translator(lan = "es")
+    }
+    if (selectedIndex == 0) {
+        translator(lan = "en")
     }
 
 
@@ -87,7 +91,7 @@ fun DropdownDemo() {
                 ),
             fontSize = 30.sp,
 
-            )
+            ) 
 
         DropdownMenu(
             expanded = expanded,
@@ -116,7 +120,6 @@ fun DropdownDemo() {
 
 @Composable
 fun Settings() {
-
     Scaffold(
         bottomBar = { bottomBar() },
         topBar = { topBar(message = stringResource(R.string.ustawienia)) },

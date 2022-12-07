@@ -1,5 +1,6 @@
 package com.example.anrdoidteamproject.ui.theme
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,7 +12,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -45,7 +45,11 @@ fun topBar(message: String) {
 }
 
 @Composable
-fun bottomBar() {
+fun bottomBar(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -54,27 +58,49 @@ fun bottomBar() {
             .height(80.dp)
             .fillMaxWidth()
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.img_user),
-            contentDescription = "fi-rr-user",
+        Button(
+            onClick = userInfoButtonOnClick,
             modifier = Modifier
                 .width(width = 32.dp)
                 .height(height = 32.dp)
-        )
-        Image(
-            painter = painterResource(id = R.drawable.img_home),
-            contentDescription = "fi-rr-home",
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.img_user),
+                contentDescription = "fi-rr-home",
+                modifier = Modifier
+                    .width(width = 32.dp)
+                    .height(height = 32.dp)
+            )
+        }
+
+        Button(
+            onClick = homeButtonOnClick,
             modifier = Modifier
                 .width(width = 32.dp)
                 .height(height = 32.dp)
-        )
-        Image(
-            painter = painterResource(id = R.drawable.img_settings),
-            contentDescription = "fi-rr-settings",
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.img_user),
+                contentDescription = "fi-rr-home",
+                modifier = Modifier
+                    .width(width = 32.dp)
+                    .height(height = 32.dp)
+            )
+        }
+        Button(
+            onClick = settingsButtonOnClick,
             modifier = Modifier
                 .width(width = 32.dp)
                 .height(height = 32.dp)
-        )
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.img_user),
+                contentDescription = "fi-rr-home",
+                modifier = Modifier
+                    .width(width = 32.dp)
+                    .height(height = 32.dp)
+            )
+        }
     }
 }
 
@@ -164,9 +190,10 @@ fun PasswordTextField(
 @Composable
 fun PromptButton(
     @StringRes label: Int,
-    ) {
+    onClick: () -> Unit = {}
+) {
     OutlinedButton(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         Modifier.width(250.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color(26, 51, 101),

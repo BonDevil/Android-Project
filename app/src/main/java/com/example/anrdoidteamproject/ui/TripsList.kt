@@ -67,9 +67,19 @@ fun ListTrips(osobas: List<Wycieczka>) {
 
 
 @Composable
-fun TripsList() {
+fun TripsList(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.wycieczki)) },
         modifier = Modifier.background(color = Color(0xff181f36)),
                 floatingActionButton = {
@@ -82,7 +92,6 @@ fun TripsList() {
         }
 
     ) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -118,6 +127,6 @@ object SampleData_trip {
 
 @Preview
 @Composable
-fun TripsListPreview(){
+fun TripsListPreview() {
     TripsList()
 }

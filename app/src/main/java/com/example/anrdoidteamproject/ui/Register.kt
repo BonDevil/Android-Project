@@ -94,10 +94,8 @@ fun RegisterList() {
             label = R.string.telefon,
 
         )
-
         Spacer(modifier = Modifier.height(60.dp))
         PromptButton(label = R.string.rejestracja_zacheta)
-
     }
 }
 

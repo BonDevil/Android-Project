@@ -31,12 +31,12 @@ fun topBar(message: String) {
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .background(Color(44, 57, 100))
-            .height(80.dp)
+            .fillMaxHeight(0.075f)
             .fillMaxWidth()
     ) {
         Text(
             text = message,
-            fontSize = 40.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight(750),
             color = Color.White
         )
@@ -54,7 +54,7 @@ fun bottomBar(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .background(Color(44, 57, 100))
-            .height(80.dp)
+            .fillMaxHeight(0.1f)
             .fillMaxWidth()
     ) {
         Button(
@@ -201,7 +201,7 @@ fun PromptButton(
     ) {
         Text(
             text = stringResource(label),
-            fontSize = 30.sp,
+            fontSize = 24.sp,
             color = Color.White
         )
     }

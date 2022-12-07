@@ -104,10 +104,11 @@ fun RegisterList() {
 fun Register() {
     Scaffold(
         topBar = { topBar(message = stringResource(R.string.rejestracja)) },
-        modifier = Modifier.background(color = Color(0xff181f36))
+        modifier = Modifier
+            .background(color = Color(0xff181f36))
+            .fillMaxHeight(0.2f)
 
     ) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()

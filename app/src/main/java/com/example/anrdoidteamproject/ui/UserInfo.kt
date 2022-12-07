@@ -38,7 +38,7 @@ fun userlist(imie: String, Nazwisko: String, E_mail: String, Numer: String) {
         Text(
             text = stringResource(R.string.imie),
             color = Color.White,
-            fontSize = 30.sp,
+            fontSize = 30.sp
         )
         Spacer(modifier = Modifier.height(15.dp))
         fText(fftekst = imie)

@@ -132,9 +132,19 @@ fun DropdownCategories() {
 
 
 @Composable
-fun AddExpense() {
+fun AddExpense(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 

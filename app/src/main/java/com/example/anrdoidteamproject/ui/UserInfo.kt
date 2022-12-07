@@ -98,9 +98,19 @@ fun fText(fftekst: String) {
 
 
 @Composable
-fun UserInfo() {
+fun UserInfo(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.konto)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 

@@ -17,10 +17,20 @@ import com.example.anrdoidteamproject.ui.theme.topBar
 
 
 @Composable
-fun EditPayment() {
+fun EditPayment(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
 
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.edytuj_wydatek)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 

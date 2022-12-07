@@ -5,7 +5,11 @@ import androidx.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun MenuPayment(){
+fun MenuPayment(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+){
 //    todo
 }
 

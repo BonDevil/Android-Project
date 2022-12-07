@@ -40,7 +40,6 @@ fun topBar(message: String) {
             fontWeight = FontWeight(750),
             color = Color.White
         )
-
     }
 }
 

@@ -92,10 +92,20 @@ fun Listpersons(osobas: List<Osoba>) {
 
 
 @Composable
-fun FriendsList() {
+fun FriendsList(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
 
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.znajomi)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 

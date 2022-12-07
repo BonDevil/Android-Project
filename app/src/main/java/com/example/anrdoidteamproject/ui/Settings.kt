@@ -62,17 +62,12 @@ fun DropdownDemo() {
 
     var selectedIndex by rememberSaveable { mutableStateOf(0) }
 
-
-
-
     if (selectedIndex == 3) {
         translator(lan = "es")
     }
     if (selectedIndex == 0) {
         translator(lan = "en")
     }
-
-
 
     Box(
         modifier = Modifier
@@ -119,9 +114,19 @@ fun DropdownDemo() {
 }
 
 @Composable
-fun Settings() {
+fun Settings(
+    userInfoButtonOnClick: () -> Unit = {},
+    homeButtonOnClick: () -> Unit = {},
+    settingsButtonOnClick: () -> Unit = {}
+) {
     Scaffold(
-        bottomBar = { bottomBar() },
+        bottomBar = {
+            bottomBar(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick
+            )
+        },
         topBar = { topBar(message = stringResource(R.string.ustawienia)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 

@@ -83,6 +83,7 @@ fun userlist(imie: String, Nazwisko: String, E_mail: String, Numer: String) {
             )
 
         }
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 

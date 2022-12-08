@@ -77,7 +77,7 @@ fun LogIn(
                     label = R.string.logwanie_zacheta,
                     onClick = logInButtonOnClick
                 )
-                Spacer(modifier = Modifier.fillMaxHeight(0.3f))
+                Spacer(modifier = Modifier.height(15.dp))
                 PromptButton(
                     label = R.string.rejestracja_zacheta,
                     onClick = registerButtonOnClick

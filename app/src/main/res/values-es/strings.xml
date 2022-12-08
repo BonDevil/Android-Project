@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AnrdoidTeamProject</string>
+    <string name="app_name">Trip Count</string>
     <string name="znajomi">AMIGOS</string>
     <string name="dodaj_znajomych">AGREGAR AMIGOS</string>
     <string name="dodaj_wycieczke">AGREGAR TOUR</string>

@@ -20,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.ui.theme.AddButton
+import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 
@@ -53,7 +55,6 @@ fun TripCard(trip: Wycieczka) {
         Divider(color = Color.White, thickness = 2.dp)
 
     }
-    
 
 
 }
@@ -71,7 +72,8 @@ fun ListTrips(osobas: List<Wycieczka>) {
 fun TripsList(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    addtripButtonOnClick: () -> Unit = {}
 ) {
     Scaffold(
         bottomBar = {
@@ -83,15 +85,10 @@ fun TripsList(
         },
         topBar = { topBar(message = stringResource(R.string.wycieczki)) },
         modifier = Modifier.background(color = Color(0xff181f36)),
-                floatingActionButton = {
-            FloatingActionButton(onClick = { /* ... */ }
-            ) {
-                Icon(
-                    Icons.Filled.Add,
-                    contentDescription = "Add",
-                )
-            }
-        }
+        floatingActionButton = {
+            AddButton(confirmOnClick = addtripButtonOnClick
+            )
+        },
 
     ) {
         Row(

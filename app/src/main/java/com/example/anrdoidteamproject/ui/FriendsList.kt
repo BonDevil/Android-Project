@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 
-import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.graphics.Color
@@ -27,9 +26,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Divider
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 
@@ -38,6 +37,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.anrdoidteamproject.ui.theme.AddButton
+import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 
@@ -95,7 +96,8 @@ fun Listpersons(osobas: List<Osoba>) {
 fun FriendsList(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    addFriends: () -> Unit = {}
 ) {
 
     Scaffold(
@@ -107,6 +109,10 @@ fun FriendsList(
             )
         },
         topBar = { topBar(message = stringResource(R.string.znajomi)) },
+        floatingActionButton = {
+            AddButton(confirmOnClick = addFriends
+            )
+        },
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {

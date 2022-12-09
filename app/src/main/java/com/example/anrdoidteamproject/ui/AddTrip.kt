@@ -4,19 +4,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.ui.theme.Actionbuton2
 import com.example.anrdoidteamproject.ui.theme.SimpleTextField
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
@@ -93,8 +95,10 @@ fun trip_valus() {
 fun AddTrip(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    addFriendsToTrip: () -> Unit = {}
 ) {
+    var expanded by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -104,6 +108,28 @@ fun AddTrip(
             )
         },
         topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { expanded = !expanded },
+                backgroundColor = Color.White
+            ) {
+                Icon(
+                    painterResource(id = R.drawable.ic_action_more_buttons),
+                    tint = Color.Black,
+                    contentDescription = "more",
+                )
+            }
+
+            if (expanded) {
+                Actionbuton2(
+                    onClick = { expanded = !expanded },
+                    onClick1 = addFriendsToTrip,
+                    onClick2 = {/*TODO*/ },
+                    drawable = R.drawable.img_add_user,
+                    drawable2 = Icons.Filled.Check
+                )
+            }
+        },
         modifier = Modifier.background(color = Color(0xff181f36))
     ) {
         trip_valus()
@@ -114,5 +140,6 @@ fun AddTrip(
 @Preview
 @Composable
 fun AddTripPreview() {
-AddTrip()
+    AddTrip()
 }
+

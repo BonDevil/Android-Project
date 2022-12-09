@@ -42,15 +42,15 @@ enum class AppScreens() {
 fun MainApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    homeButtonOnClick: () -> Unit = { navController.navigate(AppScreens.TripsList.name) },
-    userInfoButtonOnClick: () -> Unit = { navController.navigate(AppScreens.UserInfo.name) },
-    settingsButtonOnClick: () -> Unit = { navController.navigate(AppScreens.Settings.name) },
-    friendButtonOnClick: () -> Unit = { navController.navigate(AppScreens.FriendsList.name) },
-    addtripButtonOnClick: () -> Unit = { navController.navigate(AppScreens.AddTrip.name) },
-    addFriendsToTrip: () -> Unit = { navController.navigate(AppScreens.ChooseFriends.name) },
-    addFriends:() -> Unit = {navController.navigate(AppScreens.AddFriend.name)},
-    addExpense:() -> Unit = {navController.navigate(AppScreens.AddExpense.name)},
-    addCategory:() -> Unit = {navController.navigate(AppScreens.AddCategory.name)},
+    homeButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.TripsList.name) },
+    userInfoButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.UserInfo.name) },
+    settingsButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Settings.name) },
+    friendButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.FriendsList.name) },
+    addtripButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddTrip.name) },
+    addFriendsToTrip: () -> Unit = { navController.navigateSingleTopTo(AppScreens.ChooseFriends.name) },
+    addFriends:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddFriend.name)},
+    addExpense:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddExpense.name)},
+    addCategory:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddCategory.name)},
 
 
 ) {
@@ -180,6 +180,9 @@ fun MainApp(
         }
     }
 }
+
+fun NavHostController.navigateSingleTopTo(route: String) =
+    this.navigate(route) { launchSingleTop = true }
 
 
 

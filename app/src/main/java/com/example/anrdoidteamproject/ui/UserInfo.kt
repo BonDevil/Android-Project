@@ -17,12 +17,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.ui.theme.PromptButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 
 
 @Composable
-fun userlist(imie: String, Nazwisko: String, E_mail: String, Numer: String) {
+fun userlist(
+    imie: String, Nazwisko: String, E_mail: String, Numer: String,
+    frendButtonOnClick: () -> Unit = {}
+) {
 
     Column(
         modifier = Modifier
@@ -71,18 +75,11 @@ fun userlist(imie: String, Nazwisko: String, E_mail: String, Numer: String) {
         fText(fftekst = Numer)
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedButton(
-            onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color(89, 128, 255),
-                disabledBackgroundColor = Color(70, 99, 255),
-            )
-        ) {
-            Text(
-                text = stringResource(R.string.znajomi),
-                fontSize = 30.sp
-            )
-
-        }
+        PromptButton(
+            label = R.string.znajomi,
+            onClick = frendButtonOnClick
+        )
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 
@@ -101,7 +98,8 @@ fun fText(fftekst: String) {
 fun UserInfo(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    friendButtonOnClick: () -> Unit = {}
 ) {
     Scaffold(
         bottomBar = {
@@ -122,7 +120,7 @@ fun UserInfo(
                 .fillMaxHeight(0.925f)
                 .background(color = Color(0xff181f36))
         ) {
-            userlist("Jan", "Kowalski", "Jak_Kowalski@gmail.com", "123456789")
+            userlist("Jan", "Kowalski", "Jak_Kowalski@gmail.com", "123456789", frendButtonOnClick = friendButtonOnClick)
         }
     }
 }

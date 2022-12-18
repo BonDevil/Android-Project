@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -41,10 +42,18 @@ enum class AppScreens() {
 fun MainApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    homeButtonOnClick: () -> Unit = { navController.navigate(AppScreens.TripsList.name)},
-    userInfoButtonOnClick: () -> Unit = { navController.navigate(AppScreens.UserInfo.name) },
-    settingsButtonOnClick: () -> Unit = { navController.navigate(AppScreens.Settings.name) }
-){
+    homeButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.TripsList.name) },
+    userInfoButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.UserInfo.name) },
+    settingsButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Settings.name) },
+    friendButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.FriendsList.name) },
+    addtripButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddTrip.name) },
+    addFriendsToTrip: () -> Unit = { navController.navigateSingleTopTo(AppScreens.ChooseFriends.name) },
+    addFriends:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddFriend.name)},
+    addExpense:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddExpense.name)},
+    addCategory:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddCategory.name)},
+
+
+) {
     NavHost(
         navController = navController,
         startDestination = AppScreens.LogIn.name
@@ -62,7 +71,8 @@ fun MainApp(
             TripsList(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                addtripButtonOnClick = addtripButtonOnClick
             )
         }
         composable(AppScreens.Settings.name) {
@@ -97,7 +107,8 @@ fun MainApp(
             AddTrip(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                addFriendsToTrip = addFriendsToTrip
             )
         }
         composable(AppScreens.Balance.name) {
@@ -125,7 +136,8 @@ fun MainApp(
             FriendsList(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                addFriends = addFriends
             )
         }
         composable(AppScreens.History.name) {
@@ -135,33 +147,44 @@ fun MainApp(
                 settingsButtonOnClick = settingsButtonOnClick
             )
         }
-        composable(AppScreens.MenuPayment.name){
+        composable(AppScreens.MenuPayment.name) {
             MenuPayment(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick
             )
         }
-        composable(AppScreens.Stats.name){
+        composable(AppScreens.Stats.name) {
             Stats(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                addExpense = addExpense,
+                addCategory = addCategory
             )
         }
-        composable(AppScreens.TransferFunds.name){
+        composable(AppScreens.TransferFunds.name) {
             TransferFunds(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick
             )
         }
-        composable(AppScreens.UserInfo.name){
+        composable(AppScreens.UserInfo.name) {
             UserInfo(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                friendButtonOnClick = friendButtonOnClick
             )
         }
     }
 }
+
+fun NavHostController.navigateSingleTopTo(route: String) =
+    this.navigate(route) { launchSingleTop = true }
+
+
+
+
+

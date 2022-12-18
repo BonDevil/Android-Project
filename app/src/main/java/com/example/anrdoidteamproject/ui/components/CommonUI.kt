@@ -1,18 +1,20 @@
 package com.example.anrdoidteamproject.ui.theme
 
-import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -237,5 +239,100 @@ fun topBar2(message: String, message2: String) {
             color = Color.White
         )
 
+    }
+}
+
+
+
+@Composable
+fun Actionbuton2(
+    onClick: () -> Unit,
+    onClick1: () -> Unit,
+    onClick2: () -> Unit,
+
+    @DrawableRes drawable: Int,
+    drawable2: ImageVector,
+) {
+
+    Column {
+
+
+        FloatingActionButton(
+            onClick = onClick1,
+            backgroundColor = Color.White
+        ) {
+            Icon(
+                painterResource(id = drawable),
+                tint = Color(0xFF5980FF),
+                contentDescription = null,
+            )
+        }
+
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+
+        FloatingActionButton(
+            onClick = onClick2,
+            backgroundColor = Color.White
+        ) {
+            Icon(
+                drawable2,
+                tint = Color(0xFF5980FF),
+                contentDescription = null,
+                )
+        }
+
+        Spacer(
+            modifier = Modifier
+                .height(20.dp)
+        )
+
+        FloatingActionButton(
+            onClick = onClick,
+            backgroundColor = Color(0xFF5980FF)
+        ) {
+            Icon(
+                painterResource(id = R.drawable.ic_action_more_buttons),
+                contentDescription = "more",
+            )
+
+        }
+    }
+}
+
+
+@Composable
+fun ConfirmButton(
+    confirmOnClick: () -> Unit = {}
+)
+{
+    FloatingActionButton(
+        onClick = confirmOnClick,
+        backgroundColor = Color.White
+    ) {
+        Icon(
+            Icons.Filled.Check,
+            tint = Color(0xFF5980FF),
+            contentDescription = "confirm",
+        )
+    }
+}
+
+@Composable
+fun AddButton(
+    confirmOnClick: () -> Unit = {}
+)
+{
+    FloatingActionButton(
+        onClick = confirmOnClick,
+        backgroundColor = Color.White
+    ) {
+        Icon(
+            Icons.Filled.Add,
+            tint = Color(0xFF5980FF),
+            contentDescription = "ADD",
+        )
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -19,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.ui.theme.AddButton
+import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 
@@ -52,7 +55,6 @@ fun TripCard(trip: Wycieczka) {
         Divider(color = Color.White, thickness = 2.dp)
 
     }
-    
 
 
 }
@@ -70,7 +72,8 @@ fun ListTrips(osobas: List<Wycieczka>) {
 fun TripsList(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    addtripButtonOnClick: () -> Unit = {}
 ) {
     Scaffold(
         bottomBar = {
@@ -82,14 +85,10 @@ fun TripsList(
         },
         topBar = { topBar(message = stringResource(R.string.wycieczki)) },
         modifier = Modifier.background(color = Color(0xff181f36)),
-                floatingActionButton = {
-            FloatingActionButton(onClick = { /* ... */ }) {
-                Icon(
-                    Icons.Filled.Add,
-                    contentDescription = "Favorite",
-                )
-            }
-        }
+        floatingActionButton = {
+            AddButton(confirmOnClick = addtripButtonOnClick
+            )
+        },
 
     ) {
         Row(

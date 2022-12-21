@@ -160,7 +160,8 @@ fun MainApp(
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
                 addExpense = addExpense,
-                addCategory = addCategory
+                addCategory = addCategory,
+                tripName = " "
             )
         }
         composable(AppScreens.TransferFunds.name) {

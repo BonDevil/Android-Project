@@ -62,11 +62,21 @@ fun DropdownDemo() {
 
     var selectedIndex by rememberSaveable { mutableStateOf(0) }
 
+
+    if (selectedIndex == 0) {
+        translator(lan = "en")
+    }
+    if (selectedIndex == 1) {
+        translator(lan = "pl")
+    }
+    if (selectedIndex == 2) {
+        translator(lan = "it")
+    }
     if (selectedIndex == 3) {
         translator(lan = "es")
     }
-    if (selectedIndex == 0) {
-        translator(lan = "en")
+    if (selectedIndex == 4) {
+        translator(lan = "de")
     }
 
     Box(

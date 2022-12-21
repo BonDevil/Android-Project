@@ -127,10 +127,10 @@ fun SimpleTextField(
 @Composable
 fun TextFieldWithLabel(
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
-    @StringRes label: Int
+    @StringRes label: Int,
+    fieldValue: MutableState<String> = mutableStateOf("")
 ) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
-
     TextField(
         label = {
             Text(
@@ -141,16 +141,19 @@ fun TextFieldWithLabel(
         value = text,
         onValueChange = { newText ->
             text = newText
+            fieldValue.value = text.text
         },
         keyboardOptions = keyboardOptions,
         textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
     )
+
 }
 
 @Composable
 fun PasswordTextField(
     keyboardOptions: KeyboardOptions,
     @StringRes label: Int,
+    fieldValue: MutableState<String> = mutableStateOf("")
 ) {
     Column(
     ) {
@@ -165,6 +168,7 @@ fun PasswordTextField(
             value = password,
             onValueChange = {
                 password = it
+                fieldValue.value = password
             },
             textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
             trailingIcon = {
@@ -185,7 +189,8 @@ fun PasswordTextField(
                     color = Color.White,
                 )
             },
-            visualTransformation = if (passwordVisibility) VisualTransformation.None
+            visualTransformation =
+            if (passwordVisibility) VisualTransformation.None
             else PasswordVisualTransformation()
         )
     }
@@ -241,7 +246,6 @@ fun topBar2(message: String, message2: String) {
 
     }
 }
-
 
 
 @Composable
@@ -336,3 +340,4 @@ fun AddButton(
         )
     }
 }
+

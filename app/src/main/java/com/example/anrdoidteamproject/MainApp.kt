@@ -17,6 +17,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.ui.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 enum class AppScreens() {
     AddCategory,
@@ -48,11 +51,9 @@ fun MainApp(
     friendButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.FriendsList.name) },
     addtripButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddTrip.name) },
     addFriendsToTrip: () -> Unit = { navController.navigateSingleTopTo(AppScreens.ChooseFriends.name) },
-    addFriends:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddFriend.name)},
-    addExpense:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddExpense.name)},
-    addCategory:() -> Unit = {navController.navigateSingleTopTo(AppScreens.AddCategory.name)},
-
-
+    addFriends: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddFriend.name) },
+    addExpense: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddExpense.name) },
+    addCategory: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddCategory.name) },
 ) {
     NavHost(
         navController = navController,
@@ -61,7 +62,7 @@ fun MainApp(
         composable(AppScreens.LogIn.name) {
             LogIn(
                 registerButtonOnClick = { navController.navigate(AppScreens.Register.name) },
-                logInButtonOnClick = { navController.navigate(AppScreens.TripsList.name) }
+                navController = navController
             )
         }
         composable(AppScreens.Register.name) {

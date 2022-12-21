@@ -1,6 +1,7 @@
 package com.example.anrdoidteamproject.ui
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -17,10 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.anrdoidteamproject.ui.theme.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @Composable
@@ -33,6 +37,9 @@ fun RegisterList() {
     var phoneNumber by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     var repeatPasswordVisibility by remember { mutableStateOf(false) }
+    val auth by lazy { Firebase.auth }
+    var showRegisterError by remember { mutableStateOf(false) }
+
 
     Column(
         modifier = Modifier
@@ -207,16 +214,27 @@ fun RegisterList() {
         PromptButton(
             label = R.string.rejestracja_zacheta,
             onClick = {
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener{ task ->
                         if (task.isSuccessful) {
-                            Log.d("eo", "The user has successfully registered")
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("eo", "createUserWithEmail:success")
+                            val user = auth.currentUser
+//                            updateUI(user)
                         } else {
-                            Log.d("eo", "The user has failed to register")
+                            // If sign in fails, display a message to the user.
+                            Log.w("eo", "createUserWithEmail:failure", task.exception)
+                            showRegisterError = true
+//                            updateUI(null)
                         }
                     }
             }
         )
+        if(showRegisterError){
+            Toast.makeText(LocalContext.current, "Wrong input, register failed",
+                Toast.LENGTH_SHORT).show()
+            showRegisterError = false
+        }
     }
 }
 

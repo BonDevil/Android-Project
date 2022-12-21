@@ -29,7 +29,6 @@ data class Osoba2(val Imie: String, val Nazwisko: String)
 
 @Composable
 fun PersonCard2(per: Osoba) {
-
     Column(
         modifier = Modifier
             .fillMaxSize(),

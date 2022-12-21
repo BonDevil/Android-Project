@@ -1,9 +1,11 @@
 package com.example.anrdoidteamproject.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,53 +30,137 @@ import com.example.anrdoidteamproject.ui.theme.topBar
 
 @Composable
 fun add_expense() {
-
     Column(
         modifier = Modifier
-            .padding(30.dp)
+            .padding(20.dp)
             .background(Color(24, 31, 54))
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
 
-        )
-    {
+        Column(
+            modifier = Modifier
+                .padding(10.dp)
 
-        TextFieldWithLabel(
+                .fillMaxHeight()
+                .fillMaxWidth(0.85f),
+            horizontalAlignment = Alignment.Start,
+
+            )
+        {
+            Text(
+                text = stringResource(R.string.nazwa),
+                color = Color.White,
+                fontSize = 20.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                ),
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                value = "",
+                onValueChange = {},
+//            KeyboardOptions(
+//                keyboardType = KeyboardType.Text,
+//                imeAction = ImeAction.Next
+//            ),
+                modifier = Modifier
+                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
+
+                    .background(Color(217, 217, 217), RoundedCornerShape(10))
+                    .heightIn(min = 20.dp),
+
+                )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = stringResource(R.string.kategoria),
+                color = Color.White,
+                fontSize = 20.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                ),
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                value = "",
+                onValueChange = {},
+                modifier = Modifier
+                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
+                    .background(Color(217, 217, 217), RoundedCornerShape(10))
+                    .heightIn(min = 20.dp),
+//
+//            KeyboardOptions(
+//                keyboardType = KeyboardType.Text,
+//                imeAction = ImeAction.Next
+//            ),
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = stringResource(R.string.kwota),
+                color = Color.White,
+                fontSize = 20.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                ),
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(
+                value = "",
+                onValueChange = {},
+//            KeyboardOptions(
+//                keyboardType = KeyboardType.Text,
+//                imeAction = ImeAction.Next
+//            ),
+                modifier = Modifier
+                    .fillMaxWidth(0.6f)
+                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
+                    .background(Color(217, 217, 217), RoundedCornerShape(10))
+                    .heightIn(min = 20.dp),
+
+                )
+            Spacer(modifier = Modifier.height(20.dp))
+            /*TextFieldWithLabel(
+
             KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
             ),
-            label = R.string.nazwa
-        )
+            label = R.string.nazwa,
+
+            )
 
         Spacer(modifier = Modifier.height(15.dp))
         DropdownCategories()
 
         Spacer(modifier = Modifier.height(15.dp))
 
+
         TextFieldWithLabel(
             KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
             ),
-            label = R.string.kwota
+            label = R.string.kwota,
+//            modifierLocalOf {Modifier} = Modifier
+//                .background(Color(217,217,217), RoundedCornerShape(10))
+//                .heightIn(min = 56.dp),
         )
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(15.dp))*/
 
 
-        Text(
-            text = stringResource(R.string.znajomi),
-            color = Color.White,
-            fontSize = 30.sp,
-        )
-        Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                text = stringResource(R.string.znajomi),
+                color = Color.White,
+                fontSize = 20.sp,
+            )
+            Spacer(modifier = Modifier.height(15.dp))
 
 
-        Divider(color = Color.White, thickness = 2.dp)
-        Listpersons3(SampleData3.conversationSample)
-        Spacer(modifier = Modifier.height(40.dp))
+            Divider(color = Color.White, thickness = 2.dp)
+            Listpersons3(SampleData3.conversationSample)
 
 
+        }
     }
 }
 

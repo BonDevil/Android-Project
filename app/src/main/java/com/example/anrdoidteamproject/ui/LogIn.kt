@@ -44,7 +44,8 @@ fun LogIn(
     var showPasswordError by remember { mutableStateOf(false) }
     Scaffold(
         topBar = { topBar(message = stringResource(R.string.logowanie)) },
-        modifier = Modifier.background(color = Color(0xff181f36))
+        modifier = Modifier.background(color = Color(0xff181f36)),
+
     ) {
         Row(
             modifier = Modifier
@@ -64,6 +65,7 @@ fun LogIn(
                     painter = painterResource(R.drawable.img_user), contentDescription = "user",
                     modifier = Modifier
                         .fillMaxSize(0.2f)
+
                 )
                 Spacer(modifier = Modifier.height(20.dp))
 

@@ -3,6 +3,7 @@ package com.example.anrdoidteamproject
 
 import android.util.Log
 import android.view.Menu
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -64,9 +65,17 @@ fun MainApp(
                 registerButtonOnClick = { navController.navigate(AppScreens.Register.name) },
                 navController = navController
             )
+//          disable go back phone button
+            BackHandler(true) {
+//
+            }
         }
         composable(AppScreens.Register.name) {
-            Register()
+            Register(navController)
+//          disable go back phone button
+            BackHandler(true) {
+//
+            }
         }
         composable(AppScreens.TripsList.name) {
             TripsList(

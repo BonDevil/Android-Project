@@ -3,7 +3,6 @@ package com.example.anrdoidteamproject.ui
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -19,16 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.focus.FocusManager
-import androidx.compose.ui.focus.FocusState
-import androidx.compose.ui.focus.focusModifier
-import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
+import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.theme.*
 import com.google.firebase.auth.ktx.auth
@@ -72,7 +68,6 @@ fun Register(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Spacer(modifier = Modifier.height(15.dp))
-
 //        Text field for first name
                 TextField(
                     value = firstName,
@@ -92,7 +87,6 @@ fun Register(
                     }
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-
 //        Text field for last name
                 TextField(
                     value = lastName,
@@ -112,7 +106,6 @@ fun Register(
                     }
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-
 //      text field for email
                 TextField(
                     value = email,
@@ -132,7 +125,6 @@ fun Register(
                     }
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-
 //        Text field for password
                 Column() {
                     val icon = if (passwordVisibility)
@@ -172,7 +164,6 @@ fun Register(
                     )
                 }
                 Spacer(modifier = Modifier.height(15.dp))
-
 //      Text field for repeat password
                 Column() {
                     val icon = if (repeatPasswordVisibility)
@@ -212,7 +203,6 @@ fun Register(
                     )
                 }
                 Spacer(modifier = Modifier.height(15.dp))
-
 //      Text field for phone number
                 TextField(
                     value = phoneNumber,
@@ -231,7 +221,6 @@ fun Register(
                         )
                     }
                 )
-
                 Spacer(modifier = Modifier.height(60.dp))
                 PromptButton(
                     label = R.string.rejestracja_zacheta,
@@ -241,21 +230,17 @@ fun Register(
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("eo", "createUserWithEmail:success")
-//                            val user = auth.currentUser
-//                            updateUI(user)
-                                    val user = User(firstName, lastName, phoneNumber)
-                                    println(user)
-                                    val db = FirebaseDatabase.getInstance("https://androidteamproject-37498-default-rtdb.europe-west1.firebasedatabase.app/")
-                                    val reference = db.getReference("Users")
+                                    val myUser = User(firstName, lastName, phoneNumber)
+                                    val reference = DatabaseConnection.db.getReference("Users")
                                     val hashedEmail = email.hashCode().toString()
-                                    reference.child(hashedEmail).setValue(user).addOnCompleteListener {
-                                        navController.navigate(AppScreens.UserInfo.name)
-                                    }
+                                    reference.child(hashedEmail).setValue(myUser)
+                                        .addOnCompleteListener {
+                                            navController.navigate(AppScreens.UserInfo.name)
+                                        }
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("eo", "createUserWithEmail:failure", task.exception)
                                     showRegisterError = true
-//                            updateUI(null)
                                 }
                             }
                     }
@@ -290,5 +275,4 @@ fun RegisterPreview() {
 @Composable
 fun RegisterPreview2() {
     Register()
-
 }

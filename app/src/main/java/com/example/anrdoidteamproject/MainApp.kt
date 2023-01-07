@@ -1,26 +1,14 @@
 package com.example.anrdoidteamproject
 
 
-import android.util.Log
-import android.view.Menu
 import androidx.activity.compose.BackHandler
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.ui.*
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 enum class AppScreens() {
     AddCategory,
@@ -50,7 +38,7 @@ fun MainApp(
     userInfoButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.UserInfo.name) },
     settingsButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Settings.name) },
     friendButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.FriendsList.name) },
-    addtripButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddTrip.name) },
+    addTripButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddTrip.name) },
     addFriendsToTrip: () -> Unit = { navController.navigateSingleTopTo(AppScreens.ChooseFriends.name) },
     addFriends: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddFriend.name) },
     addExpense: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddExpense.name) },
@@ -82,8 +70,12 @@ fun MainApp(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
-                addtripButtonOnClick = addtripButtonOnClick
+                addtripButtonOnClick = addTripButtonOnClick
             )
+//          disable go back phone button
+            BackHandler(true) {
+//
+            }
         }
         composable(AppScreens.Settings.name) {
             Settings(

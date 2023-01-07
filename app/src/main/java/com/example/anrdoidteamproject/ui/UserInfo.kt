@@ -1,5 +1,6 @@
 package com.example.anrdoidteamproject.ui
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,12 +20,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
+import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.theme.PromptButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+
+private var emailAddress: String = ""
+private var firstName: String = ""
+private var lastName: String = ""
+private var phoneNumber: String = ""
 
 @Composable
 fun UserInfo(
@@ -33,9 +43,29 @@ fun UserInfo(
     settingsButtonOnClick: () -> Unit = {},
     friendButtonOnClick: () -> Unit = {}
 ) {
+
     val firebaseUser = Firebase.auth.currentUser
     val hashedMail = firebaseUser?.email.hashCode()
+    val myRef = DatabaseConnection.db.getReference("Users/$hashedMail")
+    emailAddress = firebaseUser?.email.toString()
 
+    myRef.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val myUser = dataSnapshot.getValue(User::class.java)
+            Log.d("eo", "$dataSnapshot")
+            if (myUser != null) {
+                phoneNumber = myUser!!.phoneNumber
+                lastName = myUser!!.lastName
+                firstName = myUser!!.firstName
+            } else
+                Log.d("eo", "user is null")
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            TODO("Not yet implemented")
+        }
+
+    })
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -64,25 +94,50 @@ fun UserInfo(
                 horizontalAlignment = Alignment.CenterHorizontally,
             )
             {
+//              show email
                 Spacer(modifier = Modifier.height(15.dp))
-
                 Text(
                     style = TextStyle(color = Color.White, fontSize = 24.sp),
                     text = stringResource(id = R.string.email),
                 )
                 Text(
                     style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = firebaseUser?.email.toString()
+                    text = emailAddress
                 )
 
+//              show first name
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(
+                    style = TextStyle(color = Color.White, fontSize = 24.sp),
+                    text = stringResource(id = R.string.imie),
+                )
+                Text(
+                    style = TextStyle(color = Color.White, fontSize = 24.sp),
+                    text = firstName
+                )
+
+//              show last name
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(
+                    style = TextStyle(color = Color.White, fontSize = 24.sp),
+                    text = stringResource(id = R.string.nazwisko),
+                )
+                Text(
+                    style = TextStyle(color = Color.White, fontSize = 24.sp),
+                    text = lastName,
+                )
+
+//              show phone number
+                Spacer(modifier = Modifier.height(15.dp))
                 Text(
                     style = TextStyle(color = Color.White, fontSize = 24.sp),
                     text = stringResource(id = R.string.telefon),
                 )
                 Text(
                     style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = DatabaseConnection.db.getReference("Users/$hashedMail")
+                    text = phoneNumber,
                 )
+
             }
         }
     }

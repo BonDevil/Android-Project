@@ -178,7 +178,8 @@ fun MainApp(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
-                friendButtonOnClick = friendButtonOnClick
+                friendButtonOnClick = friendButtonOnClick,
+                navController = navController
             )
         }
     }

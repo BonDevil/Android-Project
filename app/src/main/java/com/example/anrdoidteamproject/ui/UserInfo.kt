@@ -1,7 +1,6 @@
 package com.example.anrdoidteamproject.ui
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -12,12 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.User
@@ -27,7 +28,6 @@ import com.example.anrdoidteamproject.ui.theme.topBar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
@@ -41,7 +41,8 @@ fun UserInfo(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
-    friendButtonOnClick: () -> Unit = {}
+    friendButtonOnClick: () -> Unit = {},
+    navController: NavController = rememberNavController()
 ) {
 
     val firebaseUser = Firebase.auth.currentUser
@@ -71,7 +72,7 @@ fun UserInfo(
             bottomBar(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
             )
         },
         topBar = { topBar(message = stringResource(R.string.konto)) },
@@ -137,7 +138,13 @@ fun UserInfo(
                     style = TextStyle(color = Color.White, fontSize = 24.sp),
                     text = phoneNumber,
                 )
-
+                Spacer(modifier = Modifier.height(15.dp))
+                PromptButton(
+                    label = R.string.wylogowanie,
+                    onClick = {
+                        navController.navigate(AppScreens.LogIn.name)
+                    }
+                )
             }
         }
     }

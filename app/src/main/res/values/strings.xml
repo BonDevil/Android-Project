@@ -46,6 +46,5 @@
     <string name="cat_samolot">Samolot</string>
     <string name="cat_transport">Transport</string>
     <string name="logowanie_powrot" translatable="false">Logowanie</string>
-
-
+    <string name="wylogowanie" translatable="false">Wyloguj się</string>
 </resources>

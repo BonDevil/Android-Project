@@ -27,126 +27,8 @@ import com.example.anrdoidteamproject.ui.theme.SimpleTextField
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 
-@Composable
-fun trip_valus() {
-
-    Column(
-        modifier = Modifier
-
-            .background(Color(24, 31, 54))
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-
-        )
-    {
-        Column(
-            modifier = Modifier
-                .padding(40.dp)
-                .background(Color(24, 31, 54))
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.Start,
-
-            ) {
-            Text(
-                text = stringResource(R.string.nazwa),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                ),
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            TextField(
-                value = "",
-                onValueChange = {},
-//            KeyboardOptions(
-//                keyboardType = KeyboardType.Text,
-//                imeAction = ImeAction.Next
-//            ),
-                modifier = Modifier
-                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-
-                    .background(Color(217, 217, 217), RoundedCornerShape(10))
-                    .heightIn(min = 56.dp),
-
-                )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(R.string.opis),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                ),
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            TextField(
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-                    .background(Color(217, 217, 217), RoundedCornerShape(10))
-                    .heightIn(min = 56.dp),
-//
-//            KeyboardOptions(
-//                keyboardType = KeyboardType.Text,
-//                imeAction = ImeAction.Next
-//            ),
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(R.string.planowana_kwota),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                ),
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            TextField(
-                value = "",
-                onValueChange = {},
-//            KeyboardOptions(
-//                keyboardType = KeyboardType.Text,
-//                imeAction = ImeAction.Next
-//            ),
-                modifier = Modifier
-                    .fillMaxWidth(0.6f)
-                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-                    .background(Color(217, 217, 217), RoundedCornerShape(10))
-                    .heightIn(min = 56.dp),
-
-                )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(R.string.ilosc_dni),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                ),
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-
-            TextField(
-                value = "",
-                onValueChange = {},
-//            KeyboardOptions(
-//                keyboardType = KeyboardType.Text,
-//                imeAction = ImeAction.Next
-//            ),
-                modifier = Modifier
-                    .fillMaxWidth(0.3f)
-                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-                    .background(Color(217, 217, 217), RoundedCornerShape(10))
-                    .heightIn(min = 56.dp),
 
 
-                )
-            Spacer(modifier = Modifier.height(60.dp))
-        }
-    }
-}
 
 @Composable
 fun AddTrip(
@@ -155,6 +37,11 @@ fun AddTrip(
     settingsButtonOnClick: () -> Unit = {},
     addFriendsToTrip: () -> Unit = {}
 ) {
+
+    var tripName by remember { mutableStateOf("") }
+    var tripDescription by remember { mutableStateOf("") }
+    var plannedAmount by remember { mutableStateOf("") }
+    var numberOfDays by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
@@ -189,7 +76,127 @@ fun AddTrip(
         },
         modifier = Modifier.background(color = Color(0xff181f36))
     ) {
-        trip_valus()
+        Column(
+            modifier = Modifier
+
+                .background(Color(24, 31, 54))
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            )
+        {
+            Column(
+                modifier = Modifier
+                    .padding(40.dp)
+                    .background(Color(24, 31, 54))
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.Start,
+
+                ) {
+
+
+//                trip name
+                Text(
+                    text = stringResource(R.string.nazwa),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    ),
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                TextField(
+                    value = tripName,
+                    onValueChange = { tripName = it},
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
+                    ),
+                    modifier = Modifier
+                        .border(
+                            2.dp, Color(89, 128, 255), RoundedCornerShape(10)
+                        )
+                        .background(Color(217, 217, 217), RoundedCornerShape(10))
+                        .heightIn(min = 56.dp),
+
+                    )
+
+//                trip description
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = stringResource(R.string.opis),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    ),
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                TextField(
+                    value = tripDescription,
+                    onValueChange = { tripDescription = it},
+                    modifier = Modifier
+                        .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
+                        .background(Color(217, 217, 217), RoundedCornerShape(10))
+                        .heightIn(min = 56.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
+                    )
+                )
+
+//                trip planned amount
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = stringResource(R.string.planowana_kwota),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    ),
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                TextField(
+                    value = plannedAmount,
+                    onValueChange = { plannedAmount = it},
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
+                        .background(Color(217, 217, 217), RoundedCornerShape(10))
+                        .heightIn(min = 56.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
+                    )
+                )
+
+//                planned number of days
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = stringResource(R.string.ilosc_dni),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    ),
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                TextField(
+                    value = numberOfDays,
+                    onValueChange = { numberOfDays = it},
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth(0.3f)
+                        .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
+                        .background(Color(217, 217, 217), RoundedCornerShape(10))
+                        .heightIn(min = 56.dp),
+                    )
+                Spacer(modifier = Modifier.height(60.dp))
+            }
+        }
     }
 }
 

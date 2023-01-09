@@ -16,8 +16,6 @@ import com.example.anrdoidteamproject.R
 
 import androidx.compose.foundation.layout.Column
 
-import androidx.compose.runtime.Composable
-
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,18 +27,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.runtime.*
 
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.example.anrdoidteamproject.ui.theme.AddButton
-import com.example.anrdoidteamproject.ui.theme.ConfirmButton
-import com.example.anrdoidteamproject.ui.theme.bottomBar
-import com.example.anrdoidteamproject.ui.theme.topBar
+import com.example.anrdoidteamproject.ui.theme.*
 
 
 data class Osoba(val Imie: String, val Nazwisko: String)
@@ -97,9 +94,10 @@ fun FriendsList(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
-    addFriends: () -> Unit = {}
+    addFriends: () -> Unit = {},
+    invitationButton: () -> Unit = {},
 ) {
-
+    var expanded by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -110,8 +108,26 @@ fun FriendsList(
         },
         topBar = { topBar(message = stringResource(R.string.znajomi)) },
         floatingActionButton = {
-            AddButton(confirmOnClick = addFriends
-            )
+            FloatingActionButton(
+                onClick = { expanded = !expanded },
+                backgroundColor = Color.White
+            ) {
+                Icon(
+                    painterResource(id = R.drawable.ic_action_more_buttons),
+                    tint = Color.Black,
+                    contentDescription = "more",
+                )
+            }
+
+            if (expanded) {
+                Actionbuton2(
+                    onClick = { expanded = !expanded },
+                    onClick1 = addFriends,
+                    onClick2 = invitationButton,
+                    drawable = R.drawable.img_add_user,
+                    drawable2 = Icons.Filled.Notifications
+                )
+            }
         },
         modifier = Modifier.background(color = Color(0xff181f36))
 

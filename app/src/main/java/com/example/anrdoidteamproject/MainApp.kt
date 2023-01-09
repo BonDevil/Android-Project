@@ -27,7 +27,8 @@ enum class AppScreens() {
     Stats,
     TransferFunds,
     TripsList,
-    UserInfo
+    UserInfo,
+    Invitations,
 }
 
 @Composable
@@ -43,6 +44,8 @@ fun MainApp(
     addFriends: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddFriend.name) },
     addExpense: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddExpense.name) },
     addCategory: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddCategory.name) },
+    statsButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Stats.name) },
+    invitationButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Invitations.name) },
 ) {
     NavHost(
         navController = navController,
@@ -70,7 +73,8 @@ fun MainApp(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
-                addtripButtonOnClick = addTripButtonOnClick
+                addtripButtonOnClick = addTripButtonOnClick,
+                statsButtonOnClick = statsButtonOnClick
             )
 //          disable go back phone button
             BackHandler(true) {
@@ -139,7 +143,8 @@ fun MainApp(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
-                addFriends = addFriends
+                addFriends = addFriends,
+                invitationButton = invitationButton
             )
         }
         composable(AppScreens.History.name) {
@@ -180,6 +185,13 @@ fun MainApp(
                 settingsButtonOnClick = settingsButtonOnClick,
                 friendButtonOnClick = friendButtonOnClick,
                 navController = navController
+            )
+        }
+        composable(AppScreens.Invitations.name) {
+            InvitationsList(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick,
             )
         }
     }

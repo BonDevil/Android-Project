@@ -145,6 +145,13 @@ fun UserInfo(
                         navController.navigate(AppScreens.LogIn.name)
                     }
                 )
+                Spacer(modifier = Modifier.height(15.dp))
+                PromptButton(
+                    label = R.string.znajomi,
+                    onClick = {
+                        navController.navigate(AppScreens.FriendsList.name)
+                    }
+                )
             }
         }
     }

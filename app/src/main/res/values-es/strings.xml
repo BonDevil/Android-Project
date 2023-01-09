@@ -46,6 +46,9 @@
     <string name="cat_atrakcje">Atracciones</string>
     <string name="cat_samolot">Avión</string>
     <string name="cat_transport">Transporte</string>
+    <string name="logowanie_powrot" translatable="false">Acceso</string>
+    <string name="wylogowanie">Cerrar sesión</string>
+    <string name="akceptuj" translatable="false">Aceptar</string>
 
 
 </resources>

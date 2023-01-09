@@ -46,4 +46,7 @@
     <string name="cat_atrakcje">Attractions</string>
     <string name="cat_samolot">Plane</string>
     <string name="cat_transport">Transport</string>
+    <string name="logowanie_powrot" translatable="false">Login</string>
+    <string name="wylogowanie">Log out</string>
+    <string name="akceptuj" translatable="false">Accept</string>
 </resources>

@@ -46,4 +46,7 @@
     <string name="cat_atrakcje">Attrazioni</string>
     <string name="cat_samolot">Aereo</string>
     <string name="cat_transport">Trasporto</string>
+    <string name="logowanie_powrot">Accedere</string>
+    <string name="wylogowanie">Disconnettersi</string>
+    <string name="akceptuj">Accettare</string>
 </resources>

@@ -16,15 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.input.key.Key.Companion.H
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -45,13 +43,13 @@ fun DrawGradientCircles(
     modifier: Modifier = Modifier,
     percentage: Float,
     fillColor: Color,
-    backgroundColor: Color,
+    backgroundColor: Brush,
     strokeWidth: Dp,
     image: Int
 
 ) {
-    val image = ImageBitmap.imageResource(id = image)
-
+    //TODO:smaller icons
+    var image = ImageBitmap.imageResource(id = image)
     Canvas(
         modifier = Modifier
             .size(150.dp)
@@ -72,7 +70,7 @@ fun DrawGradientCircles(
 
         // Background Line
         drawArc(
-            color = backgroundColor,
+            brush = backgroundColor,
             140f,
             360f,
             false,
@@ -108,7 +106,7 @@ fun DrawGradientCircles(
 fun DrawGradientCircleToday(
     modifier: Modifier = Modifier,
     percentage: Float,
-    backgroundColor: Color,
+    backgroundColor: Brush,
     strokeWidth: Dp,
     total: String
 
@@ -129,6 +127,7 @@ fun DrawGradientCircleToday(
                     textSize = 50f
                     color = Color.White.hashCode()
                     textAlign = Paint.Align.CENTER
+                    //TODO:ALign text vertically
                 }
             )
         }
@@ -149,7 +148,7 @@ fun DrawGradientCircleToday(
 
         // Background Line
         drawArc(
-            color = backgroundColor,
+            brush = backgroundColor,
             140f,
             360f,
             false,
@@ -158,7 +157,7 @@ fun DrawGradientCircleToday(
         )
 
         drawArc(
-            color = Color.Blue,
+            color = Color(0xFF4663FF),
             140f,
             percentage * 360f,
             false,
@@ -190,7 +189,7 @@ fun DrawGradientCircle(
     percentage4: Float,
     percentage5: Float,
     percentage6: Float,
-    backgroundColor: Color,
+    backgroundColor: Brush,
     strokeWidth: Dp,
     total: String,
 
@@ -200,7 +199,8 @@ fun DrawGradientCircle(
 
     Canvas(
         modifier = Modifier
-            .size(300.dp)
+//            .size(200.dp)
+            .aspectRatio(1f)
             .padding(20.dp)
     ) {
 
@@ -221,7 +221,7 @@ fun DrawGradientCircle(
         }
         // Background Line
         drawArc(
-            color = backgroundColor,
+            brush = Brush.horizontalGradient(listOf(Color.White,Color(0xFF181F36))),
             140f,
             360f,
             false,
@@ -239,7 +239,7 @@ fun DrawGradientCircle(
         )
 
         drawArc(
-            color = Color.Blue,
+            color = Color(0xFF4663FF),
             140f + (percentage1 * 360f),
             percentage2 * 360f,
             false,
@@ -247,7 +247,7 @@ fun DrawGradientCircle(
             size = Size(size.width, size.height)
         )
         drawArc(
-            color = Color.Green,
+            color = Color(0xFF57FF3B),
             140f + ((percentage1 + percentage2) * 360f),
             percentage3 * 360f,
             false,
@@ -255,7 +255,7 @@ fun DrawGradientCircle(
             size = Size(size.width, size.height)
         )
         drawArc(
-            color = Color.Yellow,
+            color = Color(0xFFFFC83A),
             140f + ((percentage1 + percentage2 + percentage3) * 360f),
             percentage4 * 360f,
             false,
@@ -282,7 +282,7 @@ fun DrawGradientCircle(
 
         var angleInDegrees =
             ((percentage1 + percentage2 + percentage3 + percentage4 + percentage5 + percentage6) * 360.0) + 50.0
-        var radius = (size.height / 2)
+        var radius = (size.height /2 )
         var x = -(radius * sin(Math.toRadians(angleInDegrees))).toFloat() + (size.width / 2)
         var y = (radius * cos(Math.toRadians(angleInDegrees))).toFloat() + (size.height / 2)
 
@@ -300,53 +300,90 @@ fun DrawGradientCircle(
 fun gridcat() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
+
     )
     {
-        Row() {
-            DrawGradientCircles(
-                percentage = 0.80f,
-                fillColor = Color.Red,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.food
-            )
-            DrawGradientCircles(
-                percentage = 0.40f,
-                fillColor = Color.Blue,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.sleep
-            )
-            DrawGradientCircles(
-                percentage = 0.60f,
-                fillColor = Color.Green,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.drink
-            )
+        Row(
+            modifier = Modifier
+                .fillMaxHeight(0.5f)
+        ) {
+            Box(modifier = Modifier
+                .fillMaxWidth(0.33f)
+                .aspectRatio(1f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.80f,
+                    fillColor = Color.Red,
+                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x40ff0000),Color(0xFF181F36))),
+//                    Color(android.graphics.Color.parseColor("#90A4AE")),
+                    strokeWidth = 10.dp,
+
+                    image = R.drawable.food
+                )
+            }
+            Box(modifier = Modifier
+                .fillMaxWidth(0.5f)
+                .aspectRatio(1f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.40f,
+                    fillColor = Color(0x404663FF),
+                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x404663FF),Color(0xFF181F36))),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.sleep
+                )
+            }
+            Box(modifier = Modifier
+                .fillMaxWidth(1f)
+                .aspectRatio(1f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.60f,
+                    fillColor = Color(0xFF57FF3B),
+                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x4057FF3B),Color(0xFF181F36))),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.drink
+                )
+            }
         }
-        Row() {
-            DrawGradientCircles(
-                percentage = 0.20f,
-                fillColor = Color.Yellow,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.gift
-            )
+        Row(modifier = Modifier
+            .fillMaxHeight(1f)
+        ) {
+            Box(modifier = Modifier
+                .fillMaxWidth(0.33f)
+                .aspectRatio(1f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.20f,
+                    fillColor = Color(0xFFFFC83A),
+                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x40FFC83A),Color(0xFF181F36))),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.gift
+                )
+            }
+            Box(modifier = Modifier
+                .fillMaxWidth(0.5f)
+                .aspectRatio(1f)
+            ) {
             DrawGradientCircles(
                 percentage = 0.30f,
                 fillColor = Color(0xFFFF43BE),
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
+                backgroundColor = Brush.horizontalGradient(listOf(Color(0x40FF43BE),Color(0xFF181F36))),
                 strokeWidth = 10.dp,
                 image = R.drawable.plane
-            )
-            DrawGradientCircles(
-                percentage = 0.40f,
-                fillColor = Color(0xFFA840FA),
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.train
-            )
+            )}
+            Box(modifier = Modifier
+                .fillMaxWidth(1f)
+                .aspectRatio(1f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.40f,
+                    fillColor = Color(0xFFA840FA),
+                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x40A840FA),Color(0xFF181F36))),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.train
+                )
+            }
         }
     }
 }
@@ -407,9 +444,11 @@ fun Stats(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Row(
+            Column(
 
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                Row(modifier = Modifier
+                    .fillMaxHeight(0.3f)
                 ) {
                     DrawGradientCircle(
                         percentage1 = 0.20f,
@@ -418,28 +457,42 @@ fun Stats(
                         percentage4 = 0.2f,
                         percentage5 = 0.2f,
                         percentage6 = 0.1f,
-                        backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
+                        backgroundColor = Brush.horizontalGradient(listOf(Color(0xFF181F36),Color(0xFF181F36))),
                         strokeWidth = 30.dp,
                         total = "2000"
                     )
                 }
-                Row() {
-                    PromptButton(
-                        label = R.string.bilans,
-                        onClick = bilansButton
-                    )
-                }
 
-                Row {
+
+                Row (
+                    modifier = Modifier
+                        .fillMaxHeight(0.5f),
+                    verticalAlignment = Alignment.CenterVertically
+
+                        )
+                {
                     gridcat()
                 }
 
-                Row(modifier = Modifier.align(Alignment.Start)) {
-                    DrawGradientCircleToday(
-                        percentage = 0.4f,
-                        backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                        strokeWidth = 20.dp,
-                        total = "50"
+                Row(modifier = Modifier
+                    .fillMaxHeight()
+                    .align(Alignment.Start)
+               ) {
+                    Box(modifier = Modifier
+                        .fillMaxWidth(0.5f)
+                        .aspectRatio(1f))
+                    {
+                        DrawGradientCircleToday(
+                            percentage = 0.4f,
+                            backgroundColor = Brush.horizontalGradient(listOf(Color(0xFF181F36),Color(0x20FFFFFF))),
+                            strokeWidth = 20.dp,
+                            total = "50"
+                        )
+                    }
+                    //TODO: circle button?
+                    PromptButton(
+                        label = R.string.bilans,
+                        onClick = bilansButton
                     )
                 }
             }

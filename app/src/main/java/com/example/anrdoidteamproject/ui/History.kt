@@ -91,14 +91,14 @@ data class Expenditure(
 fun ExpenditureCard(ex: Expenditure) {
     Column(
         modifier = Modifier
-            .fillMaxSize().padding(20.dp),
+            .fillMaxSize().padding(10.dp),
 
     ) {
         Row(modifier = Modifier.align(Alignment.Start)) {
             Text(
                 text = ex.category,
                 color = Color.White,
-                fontSize = 40.sp,
+                fontSize = 30.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )
@@ -108,7 +108,7 @@ fun ExpenditureCard(ex: Expenditure) {
             Text(
                 text = ex.price.toString(),
                 color = Color.Cyan,
-                fontSize = 50.sp,
+                fontSize = 40.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )
@@ -119,7 +119,7 @@ fun ExpenditureCard(ex: Expenditure) {
             Text(
                 text = stringResource(R.string.zaplacone_przez),
                 color = Color.White,
-                fontSize = 30.sp,
+                fontSize = 20.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )
@@ -128,7 +128,7 @@ fun ExpenditureCard(ex: Expenditure) {
             Text(
                 text = ex.paying_person_name,
                 color = Color.Red,
-                fontSize = 30.sp,
+                fontSize = 20.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )
@@ -139,7 +139,7 @@ fun ExpenditureCard(ex: Expenditure) {
             Text(
                 text = ex.paying_person_full_name,
                 color = Color.Red,
-                fontSize = 30.sp,
+                fontSize = 20.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )

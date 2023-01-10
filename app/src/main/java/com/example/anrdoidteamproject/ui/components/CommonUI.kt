@@ -229,8 +229,8 @@ fun topBar21(message: String, message2: String, onClick: () -> Unit = {}) {
         modifier = Modifier
             .background(Color(44, 57, 100))
             .fillMaxHeight(0.075f)
-            .fillMaxWidth()
     ) {
+        Column(modifier = Modifier.fillMaxWidth(0.5f),horizontalAlignment = Alignment.CenterHorizontally,) {
         OutlinedButton(
             onClick = onClick,
             Modifier.width(250.dp),
@@ -242,18 +242,21 @@ fun topBar21(message: String, message2: String, onClick: () -> Unit = {}) {
             Text(
                 text = message,
                 fontFamily = FontCentury,
-                fontSize = 40.sp,
+                fontSize = 30.sp,
                 fontWeight = FontWeight(750),
                 color = Color.White,
             )
+        }}
+        Column(modifier = Modifier.fillMaxWidth(),horizontalAlignment = Alignment.CenterHorizontally,) {
+            Text(
+                text = message2,
+                fontFamily = FontCentury,
+                fontSize = 30.sp,
+                fontWeight = FontWeight(750),
+                color = Color.White
+            )
         }
-        Text(
-            text = message2,
-            fontFamily = FontCentury,
-            fontSize = 40.sp,
-            fontWeight = FontWeight(750),
-            color = Color.White
-        )
+
 
     }
 }
@@ -267,16 +270,18 @@ fun topBar22(message: String, message2: String, onClick: () -> Unit = {}) {
         modifier = Modifier
             .background(Color(44, 57, 100))
             .fillMaxHeight(0.075f)
-            .fillMaxWidth()
     ) {
 
-        Text(
-            text = message,
-            fontFamily = FontCentury,
-            fontSize = 40.sp,
-            fontWeight = FontWeight(750),
-            color = Color.White,
-        )
+        Column(modifier = Modifier.fillMaxWidth(0.5f), horizontalAlignment = Alignment.CenterHorizontally,) {
+            Text(
+                text = message,
+                fontFamily = FontCentury,
+                fontSize = 30.sp,
+                fontWeight = FontWeight(750),
+                color = Color.White,
+            )
+        }
+
         OutlinedButton(
             onClick = onClick,
             Modifier.width(250.dp),
@@ -288,13 +293,14 @@ fun topBar22(message: String, message2: String, onClick: () -> Unit = {}) {
             Text(
                 text = message2,
                 fontFamily = FontCentury,
-                fontSize = 40.sp,
+                fontSize = 30.sp,
                 fontWeight = FontWeight(750),
-                color = Color.White
+                color = Color.White,
             )
 
         }
-    }}
+    }
+}
 
 
 

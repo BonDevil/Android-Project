@@ -64,10 +64,10 @@ fun DropdownDemo() {
 
 
     if (selectedIndex == 0) {
-        translator(lan = "en")
+        translator(lan = "pl")
     }
     if (selectedIndex == 1) {
-        translator(lan = "pl")
+        translator(lan = "en")
     }
     if (selectedIndex == 2) {
         translator(lan = "it")

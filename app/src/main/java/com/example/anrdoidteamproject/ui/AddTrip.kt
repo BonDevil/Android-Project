@@ -165,7 +165,7 @@ fun AddTrip(
                         .background(Color(217, 217, 217), RoundedCornerShape(10))
                         .heightIn(min = 56.dp),
                     keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
+                        keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Next
                     )
                 )
@@ -185,8 +185,8 @@ fun AddTrip(
                     value = numberOfDays,
                     onValueChange = { numberOfDays = it},
                     keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Next
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Done
                     ),
                     modifier = Modifier
                         .fillMaxWidth(0.3f)

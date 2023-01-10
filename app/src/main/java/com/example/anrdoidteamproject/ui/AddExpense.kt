@@ -30,6 +30,8 @@ import com.example.anrdoidteamproject.ui.theme.topBar
 
 @Composable
 fun add_expense() {
+    var expenseName by remember { mutableStateOf("") }
+    var expenseSUM by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .padding(20.dp)
@@ -58,18 +60,18 @@ fun add_expense() {
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(
-                value = "",
-                onValueChange = {},
-//            KeyboardOptions(
-//                keyboardType = KeyboardType.Text,
-//                imeAction = ImeAction.Next
-//            ),
+                value = expenseName,
+                onValueChange = { expenseName = it},
+
                 modifier = Modifier
                     .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
 
                     .background(Color(217, 217, 217), RoundedCornerShape(10))
                     .heightIn(min = 20.dp),
-
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                )
                 )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
@@ -81,19 +83,8 @@ fun add_expense() {
                 ),
             )
             Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-                    .background(Color(217, 217, 217), RoundedCornerShape(10))
-                    .heightIn(min = 20.dp),
-//
-//            KeyboardOptions(
-//                keyboardType = KeyboardType.Text,
-//                imeAction = ImeAction.Next
-//            ),
-            )
+            Spacer(modifier = Modifier.height(15.dp))
+            DropdownCategories()
             Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = stringResource(R.string.kwota),
@@ -105,18 +96,20 @@ fun add_expense() {
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(
-                value = "",
-                onValueChange = {},
-//            KeyboardOptions(
-//                keyboardType = KeyboardType.Text,
-//                imeAction = ImeAction.Next
-//            ),
+                value = expenseSUM,
+                onValueChange = {expenseSUM = it},
+
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
                     .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
                     .background(Color(217, 217, 217), RoundedCornerShape(10))
                     .heightIn(min = 20.dp),
 
+
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
+                )
                 )
             Spacer(modifier = Modifier.height(20.dp))
             /*TextFieldWithLabel(
@@ -181,6 +174,8 @@ fun DropdownCategories() {
     Box(
         modifier = Modifier
             .wrapContentSize(Alignment.TopStart)
+            .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
+            .background(Color(217, 217, 217), RoundedCornerShape(10))
     ) {
         Text(
 

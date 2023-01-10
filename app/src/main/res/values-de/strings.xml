@@ -35,11 +35,6 @@
     <string name="logwanie_zacheta">Einloggen</string>
     <string name="rejestracja_zacheta">registrieren</string>
     <string name="podaj_e_mail_itd">Geben Sie die E-Mail-Adresse/Telefonnummer Ihres Freundes ein</string>
-    <string name="polski">Polieren</string>
-    <string name="angielski">Englisch</string>
-    <string name="niemiecki">Deutsch</string>
-    <string name="wloski">Italienisch</string>
-    <string name="hiszpanski">Spanisch</string>
     <string name="cat_jedzenie">Essen</string>
     <string name="cat_spanie">Schlafen</string>
     <string name="cat_napoje">Getränke</string>
@@ -49,4 +44,6 @@
     <string name="logowanie_powrot">Anmeldung</string>
     <string name="wylogowanie" translatable="false">Ausloggen</string>
     <string name="akceptuj">Akzeptieren</string>
+    <string name="zaplacone_przez">Bezahlt von</string>
+    <string name="dzisiaj">HEUTE</string>
 </resources>

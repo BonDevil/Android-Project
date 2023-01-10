@@ -35,11 +35,6 @@
     <string name="logwanie_zacheta">Accesso</string>
     <string name="rejestracja_zacheta">Registrati</string>
     <string name="podaj_e_mail_itd">Inserisci l\'e-mail/il numero di telefono del tuo amico</string>
-    <string name="polski">Polacco</string>
-    <string name="angielski">inglese</string>
-    <string name="niemiecki">Tedesco</string>
-    <string name="wloski">Italiano</string>
-    <string name="hiszpanski">spagnolo</string>
     <string name="cat_jedzenie">Cibo</string>
     <string name="cat_spanie">Dormire</string>
     <string name="cat_napoje">Bevande</string>
@@ -49,4 +44,6 @@
     <string name="logowanie_powrot">Accedere</string>
     <string name="wylogowanie">Disconnettersi</string>
     <string name="akceptuj">Accettare</string>
+    <string name="zaplacone_przez">Pagato da</string>
+    <string name="dzisiaj">OGGI</string>
 </resources>

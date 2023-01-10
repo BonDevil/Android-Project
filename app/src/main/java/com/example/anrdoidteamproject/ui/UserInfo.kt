@@ -142,7 +142,9 @@ fun UserInfo(
                 PromptButton(
                     label = R.string.wylogowanie,
                     onClick = {
+                        Firebase.auth.signOut()
                         navController.navigate(AppScreens.LogIn.name)
+
                     }
                 )
                 Spacer(modifier = Modifier.height(15.dp))

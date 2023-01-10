@@ -9,6 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.ui.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 enum class AppScreens() {
     AddCategory,
@@ -32,6 +34,8 @@ enum class AppScreens() {
 }
 
 @Composable
+
+
 fun MainApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
@@ -51,9 +55,15 @@ fun MainApp(
     transferFundsButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.TransferFunds.name) },
 
     ) {
+    var user by remember { mutableStateOf(Firebase.auth.currentUser) }
+    var naw = String()
+    if (user != null) {
+        naw = AppScreens.TripsList.name
+    }
+    else{naw = AppScreens.LogIn.name}
     NavHost(
         navController = navController,
-        startDestination = AppScreens.LogIn.name
+        startDestination = naw
     ) {
         composable(AppScreens.LogIn.name) {
             LogIn(

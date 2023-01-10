@@ -49,4 +49,5 @@
     <string name="wylogowanie">Wyloguj się</string>
     <string name="test" translatable="false">TEST</string>
     <string name="akceptuj">AKCEPTUJ</string>
+    <string name="dzisiaj" translatable="false">DZISIAJ</string>
 </resources>

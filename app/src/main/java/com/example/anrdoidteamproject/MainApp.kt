@@ -46,7 +46,10 @@ fun MainApp(
     addCategory: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddCategory.name) },
     statsButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Stats.name) },
     invitationButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Invitations.name) },
-) {
+    balanceButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Balance.name) },
+    historyButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.History.name) },
+
+    ) {
     NavHost(
         navController = navController,
         startDestination = AppScreens.LogIn.name
@@ -121,7 +124,8 @@ fun MainApp(
             Balance(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                topbarButton = historyButton
             )
         }
         composable(AppScreens.ChooseFriends.name) {
@@ -151,7 +155,8 @@ fun MainApp(
             History(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                topbarButton = balanceButton
             )
         }
         composable(AppScreens.MenuPayment.name) {
@@ -168,6 +173,7 @@ fun MainApp(
                 settingsButtonOnClick = settingsButtonOnClick,
                 addExpense = addExpense,
                 addCategory = addCategory,
+                bilansButton = balanceButton,
                 tripName = " "
             )
         }

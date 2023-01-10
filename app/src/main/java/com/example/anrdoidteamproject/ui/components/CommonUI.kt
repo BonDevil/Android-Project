@@ -221,7 +221,7 @@ fun PromptButton(
 }
 
 @Composable
-fun topBar2(message: String, message2: String) {
+fun topBar21(message: String, message2: String, onClick: () -> Unit = {}) {
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -231,13 +231,22 @@ fun topBar2(message: String, message2: String) {
             .fillMaxHeight(0.075f)
             .fillMaxWidth()
     ) {
-        Text(
-            text = message,
-            fontFamily = FontCentury,
-            fontSize = 40.sp,
-            fontWeight = FontWeight(750),
-            color = Color.White
-        )
+        OutlinedButton(
+            onClick = onClick,
+            Modifier.width(250.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(26, 51, 101),
+                disabledBackgroundColor = Color(70, 99, 255),
+            )
+        ) {
+            Text(
+                text = message,
+                fontFamily = FontCentury,
+                fontSize = 40.sp,
+                fontWeight = FontWeight(750),
+                color = Color.White,
+            )
+        }
         Text(
             text = message2,
             fontFamily = FontCentury,
@@ -249,97 +258,135 @@ fun topBar2(message: String, message2: String) {
     }
 }
 
-
 @Composable
-fun Actionbuton2(
-    onClick: () -> Unit,
-    onClick1: () -> Unit,
-    onClick2: () -> Unit,
+fun topBar22(message: String, message2: String, onClick: () -> Unit = {}) {
 
-    @DrawableRes drawable: Int,
-    drawable2: ImageVector,
-) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier
+            .background(Color(44, 57, 100))
+            .fillMaxHeight(0.075f)
+            .fillMaxWidth()
+    ) {
 
-    Column {
-
-
-        FloatingActionButton(
-            onClick = onClick1,
-            backgroundColor = Color.White
-        ) {
-            Icon(
-                painterResource(id = drawable),
-                tint = Color(0xFF5980FF),
-                contentDescription = null,
-            )
-        }
-
-        Spacer(
-            modifier = Modifier
-                .height(20.dp)
+        Text(
+            text = message,
+            fontFamily = FontCentury,
+            fontSize = 40.sp,
+            fontWeight = FontWeight(750),
+            color = Color.White,
         )
-
-        FloatingActionButton(
-            onClick = onClick2,
-            backgroundColor = Color.White
-        ) {
-            Icon(
-                drawable2,
-                tint = Color(0xFF5980FF),
-                contentDescription = null,
-                )
-        }
-
-        Spacer(
-            modifier = Modifier
-                .height(20.dp)
-        )
-
-        FloatingActionButton(
+        OutlinedButton(
             onClick = onClick,
-            backgroundColor = Color(0xFF5980FF)
+            Modifier.width(250.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(26, 51, 101),
+                disabledBackgroundColor = Color(70, 99, 255),
+            )
         ) {
-            Icon(
-                painterResource(id = R.drawable.ic_action_more_buttons),
-                contentDescription = "more",
+            Text(
+                text = message2,
+                fontFamily = FontCentury,
+                fontSize = 40.sp,
+                fontWeight = FontWeight(750),
+                color = Color.White
             )
 
         }
-    }
-}
+    }}
 
 
-@Composable
-fun ConfirmButton(
-    confirmOnClick: () -> Unit = {}
-)
-{
-    FloatingActionButton(
-        onClick = confirmOnClick,
-        backgroundColor = Color.White
+
+    @Composable
+    fun Actionbuton2(
+        onClick: () -> Unit,
+        onClick1: () -> Unit,
+        onClick2: () -> Unit,
+
+        @DrawableRes drawable: Int,
+        drawable2: ImageVector,
     ) {
-        Icon(
-            Icons.Filled.Check,
-            tint = Color(0xFF5980FF),
-            contentDescription = "confirm",
-        )
-    }
-}
 
-@Composable
-fun AddButton(
-    confirmOnClick: () -> Unit = {}
-)
-{
-    FloatingActionButton(
-        onClick = confirmOnClick,
-        backgroundColor = Color.White
-    ) {
-        Icon(
-            Icons.Filled.Add,
-            tint = Color(0xFF5980FF),
-            contentDescription = "ADD",
-        )
+        Column {
+
+
+            FloatingActionButton(
+                onClick = onClick1,
+                backgroundColor = Color.White
+            ) {
+                Icon(
+                    painterResource(id = drawable),
+                    tint = Color(0xFF5980FF),
+                    contentDescription = null,
+                )
+            }
+
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+
+            FloatingActionButton(
+                onClick = onClick2,
+                backgroundColor = Color.White
+            ) {
+                Icon(
+                    drawable2,
+                    tint = Color(0xFF5980FF),
+                    contentDescription = null,
+                )
+            }
+
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+            )
+
+            FloatingActionButton(
+                onClick = onClick,
+                backgroundColor = Color(0xFF5980FF)
+            ) {
+                Icon(
+                    painterResource(id = R.drawable.ic_action_more_buttons),
+                    contentDescription = "more",
+                )
+
+            }
+        }
     }
-}
+
+
+    @Composable
+    fun ConfirmButton(
+        confirmOnClick: () -> Unit = {}
+    ) {
+        FloatingActionButton(
+            onClick = confirmOnClick,
+            backgroundColor = Color.White
+        ) {
+            Icon(
+                Icons.Filled.Check,
+                tint = Color(0xFF5980FF),
+                contentDescription = "confirm",
+            )
+        }
+    }
+
+    @Composable
+    fun AddButton(
+        confirmOnClick: () -> Unit = {}
+    ) {
+        FloatingActionButton(
+            onClick = confirmOnClick,
+            backgroundColor = Color.White
+        ) {
+            Icon(
+                Icons.Filled.Add,
+                tint = Color(0xFF5980FF),
+                contentDescription = "ADD",
+            )
+        }
+    }
+
 

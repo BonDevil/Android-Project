@@ -14,13 +14,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
+import com.example.anrdoidteamproject.ui.theme.topBar21
+import com.example.anrdoidteamproject.ui.theme.topBar21
 
 
 @Composable
 fun Balance(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    topbarButton: () -> Unit = {},
 ) {
 
     Scaffold(
@@ -31,7 +34,13 @@ fun Balance(
                 settingsButtonOnClick = settingsButtonOnClick
             )
         },
-        topBar = { topBar(message = stringResource(R.string.bilans)) },
+        topBar = {
+            topBar21(
+                message = stringResource(R.string.historia),
+                message2 = stringResource(R.string.bilans),
+                onClick = topbarButton,
+            )
+        },
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {

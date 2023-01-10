@@ -298,55 +298,85 @@ fun DrawGradientCircle(
 
 @Composable
 fun gridcat() {
-    Column(
+    Column(modifier = Modifier
+            .fillMaxHeight(0.3f),
         horizontalAlignment = Alignment.CenterHorizontally
+
     )
     {
-        Row() {
-            DrawGradientCircles(
-                percentage = 0.80f,
-                fillColor = Color.Red,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.food
-            )
-            DrawGradientCircles(
-                percentage = 0.40f,
-                fillColor = Color.Blue,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.sleep
-            )
-            DrawGradientCircles(
-                percentage = 0.60f,
-                fillColor = Color.Green,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.drink
-            )
+        Row(
+            modifier = Modifier
+                .fillMaxHeight(0.5f)
+        ) {
+            Column(modifier = Modifier
+                .fillMaxWidth(0.33f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.80f,
+                    fillColor = Color.Red,
+                    backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.food
+                )
+            }
+            Column(modifier = Modifier
+                .fillMaxWidth(0.5f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.40f,
+                    fillColor = Color.Blue,
+                    backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.sleep
+                )
+            }
+            Column(modifier = Modifier
+                .fillMaxWidth(1f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.60f,
+                    fillColor = Color.Green,
+                    backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.drink
+                )
+            }
         }
-        Row() {
-            DrawGradientCircles(
-                percentage = 0.20f,
-                fillColor = Color.Yellow,
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.gift
-            )
+        Row(modifier = Modifier
+            .fillMaxHeight(1f)
+        ) {
+            Column(modifier = Modifier
+                .fillMaxWidth(0.3f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.20f,
+                    fillColor = Color.Yellow,
+                    backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.gift
+                )
+            }
+            Column(modifier = Modifier
+                .fillMaxWidth(0.5f)
+            ) {
             DrawGradientCircles(
                 percentage = 0.30f,
                 fillColor = Color(0xFFFF43BE),
                 backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
                 strokeWidth = 10.dp,
                 image = R.drawable.plane
-            )
-            DrawGradientCircles(
-                percentage = 0.40f,
-                fillColor = Color(0xFFA840FA),
-                backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
-                strokeWidth = 10.dp,
-                image = R.drawable.train
-            )
+            )}
+            Column(modifier = Modifier
+                .fillMaxWidth(1f)
+            ) {
+                DrawGradientCircles(
+                    percentage = 0.40f,
+                    fillColor = Color(0xFFA840FA),
+                    backgroundColor = Color(android.graphics.Color.parseColor("#90A4AE")),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.train
+                )
+            }
         }
     }
 }

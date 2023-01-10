@@ -1,24 +1,24 @@
 package com.example.anrdoidteamproject.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.*
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.ui.theme.*
 
@@ -27,7 +27,11 @@ data class Wycieczka(val Name: String)
 
 
 @Composable
-fun TripCard(trip: Wycieczka) {
+fun TripCard
+            (
+    trip: Wycieczka,
+    navController: NavController = rememberNavController()
+) {
 
     Column(
         modifier = Modifier
@@ -35,20 +39,32 @@ fun TripCard(trip: Wycieczka) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(modifier = Modifier.padding(20.dp)) {
-            Text(
-                text = trip.Name,
-                color = Color.White,
-                fontSize = 30.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
+
+
+            OutlinedButton(
+                onClick = {
+//                    navController.navigate(AppScreens.Stats.name)
+                },
+                Modifier.width(200.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color(24, 31, 54),
+                    disabledBackgroundColor = Color(70, 99, 255),
                 )
-            )
+            ) {
+                Text(
+                    text = trip.Name,
+                    color = Color.White,
+                    fontSize = 30.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    )
+                )
 
             Spacer(modifier = Modifier.width(4.dp))
 
             Spacer(modifier = Modifier.width(1.dp))
 
-        }
+        }}
         Divider(color = Color.White, thickness = 2.dp)
 
     }
@@ -113,7 +129,6 @@ fun TripsList(
 
     }
 }
-
 
 object SampleData_trip {
 

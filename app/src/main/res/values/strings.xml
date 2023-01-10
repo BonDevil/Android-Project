@@ -50,4 +50,5 @@
     <string name="test" translatable="false">TEST</string>
     <string name="akceptuj">AKCEPTUJ</string>
     <string name="dzisiaj" translatable="false">DZISIAJ</string>
+    <string name="zaplacone_przez" translatable="false">Zapłacone przez</string>
 </resources>

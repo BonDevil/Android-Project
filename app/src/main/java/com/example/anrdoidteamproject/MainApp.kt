@@ -48,6 +48,7 @@ fun MainApp(
     invitationButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Invitations.name) },
     balanceButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Balance.name) },
     historyButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.History.name) },
+    transferFundsButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.TransferFunds.name) },
 
     ) {
     NavHost(
@@ -125,7 +126,8 @@ fun MainApp(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
-                topbarButton = historyButton
+                topbarButton = historyButton,
+                transferFunds = transferFundsButton
             )
         }
         composable(AppScreens.ChooseFriends.name) {

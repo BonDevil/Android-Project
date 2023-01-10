@@ -12,10 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.anrdoidteamproject.R
-import com.example.anrdoidteamproject.ui.theme.bottomBar
-import com.example.anrdoidteamproject.ui.theme.topBar
-import com.example.anrdoidteamproject.ui.theme.topBar21
-import com.example.anrdoidteamproject.ui.theme.topBar21
+import com.example.anrdoidteamproject.ui.theme.*
 
 
 @Composable
@@ -24,6 +21,7 @@ fun Balance(
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
     topbarButton: () -> Unit = {},
+    transferFunds: () -> Unit = {},
 ) {
 
     Scaffold(
@@ -39,6 +37,10 @@ fun Balance(
                 message = stringResource(R.string.historia),
                 message2 = stringResource(R.string.bilans),
                 onClick = topbarButton,
+            )
+        },
+        floatingActionButton = {
+            ConfirmButton(confirmOnClick = transferFunds
             )
         },
         modifier = Modifier.background(color = Color(0xff181f36))

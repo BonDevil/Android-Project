@@ -51,7 +51,8 @@ fun PreviewBarGraph() {
 
         Box(modifier = Modifier
             .rotate(90f)
-            .padding(24.dp))
+//            .padding(24.dp)
+            )
             {
             BarGraph(
                 barGroups = mockedGraphData,
@@ -93,16 +94,16 @@ val mockedGraphData = listOf(
 )
 
 private object BarChartDefaults {
-    const val barVisualMinThreshold = -100
-    const val barVisualMaxThreshold = 100
+    const val barVisualMinThreshold = -150
+    const val barVisualMaxThreshold = 150
 
-    val barWidth = 30.dp
+    val barWidth = 50.dp
     val barSpacing = 1.dp
     val barCornerSize = 5.dp
 
     val groupBarContainerHeight = barVisualMaxThreshold.dp + kotlin.math.abs(barVisualMinThreshold).dp
     // groupBarContainerHeight + 40.dp height for the label
-    val groupBarAndLabelContainerHeight = groupBarContainerHeight + 40.dp
+    val groupBarAndLabelContainerHeight = groupBarContainerHeight+50.dp
 }
 @Composable
 fun BarGraph(
@@ -114,19 +115,20 @@ fun BarGraph(
 
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(5.dp))
             .fillMaxWidth()
-            .padding(8.dp)
+            .fillMaxHeight()
+//            .padding(5.dp)
+            .padding(5.dp)
     ) {
         barGroups.forEachIndexed { index, item ->
             if (index == 0) {
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.size(40.dp))
             }
             ChartBarGroup(
                 label = item.label,
                 values = item.values
             )
-            Spacer(modifier = Modifier.weight(1f))
+//            Spacer(modifier = Modifier.weight(1f).border(5.dp,Color.White,RoundedCornerShape(5.dp)))
         }
     }
 }
@@ -142,7 +144,6 @@ fun ChartBarGroup(
     Column(
         modifier = modifier
             .height(groupBarAndLabelContainerHeight),
-
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         GroupLabel(
@@ -168,6 +169,7 @@ fun ChartBarGroup(
                     modifier = Modifier.fillMaxHeight(),
                     verticalArrangement = Arrangement.Bottom
                 ) {
+
                     ChartBar(
                         percentage = percentage,
                         color = color
@@ -191,8 +193,9 @@ private fun GroupLabel(
 ) {
     Text(
         modifier = Modifier
-            .rotate(-90f)
-            .padding(bottom = 8.dp),
+            .rotate(-90f),
+
+
 
         text = text,
         color = color,
@@ -305,7 +308,6 @@ fun Balance(
                     .fillMaxWidth()
                     .fillMaxHeight(0.4f)
                     .background(color = Color(0xff181f36)),
-                verticalAlignment = Alignment.Top
 
             ) {
                 PreviewBarGraph()

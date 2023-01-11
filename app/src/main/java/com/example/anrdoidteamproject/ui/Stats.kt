@@ -299,6 +299,8 @@ fun DrawGradientCircle(
 @Composable
 fun gridcat() {
     Column(
+        modifier = Modifier
+            .padding(0.dp,20.dp,0.dp,0.dp),
         horizontalAlignment = Alignment.CenterHorizontally
 
     )
@@ -327,7 +329,7 @@ fun gridcat() {
             ) {
                 DrawGradientCircles(
                     percentage = 0.40f,
-                    fillColor = Color(0x404663FF),
+                    fillColor = Color(0xFF4663FF),
                     backgroundColor = Brush.horizontalGradient(listOf(Color(0x404663FF),Color(0xFF181F36))),
                     strokeWidth = 10.dp,
                     image = R.drawable.sleep

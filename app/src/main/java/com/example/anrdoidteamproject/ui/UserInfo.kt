@@ -149,7 +149,7 @@ fun UserInfo(
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 PromptButton(
-                    label = R.string.znajomi,
+                    label = R.string.lista_znajomych,
                     onClick = {
                         navController.navigate(AppScreens.FriendsList.name)
                     }

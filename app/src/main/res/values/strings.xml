@@ -5,20 +5,20 @@
     <string name="dodaj_wycieczke">ADD A TRIP</string>
     <string name="dodaj_kategorie">ADD CATEGORY</string>
     <string name="dodaj_wydatek">ADD EXPENSES</string>
-    <string name="wycieczki">EXCURSIONS</string>
+    <string name="wycieczki">TRIPS</string>
     <string name="konto">ACCOUNT</string>
     <string name="zwroc_koszty">RETURN COSTS</string>
     <string name="historia">HISTORY</string>
     <string name="bilans">BALANCE</string>
     <string name="ustawienia">SETTINGS</string>
     <string name="logowanie">LOGIN</string>
-    <string name="rejestracja">REGISTRATION</string>
+    <string name="rejestracja">REGISTER</string>
     <string name="edytuj_wydatek">EDIT EXPENSES</string>
     <string name="email">E-mail</string>
     <string name="haslo">Password</string>
     <string name="powtorz_haslo">Repeat password</string>
     <string name="telefon">Phone number</string>
-    <string name="jezyk">Tongue</string>
+    <string name="jezyk">Language</string>
     <string name="nazwa">Name</string>
     <string name="imie">Name</string>
     <string name="nazwisko">Name</string>
@@ -32,7 +32,7 @@
     <string name="email_zacheta">Enter your friend\'s email or phone number</string>
     <string name="powinien_zwrocic">should return for</string>
     <string name="logwanie_zacheta">Log in</string>
-    <string name="rejestracja_zacheta">register</string>
+    <string name="rejestracja_zacheta">Register</string>
     <string name="podaj_e_mail_itd">Enter your friend\'s email/phone number</string>
     <string name="polski" translatable="false">Polski</string>
     <string name="angielski" translatable="false">English</string>
@@ -51,4 +51,5 @@
     <string name="test" translatable="false">TEST</string>
     <string name="zaplacone_przez">Paid by</string>
     <string name="dzisiaj">TODAY</string>
+    <string name="lista_znajomych" translatable="false">Lista znajomych</string>
 </resources>

@@ -59,8 +59,9 @@ fun MainApp(
     var naw = String()
     if (user != null) {
         naw = AppScreens.TripsList.name
+    } else {
+        naw = AppScreens.LogIn.name
     }
-    else{naw = AppScreens.LogIn.name}
     NavHost(
         navController = navController,
         startDestination = naw

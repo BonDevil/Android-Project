@@ -55,15 +55,19 @@ fun AddFriend(
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         if (dataSnapshot.value != null) {
                             friendsInvites = dataSnapshot.value as List<Int>
-                            if (!friendsInvites.contains(currentUserHashedEmail)) {
+//                            val isInvitePresent = friendsInvites.contains(currentUserHashedEmail)
+                            if (currentUserHashedEmail in friendsInvites) {
                                 myRef.setValue(friendsInvites + listOf(currentUserHashedEmail))
-                                Log.d("eo", "$friendsInvites")
                             }
+//                            Log.d("eo", "$isInvitePresent")
+                            Log.d("eo", "$friendsInvites")
+
                         } else {
                             Log.d("eo", "friends invites is null")
                             myRef.setValue(listOf(currentUserHashedEmail))
                         }
                     }
+
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
                     }

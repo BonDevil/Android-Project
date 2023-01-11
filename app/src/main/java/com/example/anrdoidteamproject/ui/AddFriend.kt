@@ -33,6 +33,7 @@ fun AddFriend(
     settingsButtonOnClick: () -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
+    var isDataRetrieved by remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
@@ -49,26 +50,23 @@ fun AddFriend(
                 val invitedUserHashedEmail = email.hashCode()
                 val myRef =
                     DatabaseConnection.db.getReference("Users/$invitedUserHashedEmail/friendInvites")
-                var friendsInvites: List<Int>
+                var mySet: MutableSet<Int> = mutableSetOf(currentUserHashedEmail)
 
                 myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if (dataSnapshot.value != null) {
-                            friendsInvites = dataSnapshot.value as List<Int>
-                            if (!friendsInvites.contains(currentUserHashedEmail)) {
-                                myRef.setValue(friendsInvites + listOf(currentUserHashedEmail))
-                                Log.d("eo", "$friendsInvites")
-                            }
-                        } else {
-                            Log.d("eo", "friends invites is null")
-                            myRef.setValue(listOf(currentUserHashedEmail))
-                        }
+                        if(dataSnapshot.value != null)
+                            mySet = (dataSnapshot.value as MutableList<Int>).toMutableSet()
+                        mySet.add(currentUserHashedEmail)
+                        Log.d("eo", "User added to friend invites, $mySet")
+                        isDataRetrieved = true
                     }
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
                     }
                 })
-
+                if(isDataRetrieved){
+                    myRef.setValue(mySet.toList())
+                }
             })
         },
         modifier = Modifier.background(color = Color(0xff181f36))
@@ -118,7 +116,6 @@ fun AddFriend(
         }
     }
 }
-
 
 @Preview
 @Composable

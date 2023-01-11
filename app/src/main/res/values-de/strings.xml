@@ -34,7 +34,7 @@
     <string name="powinien_zwrocic">sollte zurückkehren für</string>
     <string name="logwanie_zacheta">Einloggen</string>
     <string name="rejestracja_zacheta">registrieren</string>
-    <string name="podaj_e_mail_itd">Geben Sie die E-Mail-Adresse/Telefonnummer Ihres Freundes ein</string>
+    <string name="podaj_e_mail_itd">Geben Sie die E-Mail-Adresse</string>
     <string name="cat_jedzenie">Essen</string>
     <string name="cat_spanie">Schlafen</string>
     <string name="cat_napoje">Getränke</string>
@@ -46,4 +46,5 @@
     <string name="akceptuj">Akzeptieren</string>
     <string name="zaplacone_przez">Bezahlt von</string>
     <string name="dzisiaj">HEUTE</string>
+    <string name="lista_znajomych">Freundesliste</string>
 </resources>

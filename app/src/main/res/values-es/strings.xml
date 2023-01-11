@@ -34,7 +34,7 @@
     <string name="powinien_zwrocic">debería regresar para</string>
     <string name="logwanie_zacheta">Iniciar sesión</string>
     <string name="rejestracja_zacheta">Registrarse</string>
-    <string name="podaj_e_mail_itd">Ingrese el correo electrónico/número de teléfono de un amigo</string>
+    <string name="podaj_e_mail_itd">Ingrese el correo electrónico de un amigo</string>
     <string name="cat_jedzenie">Comida</string>
     <string name="cat_spanie">Durmiendo</string>
     <string name="cat_napoje">Bebidas</string>
@@ -46,6 +46,7 @@
     <string name="akceptuj" translatable="false">Aceptar</string>
     <string name="zaplacone_przez">Pagado por</string>
     <string name="dzisiaj">HOY</string>
+    <string name="lista_znajomych">Lista de amigos</string>
 
 
 </resources>

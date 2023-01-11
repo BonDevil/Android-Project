@@ -21,7 +21,7 @@
     <string name="jezyk">Language</string>
     <string name="nazwa">Name</string>
     <string name="imie">Name</string>
-    <string name="nazwisko">Name</string>
+    <string name="nazwisko">Last Name</string>
     <string name="kategoria">Category</string>
     <string name="kwota">Sum</string>
     <string name="opis">Description</string>
@@ -33,7 +33,7 @@
     <string name="powinien_zwrocic">should return for</string>
     <string name="logwanie_zacheta">Log in</string>
     <string name="rejestracja_zacheta">Register</string>
-    <string name="podaj_e_mail_itd">Enter your friend\'s email/phone number</string>
+    <string name="podaj_e_mail_itd">Enter your friend\'s email</string>
     <string name="polski" translatable="false">Polski</string>
     <string name="angielski" translatable="false">English</string>
     <string name="niemiecki" translatable="false">Deutsch</string>
@@ -51,5 +51,5 @@
     <string name="test" translatable="false">TEST</string>
     <string name="zaplacone_przez">Paid by</string>
     <string name="dzisiaj">TODAY</string>
-    <string name="lista_znajomych" translatable="false">Lista znajomych</string>
+    <string name="lista_znajomych">Friends List</string>
 </resources>

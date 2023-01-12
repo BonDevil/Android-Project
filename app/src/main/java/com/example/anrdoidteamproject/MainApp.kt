@@ -1,9 +1,12 @@
 package com.example.anrdoidteamproject
 
 
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.ui.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 enum class AppScreens() {
     AddExpense,
@@ -32,6 +36,7 @@ enum class AppScreens() {
     Invitations,
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainApp(
     modifier: Modifier = Modifier,
@@ -58,6 +63,8 @@ fun MainApp(
     } else {
         naw = AppScreens.LogIn.name
     }
+    //default language is Polish
+    com.example.anrdoidteamproject.ui.translator(lan = "pl")
     NavHost(
         navController = navController,
         startDestination = naw
@@ -206,6 +213,17 @@ fun MainApp(
 
 fun NavHostController.navigateSingleTopTo(route: String) =
     this.navigate(route) { launchSingleTop = true }
+
+@Composable
+fun translator(lan: String) {
+    val ct = LocalContext.current
+    val locale = Locale(lan)
+    Locale.setDefault(locale)
+    val resources = ct.resources
+    val configuration = resources.configuration
+    configuration.locale = locale
+    resources.updateConfiguration(configuration, resources.displayMetrics)
+}
 
 
 

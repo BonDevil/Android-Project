@@ -47,4 +47,6 @@
     <string name="zaplacone_przez">Pagato da</string>
     <string name="dzisiaj">OGGI</string>
     <string name="lista_znajomych">Lista di amici</string>
+    <string name="kategorie">Inserisci la percentuale che desideri assegnare alle categorie</string>
+    <string name="kategorie_przycisk">Equilibrio di categoria</string>
 </resources>

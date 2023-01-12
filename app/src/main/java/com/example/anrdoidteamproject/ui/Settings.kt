@@ -18,10 +18,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
-import com.example.anrdoidteamproject.ui.theme.AnrdoidTeamProjectTheme
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 import java.util.*
+
+var selectedIndex=0
 
 
 @Composable
@@ -60,22 +61,22 @@ fun DropdownDemo() {
         stringResource(R.string.niemiecki)
     )
 
-    var selectedIndex by rememberSaveable { mutableStateOf(0) }
+    var selectedIndexTemp by rememberSaveable { mutableStateOf(selectedIndex) }
 
 
-    if (selectedIndex == 0) {
+    if (selectedIndexTemp == 0) {
         translator(lan = "pl")
     }
-    if (selectedIndex == 1) {
+    if (selectedIndexTemp == 1) {
         translator(lan = "en")
     }
-    if (selectedIndex == 2) {
+    if (selectedIndexTemp == 2) {
         translator(lan = "it")
     }
-    if (selectedIndex == 3) {
+    if (selectedIndexTemp == 3) {
         translator(lan = "es")
     }
-    if (selectedIndex == 4) {
+    if (selectedIndexTemp == 4) {
         translator(lan = "de")
     }
 
@@ -87,7 +88,7 @@ fun DropdownDemo() {
         Text(
 
 
-            items[selectedIndex],
+            items[selectedIndexTemp],
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = { expanded = true })
@@ -107,7 +108,8 @@ fun DropdownDemo() {
         ) {
             items.forEachIndexed { index, s ->
                 DropdownMenuItem(onClick = {
-                    selectedIndex = index
+                    selectedIndexTemp = index
+                    selectedIndex=selectedIndexTemp
                     expanded = false
 
                 }) {

@@ -41,12 +41,14 @@
     <string name="cat_atrakcje">Atracciones</string>
     <string name="cat_samolot">Avión</string>
     <string name="cat_transport">Transporte</string>
-    <string name="logowanie_powrot" translatable="false">Acceso</string>
+    <string name="logowanie_powrot">Acceso</string>
     <string name="wylogowanie">Cerrar sesión</string>
-    <string name="akceptuj" translatable="false">Aceptar</string>
+    <string name="akceptuj">Aceptar</string>
     <string name="zaplacone_przez">Pagado por</string>
     <string name="dzisiaj">HOY</string>
     <string name="lista_znajomych">Lista de amigos</string>
+    <string name="kategorie">Introduzca el porcentaje que desea asignar a las categorías</string>
+    <string name="kategorie_przycisk">Equilibrio de categoría</string>
 
 
 </resources>

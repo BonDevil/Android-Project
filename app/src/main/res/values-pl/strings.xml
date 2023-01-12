@@ -47,4 +47,6 @@
     <string name="dzisiaj">DZISIAJ</string>
     <string name="zaplacone_przez">Zapłacone przez</string>
     <string name="lista_znajomych">Lista znajomych</string>
+    <string name="kategorie">Podaj procentową wartość jaką chcesz przeznaczyć na kategorie</string>
+    <string name="kategorie_przycisk">Bilans kategorii</string>
 </resources>

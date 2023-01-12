@@ -13,7 +13,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 enum class AppScreens() {
-    AddCategory,
     AddExpense,
     AddFriend,
     AddTrip,
@@ -45,7 +44,6 @@ fun MainApp(
     addFriendsToTrip: () -> Unit = { navController.navigateSingleTopTo(AppScreens.ChooseFriends.name) },
     addFriends: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddFriend.name) },
     addExpense: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddExpense.name) },
-    addCategory: () -> Unit = { navController.navigateSingleTopTo(AppScreens.AddCategory.name) },
     statsButtonOnClick: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Stats.name) },
     invitationButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Invitations.name) },
     balanceButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Balance.name) },
@@ -96,13 +94,6 @@ fun MainApp(
         }
         composable(AppScreens.Settings.name) {
             Settings(
-                userInfoButtonOnClick = userInfoButtonOnClick,
-                homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
-            )
-        }
-        composable(AppScreens.AddCategory.name) {
-            AddCategory(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick
@@ -183,7 +174,6 @@ fun MainApp(
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
                 addExpense = addExpense,
-                addCategory = addCategory,
                 bilansButton = balanceButton,
                 tripName = " "
             )

@@ -221,7 +221,7 @@ fun DrawGradientCircle(
         }
         // Background Line
         drawArc(
-            brush = Brush.horizontalGradient(listOf(Color.White,Color(0xFF181F36))),
+            brush = Brush.horizontalGradient(listOf(Color.White, Color(0xFF181F36))),
             140f,
             360f,
             false,
@@ -282,7 +282,7 @@ fun DrawGradientCircle(
 
         var angleInDegrees =
             ((percentage1 + percentage2 + percentage3 + percentage4 + percentage5 + percentage6) * 360.0) + 50.0
-        var radius = (size.height /2 )
+        var radius = (size.height / 2)
         var x = -(radius * sin(Math.toRadians(angleInDegrees))).toFloat() + (size.width / 2)
         var y = (radius * cos(Math.toRadians(angleInDegrees))).toFloat() + (size.height / 2)
 
@@ -300,7 +300,7 @@ fun DrawGradientCircle(
 fun gridcat() {
     Column(
         modifier = Modifier
-            .padding(0.dp,20.dp,0.dp,0.dp),
+            .padding(0.dp, 20.dp, 0.dp, 0.dp),
         horizontalAlignment = Alignment.CenterHorizontally
 
     )
@@ -309,79 +309,117 @@ fun gridcat() {
             modifier = Modifier
                 .fillMaxHeight(0.5f)
         ) {
-            Box(modifier = Modifier
-                .fillMaxWidth(0.33f)
-                .aspectRatio(1f)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.33f)
+                    .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
                     percentage = 0.80f,
                     fillColor = Color.Red,
-                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x40ff0000),Color(0xFF181F36))),
+                    backgroundColor = Brush.horizontalGradient(
+                        listOf(
+                            Color(0x40ff0000),
+                            Color(0xFF181F36)
+                        )
+                    ),
 //                    Color(android.graphics.Color.parseColor("#90A4AE")),
                     strokeWidth = 10.dp,
 
                     image = R.drawable.food
                 )
             }
-            Box(modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .aspectRatio(1f)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+                    .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
                     percentage = 0.40f,
                     fillColor = Color(0xFF4663FF),
-                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x404663FF),Color(0xFF181F36))),
+                    backgroundColor = Brush.horizontalGradient(
+                        listOf(
+                            Color(0x404663FF),
+                            Color(0xFF181F36)
+                        )
+                    ),
                     strokeWidth = 10.dp,
                     image = R.drawable.sleep
                 )
             }
-            Box(modifier = Modifier
-                .fillMaxWidth(1f)
-                .aspectRatio(1f)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
                     percentage = 0.60f,
                     fillColor = Color(0xFF57FF3B),
-                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x4057FF3B),Color(0xFF181F36))),
+                    backgroundColor = Brush.horizontalGradient(
+                        listOf(
+                            Color(0x4057FF3B),
+                            Color(0xFF181F36)
+                        )
+                    ),
                     strokeWidth = 10.dp,
                     image = R.drawable.drink
                 )
             }
         }
-        Row(modifier = Modifier
-            .fillMaxHeight(1f)
+        Row(
+            modifier = Modifier
+                .fillMaxHeight(1f)
         ) {
-            Box(modifier = Modifier
-                .fillMaxWidth(0.33f)
-                .aspectRatio(1f)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.33f)
+                    .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
                     percentage = 0.20f,
                     fillColor = Color(0xFFFFC83A),
-                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x40FFC83A),Color(0xFF181F36))),
+                    backgroundColor = Brush.horizontalGradient(
+                        listOf(
+                            Color(0x40FFC83A),
+                            Color(0xFF181F36)
+                        )
+                    ),
                     strokeWidth = 10.dp,
                     image = R.drawable.gift
                 )
             }
-            Box(modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .aspectRatio(1f)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+                    .aspectRatio(1f)
             ) {
-            DrawGradientCircles(
-                percentage = 0.30f,
-                fillColor = Color(0xFFFF43BE),
-                backgroundColor = Brush.horizontalGradient(listOf(Color(0x40FF43BE),Color(0xFF181F36))),
-                strokeWidth = 10.dp,
-                image = R.drawable.plane
-            )}
-            Box(modifier = Modifier
-                .fillMaxWidth(1f)
-                .aspectRatio(1f)
+                DrawGradientCircles(
+                    percentage = 0.30f,
+                    fillColor = Color(0xFFFF43BE),
+                    backgroundColor = Brush.horizontalGradient(
+                        listOf(
+                            Color(0x40FF43BE),
+                            Color(0xFF181F36)
+                        )
+                    ),
+                    strokeWidth = 10.dp,
+                    image = R.drawable.plane
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
                     percentage = 0.40f,
                     fillColor = Color(0xFFA840FA),
-                    backgroundColor = Brush.horizontalGradient(listOf(Color(0x40A840FA),Color(0xFF181F36))),
+                    backgroundColor = Brush.horizontalGradient(
+                        listOf(
+                            Color(0x40A840FA),
+                            Color(0xFF181F36)
+                        )
+                    ),
                     strokeWidth = 10.dp,
                     image = R.drawable.train
                 )
@@ -398,10 +436,8 @@ fun Stats(
     bilansButton: () -> Unit = {},
 
     addExpense: () -> Unit = {},
-    addCategory: () -> Unit = {},
     tripName: String
 ) {
-    var expanded by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -414,26 +450,17 @@ fun Stats(
 
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { expanded = !expanded },
+                onClick = addExpense,
                 backgroundColor = Color.White
             ) {
                 Icon(
-                    painterResource(id = R.drawable.ic_action_more_buttons),
-                    tint = Color.Black,
-                    contentDescription = "more",
-                )
-            }
-
-            if (expanded) {
-                Actionbuton2(
-                    onClick = { expanded = !expanded },
-                    onClick1 = addExpense,
-                    onClick2 = addCategory,
-                    drawable = R.drawable.img_dolar,
-                    drawable2 = Icons.Filled.Add
+                    painterResource(id = R.drawable.img_dolar),
+                    tint = Color(0xFF5980FF),
+                    contentDescription = null,
                 )
             }
         },
+
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
@@ -448,9 +475,11 @@ fun Stats(
 
             Column(
 
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Row(modifier = Modifier
-                    .fillMaxHeight(0.3f)
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight(0.3f)
                 ) {
                     DrawGradientCircle(
                         percentage1 = 0.20f,
@@ -459,34 +488,47 @@ fun Stats(
                         percentage4 = 0.2f,
                         percentage5 = 0.2f,
                         percentage6 = 0.1f,
-                        backgroundColor = Brush.horizontalGradient(listOf(Color(0xFF181F36),Color(0xFF181F36))),
+                        backgroundColor = Brush.horizontalGradient(
+                            listOf(
+                                Color(0xFF181F36),
+                                Color(0xFF181F36)
+                            )
+                        ),
                         strokeWidth = 30.dp,
                         total = "2000"
                     )
                 }
 
 
-                Row (
+                Row(
                     modifier = Modifier
                         .fillMaxHeight(0.5f),
                     verticalAlignment = Alignment.CenterVertically
 
-                        )
+                )
                 {
                     gridcat()
                 }
 
-                Row(modifier = Modifier
-                    .fillMaxHeight()
-                    .align(Alignment.Start)
-               ) {
-                    Box(modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                        .aspectRatio(1f))
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .align(Alignment.Start)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth(0.5f)
+                            .aspectRatio(1f)
+                    )
                     {
                         DrawGradientCircleToday(
                             percentage = 0.4f,
-                            backgroundColor = Brush.horizontalGradient(listOf(Color(0xFF181F36),Color(0x20FFFFFF))),
+                            backgroundColor = Brush.horizontalGradient(
+                                listOf(
+                                    Color(0xFF181F36),
+                                    Color(0x20FFFFFF)
+                                )
+                            ),
                             strokeWidth = 20.dp,
                             total = "50"
                         )

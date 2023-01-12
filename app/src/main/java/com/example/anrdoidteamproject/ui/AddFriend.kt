@@ -46,6 +46,7 @@ fun AddFriend(
         topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
+                val currentUserEmail = Firebase.auth.currentUser?.email
                 val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
                 val invitedUserHashedEmail = email.hashCode()
                 val myRef =
@@ -53,7 +54,9 @@ fun AddFriend(
 
                 myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        myRef.child(currentUserHashedEmail.toString()).setValue(true)
+                        if(!currentUserHashedEmail.equals(invitedUserHashedEmail)){
+                            myRef.child(currentUserHashedEmail.toString()).setValue(currentUserEmail.toString())
+                        }
                     }
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")

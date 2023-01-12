@@ -41,12 +41,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CompletableDeferred
 
 
 @Composable
 fun InviteCard(
-    inviteInfo: User
+    inviteInfo: String
 ) {
     Column(
         modifier = Modifier
@@ -56,16 +55,7 @@ fun InviteCard(
         Column(modifier = Modifier.padding(10.dp)) {
             Row() {
                 Text(
-                    text = inviteInfo.firstName,
-                    color = Color.White,
-                    fontSize = 30.sp,
-                    fontFamily = FontFamily(
-                        Font(R.font.century_gothic)
-                    )
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = inviteInfo.lastName,
+                    text = inviteInfo,
                     color = Color.White,
                     fontSize = 30.sp,
                     fontFamily = FontFamily(
@@ -84,14 +74,13 @@ fun InviteCard(
 }
 
 
-//@Composable
-//fun showAllInvites(invites: List<User>) {
-//    LazyColumn {
-//        invites.map { item { InviteCard(it) } }
-//    }
-//    Log.d("eo", "showAllInvites: $invites")
-//
-//}
+@Composable
+fun showAllInvites(invites: MutableCollection<String>) {
+    LazyColumn {
+        invites.map { item { InviteCard(it) } }
+    }
+    Log.d("eo", "showAllInvites: $invites")
+}
 
 @Composable
 fun InvitationsList(
@@ -100,14 +89,11 @@ fun InvitationsList(
     settingsButtonOnClick: () -> Unit = {},
 
     ) {
-    var expanded by remember { mutableStateOf(false) }
-    var friendsInvites = remember { mutableListOf<Int>() }
-    var friendInvitesInfo = remember { mutableListOf<User>() }
+    var friendsInvites = remember { mutableMapOf<String, String>() }
+    var isLoading by remember { mutableStateOf(true) }
     val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
     val myRef =
         DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friendInvites")
-    var isDataRetrieved by remember { mutableStateOf(false) }
-    var isFriendListRetrieved by remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
@@ -129,10 +115,9 @@ fun InvitationsList(
         ) {
             myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    isLoading = false
                     if (dataSnapshot.value != null) {
-                        friendsInvites = (dataSnapshot.value as List<Int>).toMutableList()
-                        Log.d("eo", "friend invites: $friendsInvites")
-                        isDataRetrieved = true
+                        friendsInvites = dataSnapshot.value as HashMap<String, String>
                     }
                 }
 
@@ -140,34 +125,11 @@ fun InvitationsList(
                     TODO("Not yet implemented")
                 }
             })
-
-            if (isDataRetrieved) {
-                for (hashedFriendMail: Int in friendsInvites) {
-                    val friendRef = DatabaseConnection.db.getReference("Users/$hashedFriendMail")
-                    friendRef.addValueEventListener(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            val myUser = dataSnapshot.getValue(User::class.java)
-                            if (myUser != null) {
-                                friendInvitesInfo =
-                                    (friendInvitesInfo + listOf(myUser)) as MutableList<User>
-                            }
-                            Log.d("eo", "hashedFriendMail loop: $friendInvitesInfo")
-                            isFriendListRetrieved = true
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
-                        }
-                    })
-                }
-                if (isFriendListRetrieved) {
-                    LazyColumn {
-                        Log.d("eo", "lazyColumn: $friendInvitesInfo")
-                        friendInvitesInfo.map { item { InviteCard(it) } }
-                    }
-                }
+            if (!isLoading) {
+                // Display the data once it's loaded
+                showAllInvites(invites = friendsInvites.values)
+                Log.d("eo", "showAllInvites: ${friendsInvites.values}")
             }
-
         }
     }
 }

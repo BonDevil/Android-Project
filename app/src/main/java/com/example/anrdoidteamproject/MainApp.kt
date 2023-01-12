@@ -34,8 +34,6 @@ enum class AppScreens() {
 }
 
 @Composable
-
-
 fun MainApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),

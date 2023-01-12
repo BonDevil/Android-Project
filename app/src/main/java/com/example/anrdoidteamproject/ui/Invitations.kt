@@ -103,7 +103,7 @@ fun InvitationsList(
                 settingsButtonOnClick = settingsButtonOnClick
             )
         },
-        topBar = { topBar(message = stringResource(R.string.znajomi)) },
+        topBar = { topBar(message = stringResource(R.string.zaproszenia)) },
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {

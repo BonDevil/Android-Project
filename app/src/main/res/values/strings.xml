@@ -54,4 +54,5 @@
     <string name="lista_znajomych">Friends List</string>
     <string name="kategorie_przycisk">Category balance</string>
     <string name="kategorie">Enter the percentage you want to allocate to the categories</string>
+    <string name="zaproszenia">INVITATIONS</string>
 </resources>

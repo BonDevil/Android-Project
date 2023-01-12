@@ -1,5 +1,9 @@
 package com.example.anrdoidteamproject.ui
 
+import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -15,147 +19,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.Trip
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.TextFieldWithLabel
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
-
-@Composable
-fun add_expense() {
-    var expenseName by remember { mutableStateOf("") }
-    var expenseSUM by remember { mutableStateOf("") }
-    Column(
-        modifier = Modifier
-            .padding(20.dp)
-            .background(Color(24, 31, 54))
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-
-        Column(
-            modifier = Modifier
-                .padding(10.dp)
-
-                .fillMaxHeight()
-                .fillMaxWidth(0.85f),
-            horizontalAlignment = Alignment.Start,
-
-            )
-        {
-            Text(
-                text = stringResource(R.string.nazwa),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                ),
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                value = expenseName,
-                onValueChange = { expenseName = it},
-
-                modifier = Modifier
-                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-
-                    .background(Color(217, 217, 217), RoundedCornerShape(10))
-                    .heightIn(min = 20.dp),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
-                )
-                )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(R.string.kategoria),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                ),
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Spacer(modifier = Modifier.height(15.dp))
-            DropdownCategories()
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(R.string.kwota),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                ),
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            TextField(
-                value = expenseSUM,
-                onValueChange = {expenseSUM = it},
-
-                modifier = Modifier
-                    .fillMaxWidth(0.6f)
-                    .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-                    .background(Color(217, 217, 217), RoundedCornerShape(10))
-                    .heightIn(min = 20.dp),
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+var category = "food"
 
 
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                    imeAction = ImeAction.Done
-                )
-                )
-            Spacer(modifier = Modifier.height(20.dp))
-            /*TextFieldWithLabel(
-
-            KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Next
-            ),
-            label = R.string.nazwa,
-
-            )
-
-        Spacer(modifier = Modifier.height(15.dp))
-        DropdownCategories()
-
-        Spacer(modifier = Modifier.height(15.dp))
-
-
-        TextFieldWithLabel(
-            KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Next
-            ),
-            label = R.string.kwota,
-//            modifierLocalOf {Modifier} = Modifier
-//                .background(Color(217,217,217), RoundedCornerShape(10))
-//                .heightIn(min = 56.dp),
-        )
-        Spacer(modifier = Modifier.height(15.dp))*/
-
-
-            Text(
-                text = stringResource(R.string.znajomi),
-                color = Color.White,
-                fontSize = 20.sp,
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-
-
-            Divider(color = Color.White, thickness = 2.dp)
-            Listpersons3(SampleData3.conversationSample)
-
-
-        }
-    }
-}
 
 
 @Composable
@@ -174,8 +57,7 @@ fun DropdownCategories() {
     Box(
         modifier = Modifier
             .wrapContentSize(Alignment.TopStart)
-            .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-            .background(Color(217, 217, 217), RoundedCornerShape(10))
+            .border(2.dp, Color(89, 128, 200), RoundedCornerShape(10))
     ) {
         Text(
 
@@ -183,10 +65,9 @@ fun DropdownCategories() {
             modifier = Modifier
                 .fillMaxWidth(0.6f)
                 .clickable(onClick = { expanded = true })
-                .background(
-                    color = Color(200, 200, 200)
-                ),
+,
             fontSize = 30.sp,
+            color = Color.White,
 
             )
         DropdownMenu(
@@ -194,9 +75,7 @@ fun DropdownCategories() {
             onDismissRequest = { expanded = false },
             modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    color = Color(200, 200, 200)
-                )
+
 
         ) {
             items.forEachIndexed { index, s ->
@@ -212,15 +91,20 @@ fun DropdownCategories() {
             }
         }
     }
+    category = items[selectedIndex].toString()
 }
 
-
+@SuppressLint("UnrememberedMutableState")
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AddExpense(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+
 ) {
+    var expenseName = mutableStateOf("")
+    var expenseSUM = mutableStateOf("")
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -231,27 +115,80 @@ fun AddExpense(
         },
         topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) },
         floatingActionButton = {
-            ConfirmButton(confirmOnClick = { /*TODO*/ }
+            ConfirmButton(confirmOnClick = {
+                val myExpense = com.example.anrdoidteamproject.businessLogic.Expenditure(
+                    paying_person = Firebase.auth.currentUser.hashCode(), category = category, value = expenseSUM.value.toDouble(), name = expenseName.value.toString(),listOf()
+                )
+            /*TODO*/
+
+            }
             )
         },
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(color = Color(0xff181f36))
+                .background(Color(24, 31, 54))
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            add_expense()
+
+            Column(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.85f),
+                horizontalAlignment = Alignment.Start,
+
+                )
+            {
+                Spacer(modifier = Modifier.height(10.dp))
+                TextFieldWithLabel(
+                    KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
+                    ),
+                    label = R.string.nazwa,
+                    expenseName
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = stringResource(R.string.kategoria),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    ),
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                DropdownCategories()
+                Spacer(modifier = Modifier.height(20.dp))
+
+                TextFieldWithLabel(
+                    KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Done
+                    ),
+                    label = R.string.kwota,
+                    expenseSUM
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Text(
+                    text = stringResource(R.string.znajomi),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+
+
+                Divider(color = Color.White, thickness = 2.dp)
+                Listpersons3(SampleData3.conversationSample)
+
+
+            }
         }
-
     }
-}
-
-
-@Preview
-@Composable
-fun AddExpensePreview() {
-    AddExpense()
 }

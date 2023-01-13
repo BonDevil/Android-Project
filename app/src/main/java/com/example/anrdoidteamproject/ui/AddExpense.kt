@@ -2,6 +2,7 @@ package com.example.anrdoidteamproject.ui
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.provider.ContactsContract.Data
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
@@ -31,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.Trip
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.TextFieldWithLabel
@@ -202,9 +204,7 @@ fun AddExpense(
 
 
                 Divider(color = Color.White, thickness = 2.dp)
-                Listpersons3(SampleData3.conversationSample)
-
-
+                Listpersons3(DatabaseConnection.friendList)
             }
         }
     }

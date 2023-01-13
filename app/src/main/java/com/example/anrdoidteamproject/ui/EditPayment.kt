@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 
@@ -180,7 +181,7 @@ fun EditPayment(
 
 
                         Divider(color = Color.White, thickness = 2.dp)
-                        Listpersons3(SampleData3.conversationSample)
+                        Listpersons3(DatabaseConnection.friendList)
 
 
                     }

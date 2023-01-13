@@ -44,6 +44,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CountDownLatch
 
 
@@ -71,7 +72,6 @@ fun PersonCard(user: User) {
     }
 
 }
-
 
 @Composable
 fun ListFriends(users: List<User>) {
@@ -151,16 +151,16 @@ fun FriendsList(
             })
 
             if (!isLoading) {
+                DatabaseConnection.friendList.clear()
                 for (userHashedMail in friends.keys) {
                     val myRef = DatabaseConnection.db.getReference("Users/$userHashedMail")
                     myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            friendsAsUsers.add(dataSnapshot.getValue(User::class.java)!!)
+                            DatabaseConnection.friendList.add(dataSnapshot.getValue(User::class.java)!!)
                             Log.d("eo", "friends as users1:$friendsAsUsers")
                             if (friends.keys.last() == userHashedMail)
                                 isFriendsLoaded = true
                         }
-
                         override fun onCancelled(error: DatabaseError) {
                             TODO("Not yet implemented")
                         }
@@ -169,7 +169,7 @@ fun FriendsList(
                 Log.d("eo", "friends as users2:$friendsAsUsers")
             }
             if (isFriendsLoaded)
-                ListFriends(users = friendsAsUsers)
+                ListFriends(DatabaseConnection.friendList)
         }
     }
 }
@@ -177,14 +177,27 @@ fun FriendsList(
 
 @Preview(heightDp = 1000)
 @Composable
-fun FirendsListPreview() {
+fun FriendsListPreview() {
     FriendsList()
 }
 
-fun retrieveUserInfo(hashedEmail: String): User {
-    val myRef = DatabaseConnection.db.getReference("Users/$hashedEmail")
-    var myUser = User()
 
-
-    return myUser
-}
+//suspend fun getFriends(): List<User> {
+//    var friends = mutableMapOf<String, String>()
+//    val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
+//    val friendsRef =
+//        DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
+//    var isLoading = mutableStateOf(true)
+//    var isFriendsLoaded = mutableStateOf(false)
+//    var friendsAsUsers = mutableListOf<User>()
+//
+//
+//    friends = friendsRef.get().await() as HashMap<String, String>
+//
+//    for (userHashedMail in friends.keys) {
+//        val currFriendRef = DatabaseConnection.db.getReference("Users/$userHashedMail")
+//        friendsAsUsers.add(currFriendRef.get().await().value as User)
+//    }
+//    Log.d("eo", "friends as users2:$friendsAsUsers")
+//    return friendsAsUsers
+//}

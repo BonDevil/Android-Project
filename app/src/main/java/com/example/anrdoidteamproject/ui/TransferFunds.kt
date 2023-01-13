@@ -27,6 +27,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
+import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.theme.*
 
 var value:Double = 0.0
@@ -64,7 +66,7 @@ fun transferFunds() {
 
 
         Divider(color = Color.White, thickness = 2.dp)
-        Listpersons3(SampleData3.conversationSample)
+        Listpersons3(DatabaseConnection.friendList)
 
 
 
@@ -72,7 +74,7 @@ fun transferFunds() {
 }
 
 @Composable
-fun PersonCard3(per: Osoba) {
+fun PersonCard3(user: User) {
 
     Column(
         modifier = Modifier
@@ -83,18 +85,7 @@ fun PersonCard3(per: Osoba) {
         Row() {
             CheckBoxDemo()
             Text(
-                text = per.Imie,
-                color = Color.White,
-                fontSize = 25.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                )
-            )
-
-            Spacer(modifier = Modifier.width(4.dp))
-
-            Text(
-                text = per.Nazwisko,
+                text = user.firstName + " " + user.lastName,
                 color = Color.White,
                 fontSize = 25.sp,
                 fontFamily = FontFamily(
@@ -112,13 +103,12 @@ fun PersonCard3(per: Osoba) {
 
 
 @Composable
-fun Listpersons3(osobas: List<Osoba>) {
+fun Listpersons3(user: List<User>) {
     LazyColumn(
         contentPadding = PaddingValues(vertical = 40.dp)
 
     ) {
-        osobas.map { item { PersonCard3(it) } }
-
+        user.map { item { PersonCard3(it) } }
     }
 }
 

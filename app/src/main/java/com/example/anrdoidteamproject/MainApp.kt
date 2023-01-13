@@ -2,6 +2,7 @@ package com.example.anrdoidteamproject
 
 
 import android.os.Build
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
@@ -11,8 +12,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
+import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
@@ -56,6 +62,7 @@ fun MainApp(
     transferFundsButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.TransferFunds.name) },
 
     ) {
+
     var user by remember { mutableStateOf(Firebase.auth.currentUser) }
     var naw = String()
     if (user != null) {

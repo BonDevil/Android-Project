@@ -169,7 +169,7 @@ fun FriendsList(
                 Log.d("eo", "friends as users2:$friendsAsUsers")
             }
             if (isFriendsLoaded)
-                ListFriends(DatabaseConnection.friendList)
+            ListFriends(DatabaseConnection.friendList)
         }
     }
 }

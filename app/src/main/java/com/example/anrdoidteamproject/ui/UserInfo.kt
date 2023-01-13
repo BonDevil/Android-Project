@@ -50,7 +50,6 @@ fun UserInfo(
     friendButtonOnClick: () -> Unit = {},
     navController: NavController = rememberNavController()
 ) {
-
     val firebaseUser = Firebase.auth.currentUser
     val hashedMail = firebaseUser?.email.hashCode()
     val myRef = DatabaseConnection.db.getReference("Users/$hashedMail")
@@ -75,6 +74,7 @@ fun UserInfo(
         }
 
     })
+
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -165,11 +165,7 @@ fun UserInfo(
                     )
                 }
             }
-        }
-        else
-        {
-
-
+        } else {
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 color = Color(0xff181f36)
@@ -183,10 +179,8 @@ fun UserInfo(
                 }
             }
         }
-
     }
 }
-
 
 
 @Preview

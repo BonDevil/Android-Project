@@ -120,7 +120,6 @@ fun InvitationsList(
                         friendsInvites = dataSnapshot.value as HashMap<String, String>
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }

@@ -7,7 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,9 +49,11 @@ fun UserInfo(
     val hashedMail = firebaseUser?.email.hashCode()
     val myRef = DatabaseConnection.db.getReference("Users/$hashedMail")
     emailAddress = firebaseUser?.email.toString()
+    var isLoading by remember { mutableStateOf(true) }
 
     myRef.addValueEventListener(object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
+            isLoading = false
             val myUser = dataSnapshot.getValue(User::class.java)
             Log.d("eo", "$dataSnapshot")
             if (myUser != null) {
@@ -80,82 +82,85 @@ fun UserInfo(
 
     ) {
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.925f)
-                .background(color = Color(0xff181f36))
-        ) {
-            Column(
+        if (!isLoading) {
+            Row(
                 modifier = Modifier
-                    .padding(20.dp)
-                    .background(Color(24, 31, 54))
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            )
-            {
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.925f)
+                    .background(color = Color(0xff181f36))
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .background(Color(24, 31, 54))
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                )
+                {
 //              show email
-                Spacer(modifier = Modifier.height(15.dp))
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = stringResource(id = R.string.email),
-                )
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = emailAddress
-                )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = stringResource(id = R.string.email),
+                    )
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = emailAddress
+                    )
 
 //              show first name
-                Spacer(modifier = Modifier.height(15.dp))
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = stringResource(id = R.string.imie),
-                )
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = firstName
-                )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = stringResource(id = R.string.imie),
+                    )
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = firstName
+                    )
 
 //              show last name
-                Spacer(modifier = Modifier.height(15.dp))
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = stringResource(id = R.string.nazwisko),
-                )
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = lastName,
-                )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = stringResource(id = R.string.nazwisko),
+                    )
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = lastName,
+                    )
 
 //              show phone number
-                Spacer(modifier = Modifier.height(15.dp))
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = stringResource(id = R.string.telefon),
-                )
-                Text(
-                    style = TextStyle(color = Color.White, fontSize = 24.sp),
-                    text = phoneNumber,
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                PromptButton(
-                    label = R.string.wylogowanie,
-                    onClick = {
-                        Firebase.auth.signOut()
-                        navController.navigate(AppScreens.LogIn.name)
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = stringResource(id = R.string.telefon),
+                    )
+                    Text(
+                        style = TextStyle(color = Color.White, fontSize = 24.sp),
+                        text = phoneNumber,
+                    )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    PromptButton(
+                        label = R.string.wylogowanie,
+                        onClick = {
+                            Firebase.auth.signOut()
+                            navController.navigate(AppScreens.LogIn.name)
 
-                    }
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                PromptButton(
-                    label = R.string.lista_znajomych,
-                    onClick = {
-                        navController.navigate(AppScreens.FriendsList.name)
-                    }
-                )
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    PromptButton(
+                        label = R.string.lista_znajomych,
+                        onClick = {
+                            navController.navigate(AppScreens.FriendsList.name)
+                        }
+                    )
+                }
             }
         }
+
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.anrdoidteamproject.ui
 
+import android.util.Log
 import androidx.compose.foundation.background
 
 import androidx.compose.foundation.layout.*
@@ -26,8 +27,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.*
 
@@ -37,15 +36,21 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
+import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.theme.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
+import java.util.concurrent.CountDownLatch
 
 
 data class Osoba(val Imie: String, val Nazwisko: String)
 
-
 @Composable
-fun PersonCard(per: Osoba) {
-
+fun PersonCard(user: User) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -53,26 +58,13 @@ fun PersonCard(per: Osoba) {
     ) {
         Row(modifier = Modifier.padding(20.dp)) {
             Text(
-                text = per.Imie,
+                text = user.firstName + " " + user.lastName,
                 color = Color.White,
                 fontSize = 30.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )
             )
-
-            Spacer(modifier = Modifier.width(4.dp))
-
-            Text(
-                text = per.Nazwisko,
-                color = Color.White,
-                fontSize = 30.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                )
-            )
-            Spacer(modifier = Modifier.width(1.dp))
-
         }
         Divider(color = Color.White, thickness = 2.dp)
 
@@ -82,9 +74,10 @@ fun PersonCard(per: Osoba) {
 
 
 @Composable
-fun Listpersons(osobas: List<Osoba>) {
+fun ListFriends(users: List<User>) {
+    Log.d("eo", "List friends: $users")
     LazyColumn {
-        osobas.map { item { PersonCard(it) } }
+        users.map { item { PersonCard(it) } }
     }
 }
 
@@ -98,6 +91,13 @@ fun FriendsList(
     invitationButton: () -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var friends = remember { mutableMapOf<String, String>() }
+    val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
+    val friendsRef =
+        DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
+    var isLoading by remember { mutableStateOf(true) }
+    var isFriendsLoaded by remember { mutableStateOf(false) }
+    var friendsAsUsers = remember { mutableListOf<User>() }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -118,7 +118,6 @@ fun FriendsList(
                     contentDescription = "more",
                 )
             }
-
             if (expanded) {
                 Actionbuton2(
                     onClick = { expanded = !expanded },
@@ -138,7 +137,39 @@ fun FriendsList(
                 .fillMaxHeight()
                 .background(color = Color(0xff181f36))
         ) {
-            Listpersons(SampleData.conversationSample)
+            friendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    isLoading = false
+                    if (dataSnapshot.value != null) {
+                        friends = dataSnapshot.value as HashMap<String, String>
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+            if (!isLoading) {
+                for (userHashedMail in friends.keys) {
+                    val myRef = DatabaseConnection.db.getReference("Users/$userHashedMail")
+                    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            friendsAsUsers.add(dataSnapshot.getValue(User::class.java)!!)
+                            Log.d("eo", "friends as users1:$friendsAsUsers")
+                            if (friends.keys.last() == userHashedMail)
+                                isFriendsLoaded = true
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                }
+                Log.d("eo", "friends as users2:$friendsAsUsers")
+            }
+            if (isFriendsLoaded)
+                ListFriends(users = friendsAsUsers)
         }
     }
 }
@@ -150,41 +181,10 @@ fun FirendsListPreview() {
     FriendsList()
 }
 
+fun retrieveUserInfo(hashedEmail: String): User {
+    val myRef = DatabaseConnection.db.getReference("Users/$hashedEmail")
+    var myUser = User()
 
-object SampleData {
-    // Sample conversation data
-    val conversationSample = listOf(
-        Osoba(
-            "Jakub",
-            "Roszkowski"
-        ),
-        Osoba(
-            "Piotr",
-            "Grygoruk"
-        ),
-        Osoba(
-            "Nataliia",
-            "Martynenko"
-        ),
-        Osoba(
-            "Adam",
-            "Nowak"
-        ),
-        Osoba(
-            "Jan",
-            "Kowalski"
-        )
-    )
+
+    return myUser
 }
-
-
-
-
-
-
-
-
-
-
-
-

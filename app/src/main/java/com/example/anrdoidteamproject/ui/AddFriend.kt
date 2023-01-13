@@ -41,6 +41,7 @@ fun AddFriend(
     var friends = remember { mutableMapOf<String, String>() }
     var showEmailError by remember { mutableStateOf(false) }
 
+
     Scaffold(
         bottomBar = {
             bottomBar(

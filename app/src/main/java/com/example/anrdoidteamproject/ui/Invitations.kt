@@ -81,7 +81,7 @@ fun InviteCard(
                     val deleteFriendInviteRef =
                         DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friendInvites")
 
-                    currUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    currUserRef.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             currUserRef.child(invitingUserHashedEmail.toString()).setValue(true)
                             invitingUserRef.child(currentUserHashedEmail.toString()).setValue(true)
@@ -153,7 +153,62 @@ fun InvitationsList(
                 }
             })
             if (!isLoading) {
-                showAllInvites(invites = friendsInvites.values)
+                LazyColumn {
+                    friendsInvites.values.map { item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(10.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+
+                                Text(
+                                    text = it,
+                                    color = Color.White,
+                                    fontSize = 30.sp,
+                                    fontFamily = FontFamily(
+                                        Font(R.font.century_gothic)
+                                    )
+                                )
+
+                                Spacer(modifier = Modifier.width(5.dp))
+                                PromptButton(
+                                    label = R.string.akceptuj,
+                                    onClick = {
+                                        val currentUserEmail = Firebase.auth.currentUser?.email
+                                        val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
+                                        val invitingUserHashedEmail = it.hashCode()
+                                        val currUserRef =
+                                            DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
+
+                                        val invitingUserRef =
+                                            DatabaseConnection.db.getReference("Users/$invitingUserHashedEmail/friends")
+
+                                        val deleteFriendInviteRef =
+                                            DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friendInvites")
+
+                                        currUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                                currUserRef.child(invitingUserHashedEmail.toString()).setValue(true)
+                                                invitingUserRef.child(currentUserHashedEmail.toString()).setValue(true)
+                                                deleteFriendInviteRef.child("$invitingUserHashedEmail").removeValue()
+                                                friendsInvites.remove(it)
+                                            }
+
+                                            override fun onCancelled(error: DatabaseError) {
+                                                TODO("Not yet implemented")
+                                            }
+                                        })
+                                    }
+                                )
+                            }
+                            Divider(color = Color.White, thickness = 2.dp)
+                        }
+                    } }
+                }
             }
         }
     }

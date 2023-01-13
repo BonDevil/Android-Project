@@ -51,17 +51,20 @@ fun InviteCard(
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(modifier = Modifier.padding(10.dp)) {
-            Row() {
-                Text(
-                    text = inviteInfo,
-                    color = Color.White,
-                    fontSize = 30.sp,
-                    fontFamily = FontFamily(
-                        Font(R.font.century_gothic)
-                    )
+        Column(
+            modifier = Modifier.padding(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Text(
+                text = inviteInfo,
+                color = Color.White,
+                fontSize = 30.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
                 )
-            }
+            )
+
             Spacer(modifier = Modifier.width(5.dp))
             PromptButton(
                 label = R.string.akceptuj,
@@ -84,6 +87,7 @@ fun InviteCard(
                             invitingUserRef.child(currentUserHashedEmail.toString()).setValue(true)
                             deleteFriendInviteRef.child("$invitingUserHashedEmail").removeValue()
                         }
+
                         override fun onCancelled(error: DatabaseError) {
                             TODO("Not yet implemented")
                         }
@@ -111,6 +115,7 @@ fun InvitationsList(
     settingsButtonOnClick: () -> Unit = {},
 
     ) {
+    var deletedFriend by remember { mutableStateOf(false) }
     var friendsInvites = remember { mutableMapOf<String, String>() }
     var isLoading by remember { mutableStateOf(true) }
     val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
@@ -142,6 +147,7 @@ fun InvitationsList(
                         friendsInvites = dataSnapshot.value as HashMap<String, String>
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }

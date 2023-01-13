@@ -55,4 +55,5 @@
     <string name="kategorie_przycisk">Category balance</string>
     <string name="kategorie">Enter the percentage you want to allocate to the categories</string>
     <string name="zaproszenia">INVITATIONS</string>
+    <string name="toastNull">All values must be filled in</string>
 </resources>

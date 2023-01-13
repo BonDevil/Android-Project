@@ -24,7 +24,7 @@ class Trip {
 
     public lateinit var expenses: List<Int>
 
-    public lateinit var persons: List<Int>
+    public lateinit var persons: List<User_in_trip>
 
 
 
@@ -40,7 +40,7 @@ class Trip {
         cat5planeMax: Double,
         cat6transportMax: Double,
 
-        persons: List<Int>,
+        persons: List<User_in_trip>,
     ) {
         this.tripName = tripName
         this.tripDescription = tripDescription

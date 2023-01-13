@@ -1,5 +1,6 @@
 package com.example.anrdoidteamproject.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -14,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -49,6 +51,7 @@ fun AddTrip(
     var numberOfDays by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     var expandedcat by remember { mutableStateOf(false) }
+    var showADDError by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -76,19 +79,25 @@ fun AddTrip(
                     onClick1 = addFriendsToTrip,
                     onClick2 = {/*TODO*/
 
-                        val myTrip = Trip(
-                            tripName,
-                            tripDescription,
-                            plannedAmount = plannedAmount.toDouble(),
-                            numberOfDays.toInt(),
-                            cat1foodMax = catfood * plannedAmount.toDouble() * 0.01,
-                            cat2sleepMax = catsleep * plannedAmount.toDouble() * 0.01,
-                            cat3drinkMax = catdrink * plannedAmount.toDouble() * 0.01,
-                            cat4atractionsMax = catatractions * plannedAmount.toDouble() * 0.01,
-                            cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
-                            cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
-                            listOf()
-                        )
+                        if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() && !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble()!=0.0 && numberOfDays.toInt()!=0) {
+                            val myTrip = Trip(
+                                tripName,
+                                tripDescription,
+                                plannedAmount = plannedAmount.toDouble(),
+                                numberOfDays.toInt(),
+                                cat1foodMax = catfood * plannedAmount.toDouble() * 0.01,
+                                cat2sleepMax = catsleep * plannedAmount.toDouble() * 0.01,
+                                cat3drinkMax = catdrink * plannedAmount.toDouble() * 0.01,
+                                cat4atractionsMax = catatractions * plannedAmount.toDouble() * 0.01,
+                                cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
+                                cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
+                                persons = listOf()
+                            )
+                        }
+                        else{
+                            showADDError=true
+                        }
+
 
                     },
                     drawable = R.drawable.img_add_user,
@@ -108,6 +117,13 @@ fun AddTrip(
 
             )
         {
+            if (showADDError) {
+            Toast.makeText(
+                LocalContext.current,stringResource(R.string.toastNull) ,
+                Toast.LENGTH_SHORT
+            ).show()
+            showADDError = false
+        }
             Column(
                 modifier = Modifier
                     .padding(40.dp)
@@ -247,7 +263,6 @@ fun Categories() {
 
     Column(
         modifier = Modifier
-            .padding(40.dp)
             .background(Color(24, 31, 54))
             .fillMaxSize(),
         horizontalAlignment = Alignment.Start,
@@ -256,7 +271,7 @@ fun Categories() {
         Text(
             text = stringResource(R.string.kategorie),
             color = Color.White,
-            fontSize = 30.sp,
+            fontSize = 25.sp,
             fontFamily = FontFamily(
                 Font(R.font.century_gothic)
             ),
@@ -280,7 +295,7 @@ fun Categories() {
                 imeAction = ImeAction.Next
             ),
             modifier = Modifier
-                .fillMaxWidth(0.2f)
+                .width(80.dp)
                 .border(
                     2.dp, Color(89, 128, 255), RoundedCornerShape(10)
                 )
@@ -304,7 +319,7 @@ fun Categories() {
             value = catsleeptemp,
             onValueChange = { catsleeptemp = it },
             modifier = Modifier
-                .fillMaxWidth(0.2f)
+                .width(80.dp)
                 .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
                 .background(Color(217, 217, 217), RoundedCornerShape(10))
                 .heightIn(min = 56.dp),
@@ -329,7 +344,7 @@ fun Categories() {
             value = catdrinktemp,
             onValueChange = { catdrinktemp = it },
             modifier = Modifier
-                .fillMaxWidth(0.2f)
+                .width(80.dp)
                 .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
                 .background(Color(217, 217, 217), RoundedCornerShape(10))
                 .heightIn(min = 56.dp),
@@ -358,7 +373,7 @@ fun Categories() {
                 imeAction = ImeAction.Next
             ),
             modifier = Modifier
-                .fillMaxWidth(0.2f)
+                .width(80.dp)
                 .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
                 .background(Color(217, 217, 217), RoundedCornerShape(10))
                 .heightIn(min = 56.dp),
@@ -384,7 +399,7 @@ fun Categories() {
                 imeAction = ImeAction.Next
             ),
             modifier = Modifier
-                .fillMaxWidth(0.2f)
+                .width(80.dp)
                 .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
                 .background(Color(217, 217, 217), RoundedCornerShape(10))
                 .heightIn(min = 56.dp),
@@ -409,7 +424,7 @@ fun Categories() {
                 imeAction = ImeAction.Done
             ),
             modifier = Modifier
-                .fillMaxWidth(0.2f)
+                .width(80.dp)
                 .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
                 .background(Color(217, 217, 217), RoundedCornerShape(10))
                 .heightIn(min = 56.dp),

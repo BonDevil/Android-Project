@@ -8,9 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -21,6 +19,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -291,8 +290,16 @@ fun Balance(
             )
         },
         floatingActionButton = {
-            ConfirmButton(confirmOnClick = transferFunds
-            )
+            FloatingActionButton(
+                onClick = transferFunds,
+                backgroundColor = Color.White
+            ) {
+                Icon(
+                    painterResource(id = R.drawable.img_dolar),
+                    tint = Color(0xFF5AFAFF),
+                    contentDescription = null,
+                )
+            }
         },
         modifier = Modifier.background(color = Color(0xff181f36))
 

@@ -50,6 +50,7 @@
     <string name="kategorie">Introduzca el porcentaje que desea asignar a las categorías</string>
     <string name="kategorie_przycisk">Equilibrio de categoría</string>
     <string name="zaproszenia">INVITACIONES</string>
+    <string name="toastNull">Todos los valores deben ser llenados</string>
 
 
 </resources>

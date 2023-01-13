@@ -50,4 +50,5 @@
     <string name="kategorie">Podaj procentową wartość jaką chcesz przeznaczyć na kategorie</string>
     <string name="kategorie_przycisk">Bilans kategorii</string>
     <string name="zaproszenia">ZAPROSZENIA</string>
+    <string name="toastNull">Wszystkie wartości muszą byc wypełnione</string>
 </resources>

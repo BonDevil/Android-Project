@@ -2,6 +2,7 @@ package com.example.anrdoidteamproject.ui
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -18,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -36,9 +38,8 @@ import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 var category = "food"
-
-
 
 
 @Composable
@@ -64,8 +65,7 @@ fun DropdownCategories() {
             items[selectedIndex],
             modifier = Modifier
                 .fillMaxWidth(0.6f)
-                .clickable(onClick = { expanded = true })
-,
+                .clickable(onClick = { expanded = true }),
             fontSize = 30.sp,
             color = Color.White,
 
@@ -102,9 +102,10 @@ fun AddExpense(
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
 
-) {
+    ) {
     var expenseName = mutableStateOf("")
     var expenseSUM = mutableStateOf("")
+    var showADDError by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -116,10 +117,19 @@ fun AddExpense(
         topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
-                val myExpense = com.example.anrdoidteamproject.businessLogic.Expenditure(
-                    paying_person = Firebase.auth.currentUser.hashCode(), category = category, value = expenseSUM.value.toDouble(), name = expenseName.value.toString(),listOf()
-                )
-            /*TODO*/
+                if (!expenseSUM.value.isNullOrEmpty() && !expenseName.value.isNullOrEmpty()&& expenseSUM.value.toDouble()!=0.0) {
+                    val myExpense = com.example.anrdoidteamproject.businessLogic.Expenditure(
+                        paying_person = Firebase.auth.currentUser.hashCode(),
+                        category = category,
+                        value = expenseSUM.value.toDouble(),
+                        name = expenseName.value.toString()
+                    )
+                }
+                else{
+                    showADDError=true
+                }
+                /*TODO*/
+                /*TODO przechodzenie po liscie uzytkownikow w grupie zeby zmienic bilans */
 
             }
             )
@@ -127,6 +137,13 @@ fun AddExpense(
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
+        if (showADDError) {
+            Toast.makeText(
+                LocalContext.current, stringResource(R.string.toastNull),
+                Toast.LENGTH_SHORT
+            ).show()
+            showADDError = false
+        }
         Column(
             modifier = Modifier
                 .background(Color(24, 31, 54))

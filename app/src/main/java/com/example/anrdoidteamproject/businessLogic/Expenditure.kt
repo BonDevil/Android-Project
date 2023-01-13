@@ -15,7 +15,7 @@ class Expenditure {
     public var value: Double = 0.0
     public var name: String = ""
     public var date: String = ""
-    public lateinit var persons: List<Int>
+//    public lateinit var persons: List<Int>
 
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(
@@ -23,13 +23,13 @@ class Expenditure {
         category: String,
         value: Double,
         name: String,
-        persons: List<Int>,
+//        persons: List<Int>,
     ) {
         this.paying_person = paying_person
         this.category = category
         this.value = value
         this.name = name
-        this.persons = persons
+//        this.persons = persons
         this.date = LocalDate.now().toString()
     }
 }

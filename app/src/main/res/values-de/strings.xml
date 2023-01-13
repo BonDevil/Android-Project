@@ -50,4 +50,5 @@
     <string name="kategorie">Geben Sie den Prozentsatz ein, den Sie den Kategorien zuweisen möchten</string>
     <string name="kategorie_przycisk">Kategorie-Balance</string>
     <string name="zaproszenia">EINLADUNGEN</string>
+    <string name="toastNull">Alle Werte müssen ausgefüllt werden</string>
 </resources>

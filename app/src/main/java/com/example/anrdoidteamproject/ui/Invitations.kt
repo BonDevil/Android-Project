@@ -34,7 +34,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
-import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.theme.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -66,7 +65,30 @@ fun InviteCard(
             Spacer(modifier = Modifier.width(5.dp))
             PromptButton(
                 label = R.string.akceptuj,
-                onClick = {}
+                onClick = {
+                    val currentUserEmail = Firebase.auth.currentUser?.email
+                    val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
+                    val invitingUserHashedEmail = inviteInfo.hashCode()
+                    val currUserRef =
+                        DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
+
+                    val invitingUserRef =
+                        DatabaseConnection.db.getReference("Users/$invitingUserHashedEmail/friends")
+
+                    val deleteFriendInviteRef =
+                        DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friendInvites")
+
+                    currUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            currUserRef.child(invitingUserHashedEmail.toString()).setValue(true)
+                            invitingUserRef.child(currentUserHashedEmail.toString()).setValue(true)
+                            deleteFriendInviteRef.child("$invitingUserHashedEmail").removeValue()
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                }
             )
         }
         Divider(color = Color.White, thickness = 2.dp)
@@ -125,9 +147,7 @@ fun InvitationsList(
                 }
             })
             if (!isLoading) {
-                // Display the data once it's loaded
                 showAllInvites(invites = friendsInvites.values)
-                Log.d("eo", "showAllInvites: ${friendsInvites.values}")
             }
         }
     }

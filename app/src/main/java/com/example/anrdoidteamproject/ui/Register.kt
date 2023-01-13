@@ -230,7 +230,7 @@ fun Register(
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("eo", "createUserWithEmail:success")
-                                    val myUser = User(firstName, lastName, phoneNumber)
+                                    val myUser = User(firstName, lastName, phoneNumber, email)
                                     val reference = DatabaseConnection.db.getReference("Users")
                                     val hashedEmail = email.hashCode().toString()
                                     reference.child(hashedEmail).setValue(myUser)

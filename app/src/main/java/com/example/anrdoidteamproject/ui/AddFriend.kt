@@ -34,6 +34,7 @@ fun AddFriend(
 ) {
     var email by remember { mutableStateOf("") }
     var isDataRetrieved by remember { mutableStateOf(false) }
+    var friends = remember { mutableMapOf<String, String>() }
 
     Scaffold(
         bottomBar = {
@@ -52,10 +53,29 @@ fun AddFriend(
                 val myRef =
                     DatabaseConnection.db.getReference("Users/$invitedUserHashedEmail/friendInvites")
 
+                val checkFriendsRef =
+                    DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
+
+                checkFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if(dataSnapshot.value != null)
+                            friends = dataSnapshot.value as HashMap<String, String>
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+
+
                 myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if(!currentUserHashedEmail.equals(invitedUserHashedEmail)){
+                        if(!currentUserHashedEmail.equals(invitedUserHashedEmail) && !friends.keys.contains(invitedUserHashedEmail.toString())){
                             myRef.child(currentUserHashedEmail.toString()).setValue(currentUserEmail.toString())
+                            Log.d("eo", "Friend invite successfully sent")
+                        }
+                        else{
+                            Log.d("eo", "Friend invite not sent, error occured")
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {

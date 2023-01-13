@@ -1,6 +1,7 @@
 package com.example.anrdoidteamproject.ui
 
-import android.util.Log
+import android.util.Patterns
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -9,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -24,7 +26,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import kotlin.reflect.typeOf
 
 @Composable
 fun AddFriend(
@@ -34,6 +35,7 @@ fun AddFriend(
 ) {
     var email by remember { mutableStateOf("") }
     var isDataRetrieved by remember { mutableStateOf(false) }
+    var showEmailError by remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
@@ -46,27 +48,41 @@ fun AddFriend(
         topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
-                val currentUserEmail = Firebase.auth.currentUser?.email
-                val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
-                val invitedUserHashedEmail = email.hashCode()
-                val myRef =
-                    DatabaseConnection.db.getReference("Users/$invitedUserHashedEmail/friendInvites")
+                if (Patterns.EMAIL_ADDRESS.matcher(email.toString()).matches()) {
 
-                myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if(!currentUserHashedEmail.equals(invitedUserHashedEmail)){
-                            myRef.child(currentUserHashedEmail.toString()).setValue(currentUserEmail.toString())
+                    val currentUserEmail = Firebase.auth.currentUser?.email
+                    val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
+                    val invitedUserHashedEmail = email.hashCode()
+                    val myRef =
+                        DatabaseConnection.db.getReference("Users/$invitedUserHashedEmail/friendInvites")
+
+                    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (!currentUserHashedEmail.equals(invitedUserHashedEmail)) {
+                                myRef.child(currentUserHashedEmail.toString())
+                                    .setValue(currentUserEmail.toString())
+                            }
                         }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                } else {
+                    showEmailError=true
+                }
             })
         },
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
+        if (showEmailError) {
+            Toast.makeText(
+                LocalContext.current, stringResource(R.string.toastCorectValue),
+                Toast.LENGTH_SHORT
+            ).show()
+            showEmailError = false
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()

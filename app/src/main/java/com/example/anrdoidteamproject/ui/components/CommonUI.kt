@@ -2,8 +2,11 @@ package com.example.anrdoidteamproject.ui.theme
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,6 +16,8 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -22,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -394,5 +400,52 @@ fun topBar22(message: String, message2: String, onClick: () -> Unit = {}) {
             )
         }
     }
+
+@Composable
+fun LoadingAnimation(
+    indicatorSize: Dp = 200.dp,
+    circleColors: List<Color> = listOf(
+        Color(0xFF5851D8),
+        Color(0xFF833AB4),
+        Color(0xFFC13584),
+        Color(0xFFE1306C),
+        Color(0xFFFD1D1D),
+        Color(0xFFF56040),
+        Color(0xFFF77737),
+        Color(0xFFFCAF45),
+        Color(0xFFFFDC80),
+        Color(0xFF5851D8)
+    ),
+    animationDuration: Int = 360
+) {
+
+    val infiniteTransition = rememberInfiniteTransition()
+
+    val rotateAnimation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = animationDuration,
+                easing = LinearEasing
+            )
+        )
+    )
+
+    CircularProgressIndicator(
+        modifier = Modifier
+            .size(size = indicatorSize)
+            .rotate(degrees = rotateAnimation)
+            .border(
+                width = 4.dp,
+                brush = Brush.sweepGradient(circleColors),
+                shape = CircleShape
+            ),
+        progress = 1f,
+        strokeWidth = 1.dp,
+        color = MaterialTheme.colors.background // Set background color
+    )
+}
+
 
 

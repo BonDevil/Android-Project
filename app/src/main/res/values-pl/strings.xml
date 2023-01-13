@@ -51,4 +51,5 @@
     <string name="kategorie_przycisk">Bilans kategorii</string>
     <string name="zaproszenia">ZAPROSZENIA</string>
     <string name="toastNull">Wszystkie wartości muszą byc wypełnione</string>
+    <string name="toastCorectValue">Wprowadź poprawną wartość</string>
 </resources>

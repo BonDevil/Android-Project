@@ -83,12 +83,12 @@ class Trip {
         this.cat5planeMax = cat5planeMax
         this.cat6transportMax = cat6transportMax
         this.expenses = expenses
-        this.cat1food = 100.0
+        this.cat1food = 200.0
         this.cat2sleep = 100.0
-        this.cat3drink = 100.0
-        this.cat4atractions = 100.0
-        this.cat5plane = 100.0
-        this.cat6transport = 100.0
+        this.cat3drink = 300.0
+        this.cat4atractions = 50.0
+        this.cat5plane = 285.0
+        this.cat6transport = 65.0
         this.TotalAmount = 1000.0
 
     }

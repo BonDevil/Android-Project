@@ -5,7 +5,7 @@ import java.lang.Double.min
 public var tripID: Int = 0
 public var tripName: String = ""
 public var tripDescription: String = ""
-public var plannedAmount: Double = 0.0
+public var plannedAmount: Double = 100.0
 public var numberOfDays: Int = 1
 
 public var cat1foodMax: Double = 1.0
@@ -42,12 +42,12 @@ public var cat6transportBalance = min((cat6transport / cat6transportMax), (1.0))
 public var today = (plannedAmount / numberOfDays)
 
 
-public var cat1foodBalanceTotal = min((cat1food / TotalAmount), (1.0)).toFloat()
-public var cat2sleepBalanceTotal = min((cat2sleep / TotalAmount), (1.0)).toFloat()
-public var cat3drinkBalanceTotal = min((cat3drink / TotalAmount), (1.0)).toFloat()
-public var cat4atractionsBalanceTotal = min((cat4atractions / TotalAmount), (1.0)).toFloat()
-public var cat5planeBalanceTotal = min((cat5plane / TotalAmount), (1.0)).toFloat()
-public var cat6transportBalanceTotal = min((cat6transport / TotalAmount), (1.0)).toFloat()
+public var cat1foodBalanceTotal = min((cat1food / plannedAmount), (1.0)).toFloat()
+public var cat2sleepBalanceTotal = min((cat2sleep / plannedAmount), (1.0)).toFloat()
+public var cat3drinkBalanceTotal = min((cat3drink / plannedAmount), (1.0)).toFloat()
+public var cat4atractionsBalanceTotal = min((cat4atractions / plannedAmount), (1.0)).toFloat()
+public var cat5planeBalanceTotal = min((cat5plane / plannedAmount), (1.0)).toFloat()
+public var cat6transportBalanceTotal = min((cat6transport / plannedAmount), (1.0)).toFloat()
 
 
 fun transferData(trip:Trip){

@@ -156,13 +156,13 @@ object SampleData_trip {
 
     val SampleTrips = listOf(
 
-        Trip(constructortestowytest = "","Barcelona","opis",2000.0,7,130.0,120.0,200.0,300.0,200.0,80.0,
+        Trip(constructortestowytest = "","Barcelona","opis",1000.0,7,130.0,120.0,200.0,300.0,200.0,80.0,
             listOf()),
-        Trip(constructortestowytest = "","Madryt","opis",1000.0,10,180.0,450.0,200.0,300.0,270.0,180.0,
+        Trip(constructortestowytest = "","Madryt","opis",2000.0,10,180.0,450.0,200.0,300.0,270.0,180.0,
             listOf()),
         Trip(constructortestowytest = "","Lizbona","opis",200.0,3,130.0,120.0,300.0,300.0,200.0,80.0,
             listOf()),
-        Trip(constructortestowytest = "","Warszawa","opis",5000.0,5,130.0,120.0,200.0,370.0,200.0,580.0,
+        Trip(constructortestowytest = "","Warszawa","opis",5000.0,5,530.0,920.0,600.0,670.0,600.0,580.0,
             listOf()),
 
     )

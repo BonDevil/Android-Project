@@ -31,13 +31,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.Trip
-import com.example.anrdoidteamproject.ui.theme.ConfirmButton
-import com.example.anrdoidteamproject.ui.theme.TextFieldWithLabel
-import com.example.anrdoidteamproject.ui.theme.bottomBar
-import com.example.anrdoidteamproject.ui.theme.topBar
+import com.example.anrdoidteamproject.businessLogic.User
+import com.example.anrdoidteamproject.ui.theme.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -103,11 +103,13 @@ fun AddExpense(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
+    navController: NavController = rememberNavController()
 
     ) {
     var expenseName = mutableStateOf("")
     var expenseSUM = mutableStateOf("")
     var showADDError by remember { mutableStateOf(false) }
+    var showADD by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -125,7 +127,11 @@ fun AddExpense(
                         category = category,
                         value = expenseSUM.value.toDouble(),
                         name = expenseName.value.toString()
+
                     )
+                    //jak sie uda to:
+                    showADD=true
+                    navController.popBackStack()
                 }
                 else{
                     showADDError=true
@@ -145,6 +151,13 @@ fun AddExpense(
                 Toast.LENGTH_SHORT
             ).show()
             showADDError = false
+        }
+        if (showADD) {
+            Toast.makeText(
+                LocalContext.current, stringResource(R.string.toastCorectADDExpense),
+                Toast.LENGTH_SHORT
+            ).show()
+            showADD = false
         }
         Column(
             modifier = Modifier
@@ -207,5 +220,46 @@ fun AddExpense(
                 Listpersons3(DatabaseConnection.friendList)
             }
         }
+    }
+}
+
+
+
+@Composable
+fun PersonCard3(user: User) {
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Row() {
+            CheckBoxDemo()
+            Text(
+                text = user.firstName + " " + user.lastName,
+                color = Color.White,
+                fontSize = 25.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                )
+            )
+            Spacer(modifier = Modifier.width(1.dp))
+
+        }
+        Divider(color = Color.White, thickness = 2.dp)
+
+    }
+
+}
+
+
+@Composable
+fun Listpersons3(user: List<User>) {
+    LazyColumn(
+        contentPadding = PaddingValues(vertical = 40.dp)
+
+    ) {
+        user.map { item { PersonCard3(it) } }
     }
 }

@@ -58,6 +58,8 @@ fun Register(
             var repeatPasswordVisibility by remember { mutableStateOf(false) }
             val auth by lazy { Firebase.auth }
             var showRegisterError by remember { mutableStateOf(false) }
+            var ThePasswordIsTooShort by remember { mutableStateOf(false) }
+            var passwordsDoNotMatch by remember { mutableStateOf(false) }
 
             Column(
                 modifier = Modifier
@@ -69,68 +71,46 @@ fun Register(
             ) {
                 Spacer(modifier = Modifier.height(15.dp))
 //        Text field for first name
-                TextField(
-                    value = firstName,
-                    onValueChange = { newText ->
-                        firstName = newText
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Next
-                    ),
-                    textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
-                    label = {
-                        Text(
-                            stringResource(R.string.imie),
-                            color = Color.White,
-                        )
-                    }
-                )
+                TextField(value = firstName, onValueChange = { newText ->
+                    firstName = newText
+                }, keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                ), textStyle = TextStyle(color = Color.White, fontSize = 16.sp), label = {
+                    Text(
+                        stringResource(R.string.imie),
+                        color = Color.White,
+                    )
+                })
                 Spacer(modifier = Modifier.height(20.dp))
 //        Text field for last name
-                TextField(
-                    value = lastName,
-                    onValueChange = { newText ->
-                        lastName = newText
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Next
-                    ),
-                    textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
-                    label = {
-                        Text(
-                            stringResource(R.string.nazwisko),
-                            color = Color.White,
-                        )
-                    }
-                )
+                TextField(value = lastName, onValueChange = { newText ->
+                    lastName = newText
+                }, keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                ), textStyle = TextStyle(color = Color.White, fontSize = 16.sp), label = {
+                    Text(
+                        stringResource(R.string.nazwisko),
+                        color = Color.White,
+                    )
+                })
                 Spacer(modifier = Modifier.height(15.dp))
 //      text field for email
-                TextField(
-                    value = email,
-                    onValueChange = { newText ->
-                        email = newText
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next
-                    ),
-                    textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
-                    label = {
-                        Text(
-                            stringResource(R.string.email),
-                            color = Color.White,
-                        )
-                    }
-                )
+                TextField(value = email, onValueChange = { newText ->
+                    email = newText
+                }, keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email, imeAction = ImeAction.Next
+                ), textStyle = TextStyle(color = Color.White, fontSize = 16.sp), label = {
+                    Text(
+                        stringResource(R.string.email),
+                        color = Color.White,
+                    )
+                })
                 Spacer(modifier = Modifier.height(15.dp))
 //        Text field for password
                 Column() {
-                    val icon = if (passwordVisibility)
-                        painterResource(id = R.drawable.design_ic_visibility)
-                    else
-                        painterResource(id = R.drawable.design_ic_visibility_off)
+                    val icon =
+                        if (passwordVisibility) painterResource(id = R.drawable.design_ic_visibility)
+                        else painterResource(id = R.drawable.design_ic_visibility_off)
                     OutlinedTextField(
                         value = password,
                         onValueChange = {
@@ -149,8 +129,7 @@ fun Register(
                             }
                         },
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Next
+                            keyboardType = KeyboardType.Password, imeAction = ImeAction.Next
                         ),
                         label = {
                             Text(
@@ -158,18 +137,16 @@ fun Register(
                                 color = Color.White,
                             )
                         },
-                        visualTransformation =
-                        if (passwordVisibility) VisualTransformation.None
+                        visualTransformation = if (passwordVisibility) VisualTransformation.None
                         else PasswordVisualTransformation()
                     )
                 }
                 Spacer(modifier = Modifier.height(15.dp))
 //      Text field for repeat password
                 Column() {
-                    val icon = if (repeatPasswordVisibility)
-                        painterResource(id = R.drawable.design_ic_visibility)
-                    else
-                        painterResource(id = R.drawable.design_ic_visibility_off)
+                    val icon =
+                        if (repeatPasswordVisibility) painterResource(id = R.drawable.design_ic_visibility)
+                        else painterResource(id = R.drawable.design_ic_visibility_off)
                     OutlinedTextField(
                         value = repeatPassword,
                         onValueChange = {
@@ -188,8 +165,7 @@ fun Register(
                             }
                         },
                         keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Next
+                            keyboardType = KeyboardType.Password, imeAction = ImeAction.Next
                         ),
                         label = {
                             Text(
@@ -197,34 +173,25 @@ fun Register(
                                 color = Color.White,
                             )
                         },
-                        visualTransformation =
-                        if (repeatPasswordVisibility) VisualTransformation.None
+                        visualTransformation = if (repeatPasswordVisibility) VisualTransformation.None
                         else PasswordVisualTransformation()
                     )
                 }
                 Spacer(modifier = Modifier.height(15.dp))
 //      Text field for phone number
-                TextField(
-                    value = phoneNumber,
-                    onValueChange = { newText ->
-                        phoneNumber = newText
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Phone,
-                        imeAction = ImeAction.Done
-                    ),
-                    textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
-                    label = {
-                        Text(
-                            stringResource(R.string.telefon),
-                            color = Color.White,
-                        )
-                    }
-                )
+                TextField(value = phoneNumber, onValueChange = { newText ->
+                    phoneNumber = newText
+                }, keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone, imeAction = ImeAction.Done
+                ), textStyle = TextStyle(color = Color.White, fontSize = 16.sp), label = {
+                    Text(
+                        stringResource(R.string.telefon),
+                        color = Color.White,
+                    )
+                })
                 Spacer(modifier = Modifier.height(60.dp))
-                PromptButton(
-                    label = R.string.rejestracja_zacheta,
-                    onClick = {
+                PromptButton(label = R.string.rejestracja_zacheta, onClick = {
+                    if (password.length >= 6 && password.equals(repeatPassword)) {
                         auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
@@ -243,21 +210,34 @@ fun Register(
                                     showRegisterError = true
                                 }
                             }
+                    } else if (password.length >= 6) {
+                        ThePasswordIsTooShort= true
+
+                    } else if (password.equals(repeatPassword)) {
+                        passwordsDoNotMatch= true
                     }
-                )
+                })
                 Spacer(modifier = Modifier.height(20.dp))
-                PromptButton(
-                    label = R.string.logowanie_powrot,
-                    onClick = {
-                        navController.navigate(AppScreens.LogIn.name)
-                    }
-                )
+                PromptButton(label = R.string.logowanie_powrot, onClick = {
+                    navController.navigate(AppScreens.LogIn.name)
+                })
                 if (showRegisterError) {
                     Toast.makeText(
-                        LocalContext.current, "Wrong input, register failed",
-                        Toast.LENGTH_SHORT
+                        LocalContext.current, stringResource(R.string.showRegisterError), Toast.LENGTH_SHORT
                     ).show()
                     showRegisterError = false
+                }
+                if (ThePasswordIsTooShort) {
+                    Toast.makeText(
+                        LocalContext.current, stringResource(R.string.ThePasswordIsTooShort), Toast.LENGTH_SHORT
+                    ).show()
+                    ThePasswordIsTooShort = false
+                }
+                if (passwordsDoNotMatch) {
+                    Toast.makeText(
+                        LocalContext.current, stringResource(R.string.toastPasswordsDoNotMatch), Toast.LENGTH_SHORT
+                    ).show()
+                    passwordsDoNotMatch = false
                 }
             }
         }

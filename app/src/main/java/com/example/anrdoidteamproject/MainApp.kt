@@ -124,14 +124,16 @@ fun MainApp(
             AddExpense(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                navController = navController
             )
         }
         composable(AppScreens.AddFriend.name) {
             AddFriend(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                navController = navController,
             )
         }
         composable(AppScreens.AddTrip.name) {
@@ -139,7 +141,8 @@ fun MainApp(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
-                addFriendsToTrip = addFriendsToTrip
+                addFriendsToTrip = addFriendsToTrip,
+                navController = navController
             )
         }
         composable(AppScreens.Balance.name) {
@@ -203,7 +206,8 @@ fun MainApp(
             TransferFunds(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                navController = navController
             )
         }
         composable(AppScreens.UserInfo.name) {

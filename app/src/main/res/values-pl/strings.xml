@@ -53,4 +53,12 @@
     <string name="toastNull">Wszystkie wartości muszą byc wypełnione</string>
     <string name="toastCorectValue">Wprowadź poprawną wartość</string>
     <string name="Szczegóły">Szczegóły</string>
+    <string name="toastCorectADDinvite">Pomyślnie dodano zaproszenie</string>
+    <string name="toastNOTCorectADDinvite">Nie możesz wysłać zaproszenia tej osobie</string>
+    <string name="toastCorectADDTrip">Pomyślnie dodano wycieczkę</string>
+    <string name="toastCorectADDExpense">Pomyślnie dodano wydatek</string>
+    <string name="toastCorectADDReturn">Pomyślnie dodano zwrot pieniędzy</string>
+    <string name="toastPasswordsDoNotMatch">Hasła nie zgadzają się ze sobą</string>
+    <string name="ThePasswordIsTooShort">Podano za krótkie hasło</string>
+    <string name="showRegisterError">Błędne dane, rejestracja nie powiódła się</string>
 </resources>

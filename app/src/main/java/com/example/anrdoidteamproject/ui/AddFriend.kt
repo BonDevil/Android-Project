@@ -1,4 +1,3 @@
-
 package com.example.anrdoidteamproject.ui
 
 import android.util.Log
@@ -43,70 +42,89 @@ fun AddFriend(
     var isDataRetrieved by remember { mutableStateOf(false) }
     var friends = remember { mutableMapOf<String, String>() }
     var showEmailError by remember { mutableStateOf(false) }
+    var showAddFriendToast by remember { mutableStateOf(false) }
+    var showNOTAddFriendToast by remember { mutableStateOf(false) }
 
 
-    Scaffold(
-        bottomBar = {
-            bottomBar(
-                userInfoButtonOnClick = userInfoButtonOnClick,
-                homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
-            )
-        },
+    Scaffold(bottomBar = {
+        bottomBar(
+            userInfoButtonOnClick = userInfoButtonOnClick,
+            homeButtonOnClick = homeButtonOnClick,
+            settingsButtonOnClick = settingsButtonOnClick
+        )
+    },
         topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
                 if (Patterns.EMAIL_ADDRESS.matcher(email.toString()).matches()) {
-                val currentUserEmail = Firebase.auth.currentUser?.email
-                val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
-                val invitedUserHashedEmail = email.hashCode()
-                val myRef =
-                    DatabaseConnection.db.getReference("Users/$invitedUserHashedEmail/friendInvites")
+                    val currentUserEmail = Firebase.auth.currentUser?.email
+                    val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
+                    val invitedUserHashedEmail = email.hashCode()
+                    val myRef =
+                        DatabaseConnection.db.getReference("Users/$invitedUserHashedEmail/friendInvites")
 
-                val checkFriendsRef =
-                    DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
+                    val checkFriendsRef =
+                        DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
 
-                checkFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener{
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if(dataSnapshot.value != null)
-                            friends = dataSnapshot.value as HashMap<String, String>
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
-
-
-                myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if(!currentUserHashedEmail.equals(invitedUserHashedEmail) && !friends.keys.contains(invitedUserHashedEmail.toString())){
-                            myRef.child(currentUserHashedEmail.toString()).setValue(currentUserEmail.toString())
-                            Log.d("eo", "Friend invite successfully sent")
+                    checkFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (dataSnapshot.value != null) friends =
+                                dataSnapshot.value as HashMap<String, String>
                         }
-                        else{
-                            Log.d("eo", "Friend invite not sent, error occured")
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
                         }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
-            }
-            else{
-//                showEmailError=true
-                    navController.popBackStack()
-            }})
+                    })
+
+
+                    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (!currentUserHashedEmail.equals(invitedUserHashedEmail) && !friends.keys.contains(
+                                    invitedUserHashedEmail.toString()
+                                )
+                            ) {
+                                myRef.child(currentUserHashedEmail.toString())
+                                    .setValue(currentUserEmail.toString())
+                                Log.d("eo", "Friend invite successfully sent")
+                                showAddFriendToast=true
+                                navController.popBackStack()
+                            } else {
+                                Log.d("eo", "Friend invite not sent, error occured")
+                                showNOTAddFriendToast=true
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                } else {
+                    showEmailError = true
+                }
+            })
         },
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
         if (showEmailError) {
             Toast.makeText(
-                LocalContext.current, stringResource(R.string.toastCorectValue),
-                Toast.LENGTH_SHORT
+                LocalContext.current, stringResource(R.string.toastCorectValue), Toast.LENGTH_SHORT
             ).show()
             showEmailError = false
+        }
+        if (showAddFriendToast) {
+            Toast.makeText(
+                LocalContext.current, stringResource(R.string.toastCorectADDinvite), Toast.LENGTH_SHORT
+            ).show()
+            showAddFriendToast = false
+        }
+
+        if (showNOTAddFriendToast) {
+            Toast.makeText(
+                LocalContext.current,stringResource(R.string.toastNOTCorectADDinvite), Toast.LENGTH_SHORT
+            ).show()
+            showNOTAddFriendToast = false
         }
         Row(
             modifier = Modifier
@@ -121,8 +139,7 @@ fun AddFriend(
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
 
-                )
-            {
+                ) {
 
                 Text(
                     text = stringResource(R.string.podaj_e_mail_itd),
@@ -130,23 +147,16 @@ fun AddFriend(
                     fontSize = 30.sp,
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-                TextField(
-                    value = email,
-                    onValueChange = { newText ->
-                        email = newText
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Done
-                    ),
-                    textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
-                    label = {
-                        Text(
-                            stringResource(R.string.email),
-                            color = Color.White,
-                        )
-                    }
-                )
+                TextField(value = email, onValueChange = { newText ->
+                    email = newText
+                }, keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email, imeAction = ImeAction.Done
+                ), textStyle = TextStyle(color = Color.White, fontSize = 16.sp), label = {
+                    Text(
+                        stringResource(R.string.email),
+                        color = Color.White,
+                    )
+                })
 
             }
         }

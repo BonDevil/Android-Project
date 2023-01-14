@@ -57,4 +57,12 @@
     <string name="zaproszenia">INVITATIONS</string>
     <string name="toastNull">All values must be filled in</string>
     <string name="toastCorectValue">Enter correct value</string>
+    <string name="toastCorectADDinvite">Invitation added successfully</string>
+    <string name="toastNOTCorectADDinvite">You cannot send an invitation to this person</string>
+    <string name="toastCorectADDTrip">Trip added successfully</string>
+    <string name="toastCorectADDExpense">Expense added successfully</string>
+    <string name="toastCorectADDReturn">Refund successfully added</string>
+    <string name="toastPasswordsDoNotMatch">The passwords do not match</string>
+    <string name="ThePasswordIsTooShort">The password is too short</string>
+    <string name="showRegisterError">Incorrect data, registration failed</string>
 </resources>

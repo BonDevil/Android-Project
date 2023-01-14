@@ -53,4 +53,12 @@
     <string name="toastNull">Alle Werte müssen ausgefüllt werden</string>
     <string name="toastCorectValue">Geben Sie den korrekten Wert ein</string>
     <string name="Szczegóły">Einzelheiten</string>
+    <string name="toastCorectADDinvite">Einladung erfolgreich hinzugefügt</string>
+    <string name="toastNOTCorectADDinvite">Sie können dieser Person keine Einladung senden</string>
+    <string name="toastCorectADDTrip">Tour erfolgreich hinzugefügt</string>
+    <string name="toastCorectADDExpense">Kosten erfolgreich hinzugefügt</string>
+    <string name="toastCorectADDReturn">Rückerstattung erfolgreich hinzugefügt</string>
+    <string name="toastPasswordsDoNotMatch">Die Passwörter stimmen nicht überein</string>
+    <string name="ThePasswordIsTooShort">Das Passwort ist zu kurz</string>
+    <string name="showRegisterError">Falsche Daten, Anmeldung fehlgeschlagen</string>
 </resources>

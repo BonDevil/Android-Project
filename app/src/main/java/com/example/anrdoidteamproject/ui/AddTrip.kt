@@ -1,4 +1,3 @@
-
 package com.example.anrdoidteamproject.ui
 
 import android.util.Log
@@ -27,6 +26,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.*
@@ -40,17 +41,18 @@ var catplane = 16.0
 var cattransport = 16.0
 
 
-var tripNameG =""
-var tripDescriptionG =""
-var plannedAmountG =""
-var numberOfDaysG =""
+var tripNameG = ""
+var tripDescriptionG = ""
+var plannedAmountG = ""
+var numberOfDaysG = ""
 
 @Composable
 fun AddTrip(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
-    addFriendsToTrip: () -> Unit = {}
+    addFriendsToTrip: () -> Unit = {},
+    navController: NavController = rememberNavController()
 ) {
 
     var tripName by remember { mutableStateOf(tripNameG) }
@@ -60,6 +62,7 @@ fun AddTrip(
     var expanded by remember { mutableStateOf(false) }
     var expandedcat by remember { mutableStateOf(false) }
     var showADDError by remember { mutableStateOf(false) }
+    var showADD by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -71,13 +74,14 @@ fun AddTrip(
         topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { expanded = !expanded
+                onClick = {
+                    expanded = !expanded
 
                     tripNameG = tripName
                     tripDescriptionG = tripDescription
                     plannedAmountG = plannedAmount.toString()
                     numberOfDaysG = numberOfDays.toString()
-                          },
+                },
                 backgroundColor = Color.White
             ) {
                 Icon(
@@ -99,8 +103,8 @@ fun AddTrip(
                         Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
 
                         if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
-                            !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0)
-                        {
+                            !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0
+                        ) {
                             val tripRef = DatabaseConnection.db.getReference("trips")
                             val newTripRef = tripRef.push()
                             newTripRef.setValue(
@@ -115,10 +119,13 @@ fun AddTrip(
                                     cat4atractionsMax = catatractions * plannedAmount.toDouble() * 0.01,
                                     cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
                                     cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
-                                    persons = listOf(),
+                                    persons = personsUser_In_Trip_inCreate,
                                     expenses = listOf()
                                 )
                             )
+
+                            showADD = true
+                            navController.popBackStack()
                         } else {
                             showADDError = true
                         }
@@ -147,6 +154,13 @@ fun AddTrip(
                 ).show()
                 showADDError = false
             }
+            if (showADD) {
+            Toast.makeText(
+                LocalContext.current, stringResource(R.string.toastCorectADDTrip),
+                Toast.LENGTH_SHORT
+            ).show()
+            showADD = false
+        }
             Column(
                 modifier = Modifier
                     .padding(40.dp)
@@ -464,8 +478,6 @@ fun Categories() {
     if (!catatractionstemp.isNullOrEmpty()) catatractions = catatractionstemp.toDouble()
     if (!catplanetemp.isNullOrEmpty()) catplane = catplanetemp.toDouble()
     if (!cattransporttemp.isNullOrEmpty()) cattransport = cattransporttemp.toDouble()
-
-
 
 
 }

@@ -38,8 +38,10 @@ var selectedPerson: String=""
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun transferFunds() {
+fun transferFunds(
+) {
     var valuetemp = mutableStateOf(value.toString())
+
 
     Column(
         modifier = Modifier
@@ -69,135 +71,15 @@ fun transferFunds() {
 
 
         Divider(color = Color.White, thickness = 2.dp)
-        //Listpersons3(DatabaseConnection.friendList)
         Preview_MultipleRadioButtons()
 
 
     }
 }
 
-@Composable
-fun PersonCard3(user: User) {
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Row() {
-            CheckBoxDemo()
-            Text(
-                text = user.firstName + " " + user.lastName,
-                color = Color.White,
-                fontSize = 25.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                )
-            )
-            Spacer(modifier = Modifier.width(1.dp))
-
-        }
-        Divider(color = Color.White, thickness = 2.dp)
-
-    }
-
-}
 
 
-@Composable
-fun Listpersons3(user: List<User>) {
-    LazyColumn(
-        contentPadding = PaddingValues(vertical = 40.dp)
 
-    ) {
-        user.map { item { PersonCard3(it) } }
-    }
-}
-
-
-object SampleData3 {
-    // Sample conversation data
-    val conversationSample = listOf(
-        Osoba(
-            "Jakub",
-            "Roszkowski"
-        ),
-        Osoba(
-            "Piotr",
-            "Grygoruk"
-        ),
-        Osoba(
-            "Nataliia",
-            "Martynenko"
-        ),
-        Osoba(
-            "Adam",
-            "Nowak"
-        ),
-        Osoba(
-            "Jan",
-            "Kowalski"
-        ),
-        Osoba(
-            "Piotr",
-            "Grygoruk"
-        ),
-        Osoba(
-            "Nataliia",
-            "Martynenko"
-        ),
-        Osoba(
-            "Adam",
-            "Nowak"
-        ),
-        Osoba(
-            "Jan",
-            "Kowalski"
-        )
-
-    )
-}
-
-
-val Samplelist = listOf(
-    Osoba(
-        "Jakub",
-        "Roszkowski"
-    ),
-    Osoba(
-        "Piotr",
-        "Grygoruk"
-    ),
-    Osoba(
-        "Nataliia",
-        "Martynenko"
-    ),
-    Osoba(
-        "Adam",
-        "Nowak"
-    ),
-    Osoba(
-        "Jan",
-        "Kowalski"
-    ),
-    Osoba(
-        "Piotr",
-        "Grygoruk"
-    ),
-    Osoba(
-        "Nataliia",
-        "Martynenko"
-    ),
-    Osoba(
-        "Adam",
-        "Nowak"
-    ),
-    Osoba(
-        "Jan",
-        "Kowalski"
-    )
-)
 
 
 @Composable
@@ -209,6 +91,7 @@ fun TransferFunds(
 ) {
 
     var showADDError by remember { mutableStateOf(false) }
+    var showADD by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -230,6 +113,9 @@ fun TransferFunds(
 
                     //osoba ktora zwraca koszty i ma miec polepszony bilans
                     //paying_person = Firebase.auth.currentUser.hashCode()
+
+                    showADD=true
+                    navController.popBackStack()
                 } else {
                     showADDError = true
                 }
@@ -247,6 +133,13 @@ fun TransferFunds(
                 Toast.LENGTH_SHORT
             ).show()
             showADDError = false
+        }
+        if (showADD) {
+            Toast.makeText(
+                LocalContext.current, stringResource(R.string.toastCorectADDReturn),
+                Toast.LENGTH_SHORT
+            ).show()
+            showADD = false
         }
 
         Row(

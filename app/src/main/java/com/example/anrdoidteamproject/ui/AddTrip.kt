@@ -26,7 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.Trip
+import com.example.anrdoidteamproject.businessLogic.expenses
 import com.example.anrdoidteamproject.businessLogic.persons2
 import com.example.anrdoidteamproject.ui.theme.*
 
@@ -79,31 +81,31 @@ fun AddTrip(
                     onClick = { expanded = !expanded },
                     onClick1 = addFriendsToTrip,
                     onClick2 = {/*TODO*/
-
                         //lista osób
-                        persons2
-
-
-                        if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() && !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble()!=0.0 && numberOfDays.toInt()!=0) {
-                            val myTrip = Trip(
-                                tripName,
-                                tripDescription,
-                                plannedAmount = plannedAmount.toDouble(),
-                                numberOfDays.toInt(),
-                                cat1foodMax = catfood * plannedAmount.toDouble() * 0.01,
-                                cat2sleepMax = catsleep * plannedAmount.toDouble() * 0.01,
-                                cat3drinkMax = catdrink * plannedAmount.toDouble() * 0.01,
-                                cat4atractionsMax = catatractions * plannedAmount.toDouble() * 0.01,
-                                cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
-                                cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
-                                persons = listOf()
+                        if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
+                            !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0)
+                        {
+                            val tripRef = DatabaseConnection.db.getReference("trips")
+                            val newTripRef = tripRef.push()
+                            newTripRef.setValue(
+                                Trip(
+                                    tripName,
+                                    tripDescription,
+                                    plannedAmount = plannedAmount.toDouble(),
+                                    numberOfDays.toInt(),
+                                    cat1foodMax = catfood * plannedAmount.toDouble() * 0.01,
+                                    cat2sleepMax = catsleep * plannedAmount.toDouble() * 0.01,
+                                    cat3drinkMax = catdrink * plannedAmount.toDouble() * 0.01,
+                                    cat4atractionsMax = catatractions * plannedAmount.toDouble() * 0.01,
+                                    cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
+                                    cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
+                                    persons = listOf(),
+                                    expenses = listOf()
+                                )
                             )
+                        } else {
+                            showADDError = true
                         }
-                        else{
-                            showADDError=true
-                        }
-
-
                     },
                     drawable = R.drawable.img_add_user,
                     drawable2 = Icons.Filled.Check
@@ -123,12 +125,12 @@ fun AddTrip(
             )
         {
             if (showADDError) {
-            Toast.makeText(
-                LocalContext.current,stringResource(R.string.toastNull) ,
-                Toast.LENGTH_SHORT
-            ).show()
-            showADDError = false
-        }
+                Toast.makeText(
+                    LocalContext.current, stringResource(R.string.toastNull),
+                    Toast.LENGTH_SHORT
+                ).show()
+                showADDError = false
+            }
             Column(
                 modifier = Modifier
                     .padding(40.dp)

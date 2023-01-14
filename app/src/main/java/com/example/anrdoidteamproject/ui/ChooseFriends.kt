@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.User
+import com.example.anrdoidteamproject.businessLogic.persons
+import com.example.anrdoidteamproject.ui.theme.CheckBoxDemo
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
@@ -28,19 +30,24 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import com.example.anrdoidteamproject.businessLogic.persons2
+
+
+
+var list: ArrayList<String> = ArrayList()
 
 
 @Composable
-fun PersonCard2(per: Osoba) {
+fun PersonCard2(user: User) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(modifier = Modifier.padding(20.dp)) {
-            CheckBoxDemo()
+            CheckBoxDemo2(user.email)
             Text(
-                text = per.Imie,
+                text = user.firstName+" "+user.lastName,
                 color = Color.White,
                 fontSize = 30.sp,
                 fontFamily = FontFamily(
@@ -50,14 +57,6 @@ fun PersonCard2(per: Osoba) {
 
             Spacer(modifier = Modifier.width(4.dp))
 
-            Text(
-                text = per.Nazwisko,
-                color = Color.White,
-                fontSize = 30.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                )
-            )
             Spacer(modifier = Modifier.width(1.dp))
 
         }
@@ -71,16 +70,23 @@ fun PersonCard2(per: Osoba) {
 @Composable
 fun listChooseFriends(users: List<User>) {
     LazyColumn {
-        users.map { item { PersonCard(it) } }
+        users.map { item { PersonCard2(it) } }
     }
 }
 
 @Composable
-fun CheckBoxDemo() {
+fun CheckBoxDemo2(email: String) {
     val checkedState = rememberSaveable { mutableStateOf(false) }
     Checkbox(
         checked = checkedState.value,
-        onCheckedChange = { checkedState.value = it }
+        onCheckedChange = {
+            checkedState.value = it
+            if (checkedState.value)
+            list.add(email)
+            else
+                list.remove(email)
+
+        }
     )
 }
 
@@ -107,7 +113,10 @@ fun ChooseFriends(
         },
         topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
         floatingActionButton = {
-            ConfirmButton(confirmOnClick = { /*TODO*/ }
+            ConfirmButton(confirmOnClick = {
+                persons2 = list
+            /*TODO*/
+            }
             )
         },
         modifier = Modifier.background(color = Color(0xff181f36))

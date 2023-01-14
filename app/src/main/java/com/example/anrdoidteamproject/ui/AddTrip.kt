@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.Trip
+import com.example.anrdoidteamproject.businessLogic.persons2
 import com.example.anrdoidteamproject.ui.theme.*
 
 
@@ -78,6 +79,10 @@ fun AddTrip(
                     onClick = { expanded = !expanded },
                     onClick1 = addFriendsToTrip,
                     onClick2 = {/*TODO*/
+
+                        //lista osób
+                        persons2
+
 
                         if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() && !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble()!=0.0 && numberOfDays.toInt()!=0) {
                             val myTrip = Trip(

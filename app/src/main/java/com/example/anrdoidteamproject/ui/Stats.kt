@@ -489,22 +489,48 @@ fun Stats(
                     modifier = Modifier
                         .fillMaxHeight(0.3f)
                 ) {
-                    DrawGradientCircle(
-                        percentage1 = cat1foodBalanceTotal,
-                        percentage2 = cat2sleepBalanceTotal,
-                        percentage3 = cat3drinkBalanceTotal,
-                        percentage4 = cat4atractionsBalanceTotal,
-                        percentage5 = cat5planeBalanceTotal,
-                        percentage6 = cat6transportBalanceTotal,
-                        backgroundColor = Brush.horizontalGradient(
-                            listOf(
-                                Color(0xFF181F36),
-                                Color(0xFF181F36)
-                            )
-                        ),
-                        strokeWidth = 30.dp,
-                        total = String.format("%.2f", TotalAmount)
-                    )
+                    if (
+                        cat1foodBalanceTotal +
+                        cat2sleepBalanceTotal +
+                        cat3drinkBalanceTotal +
+                        cat4atractionsBalanceTotal +
+                        cat5planeBalanceTotal +
+                        cat6transportBalanceTotal <= 1.0f
+                    ) {
+                        DrawGradientCircle(
+                            percentage1 = cat1foodBalanceTotal,
+                            percentage2 = cat2sleepBalanceTotal,
+                            percentage3 = cat3drinkBalanceTotal,
+                            percentage4 = cat4atractionsBalanceTotal,
+                            percentage5 = cat5planeBalanceTotal,
+                            percentage6 = cat6transportBalanceTotal,
+                            backgroundColor = Brush.horizontalGradient(
+                                listOf(
+                                    Color(0xFF181F36),
+                                    Color(0xFF181F36)
+                                )
+                            ),
+                            strokeWidth = 30.dp,
+                            total = String.format("%.2f", TotalAmount)
+                        )
+                    } else {
+                        DrawGradientCircle(
+                            percentage1 = cat1foodBalanceTotalALL,
+                            percentage2 = cat2sleepBalanceTotalALL,
+                            percentage3 = cat3drinkBalanceTotalALL,
+                            percentage4 = cat4atractionsBalanceTotalALL,
+                            percentage5 = cat5planeBalanceTotalALL,
+                            percentage6 = cat6transportBalanceTotalALL,
+                            backgroundColor = Brush.horizontalGradient(
+                                listOf(
+                                    Color(0xFF181F36),
+                                    Color(0xFF181F36)
+                                )
+                            ),
+                            strokeWidth = 30.dp,
+                            total = String.format("%.2f", TotalAmount)
+                        )
+                    }
                 }
 
 

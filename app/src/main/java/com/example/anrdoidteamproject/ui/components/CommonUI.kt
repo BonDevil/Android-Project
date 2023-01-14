@@ -449,3 +449,12 @@ fun LoadingAnimation(
 
 
 
+@Composable
+fun CheckBoxDemo() {
+    val checkedState = rememberSaveable { mutableStateOf(false) }
+    Checkbox(
+        checked = checkedState.value,
+        onCheckedChange = { checkedState.value = it }
+    )
+}
+

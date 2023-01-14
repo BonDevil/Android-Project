@@ -4,7 +4,7 @@ import com.example.anrdoidteamproject.ui.historySample
 import java.lang.Double.min
 
 public var tripID: Int = 0
-public var tripName: String = ""
+public var tripName: String = "test"
 public var tripDescription: String = ""
 public var plannedAmount: Double = 100.0
 public var numberOfDays: Int = 1
@@ -26,6 +26,8 @@ public var cat6transport: Double = 0.0
 public var TotalAmount: Double = 0.0
 
 public lateinit var persons: List<User_in_trip>
+
+public lateinit var persons2: List<String>
 
 
 public var cat1foodBalance = min((cat1food / cat1foodMax), (1.0)).toFloat()
@@ -51,6 +53,13 @@ public var cat3drinkBalanceTotal = min((cat3drink / plannedAmount), (1.0)).toFlo
 public var cat4atractionsBalanceTotal = min((cat4atractions / plannedAmount), (1.0)).toFloat()
 public var cat5planeBalanceTotal = min((cat5plane / plannedAmount), (1.0)).toFloat()
 public var cat6transportBalanceTotal = min((cat6transport / plannedAmount), (1.0)).toFloat()
+
+public var cat1foodBalanceTotalALL = min((cat1food / TotalAmount), (1.0)).toFloat()
+public var cat2sleepBalanceTotalALL = min((cat2sleep / TotalAmount), (1.0)).toFloat()
+public var cat3drinkBalanceTotalALL = min((cat3drink / TotalAmount), (1.0)).toFloat()
+public var cat4atractionsBalanceTotalALL = min((cat4atractions / TotalAmount), (1.0)).toFloat()
+public var cat5planeBalanceTotalALL = min((cat5plane / TotalAmount), (1.0)).toFloat()
+public var cat6transportBalanceTotalALL = min((cat6transport / TotalAmount), (1.0)).toFloat()
 
 
 fun transferData(trip:Trip){
@@ -94,6 +103,17 @@ fun transferData(trip:Trip){
     cat4atractionsBalanceTotal = min((cat4atractions / plannedAmount), (1.0)).toFloat()
     cat5planeBalanceTotal = min((cat5plane / plannedAmount), (1.0)).toFloat()
     cat6transportBalanceTotal = min((cat6transport / plannedAmount), (1.0)).toFloat()
+
+    cat1foodBalanceTotalALL = min((cat1food / TotalAmount), (1.0)).toFloat()
+    cat2sleepBalanceTotalALL = min((cat2sleep / TotalAmount), (1.0)).toFloat()
+    cat3drinkBalanceTotalALL = min((cat3drink / TotalAmount), (1.0)).toFloat()
+    cat4atractionsBalanceTotalALL = min((cat4atractions / TotalAmount), (1.0)).toFloat()
+    cat5planeBalanceTotalALL = min((cat5plane / TotalAmount), (1.0)).toFloat()
+    cat6transportBalanceTotalALL = min((cat6transport / TotalAmount), (1.0)).toFloat()
+
+
+
+
     expenses=trip.expenses
 
 //TODO()

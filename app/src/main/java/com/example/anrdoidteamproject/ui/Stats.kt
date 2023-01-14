@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.Actionbuton2
 import com.example.anrdoidteamproject.ui.theme.PromptButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
@@ -297,7 +298,14 @@ fun DrawGradientCircle(
 }
 
 @Composable
-fun gridcat() {
+fun gridcat(
+    percentage1: Float,
+    percentage2: Float,
+    percentage3: Float,
+    percentage4: Float,
+    percentage5: Float,
+    percentage6: Float,
+) {
     Column(
         modifier = Modifier
             .padding(0.dp, 20.dp, 0.dp, 0.dp),
@@ -315,7 +323,7 @@ fun gridcat() {
                     .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
-                    percentage = 0.80f,
+                    percentage = percentage1,
                     fillColor = Color.Red,
                     backgroundColor = Brush.horizontalGradient(
                         listOf(
@@ -335,7 +343,7 @@ fun gridcat() {
                     .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
-                    percentage = 0.40f,
+                    percentage = percentage2,
                     fillColor = Color(0xFF4663FF),
                     backgroundColor = Brush.horizontalGradient(
                         listOf(
@@ -353,7 +361,7 @@ fun gridcat() {
                     .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
-                    percentage = 0.60f,
+                    percentage = percentage3,
                     fillColor = Color(0xFF57FF3B),
                     backgroundColor = Brush.horizontalGradient(
                         listOf(
@@ -376,7 +384,7 @@ fun gridcat() {
                     .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
-                    percentage = 0.20f,
+                    percentage = percentage4,
                     fillColor = Color(0xFFFFC83A),
                     backgroundColor = Brush.horizontalGradient(
                         listOf(
@@ -394,7 +402,7 @@ fun gridcat() {
                     .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
-                    percentage = 0.30f,
+                    percentage = percentage5,
                     fillColor = Color(0xFFFF43BE),
                     backgroundColor = Brush.horizontalGradient(
                         listOf(
@@ -412,7 +420,7 @@ fun gridcat() {
                     .aspectRatio(1f)
             ) {
                 DrawGradientCircles(
-                    percentage = 0.40f,
+                    percentage = percentage6,
                     fillColor = Color(0xFFA840FA),
                     backgroundColor = Brush.horizontalGradient(
                         listOf(
@@ -436,7 +444,7 @@ fun Stats(
     bilansButton: () -> Unit = {},
 
     addExpense: () -> Unit = {},
-    tripName: String
+//    tripName: String
 ) {
     Scaffold(
         bottomBar = {
@@ -482,12 +490,12 @@ fun Stats(
                         .fillMaxHeight(0.3f)
                 ) {
                     DrawGradientCircle(
-                        percentage1 = 0.20f,
-                        percentage2 = 0.10f,
-                        percentage3 = 0.10f,
-                        percentage4 = 0.2f,
-                        percentage5 = 0.2f,
-                        percentage6 = 0.1f,
+                        percentage1 = cat1foodBalanceTotal,
+                        percentage2 = cat2sleepBalanceTotal,
+                        percentage3 = cat3drinkBalanceTotal,
+                        percentage4 = cat4atractionsBalanceTotal,
+                        percentage5 = cat5planeBalanceTotal,
+                        percentage6 = cat6transportBalanceTotal,
                         backgroundColor = Brush.horizontalGradient(
                             listOf(
                                 Color(0xFF181F36),
@@ -495,7 +503,7 @@ fun Stats(
                             )
                         ),
                         strokeWidth = 30.dp,
-                        total = "2000"
+                        total = String.format("%.2f", TotalAmount)
                     )
                 }
 
@@ -507,7 +515,14 @@ fun Stats(
 
                 )
                 {
-                    gridcat()
+                    gridcat(
+                        percentage1 = cat1foodBalance,
+                        percentage2 = cat2sleepBalance,
+                        percentage3 = cat3drinkBalance,
+                        percentage4 = cat4atractionsBalance,
+                        percentage5 = cat5planeBalance,
+                        percentage6 = cat6transportBalance,
+                    )
                 }
 
                 Row(
@@ -522,7 +537,7 @@ fun Stats(
                     )
                     {
                         DrawGradientCircleToday(
-                            percentage = 0.4f,
+                            percentage = today.toFloat(),
                             backgroundColor = Brush.horizontalGradient(
                                 listOf(
                                     Color(0xFF181F36),
@@ -530,7 +545,7 @@ fun Stats(
                                 )
                             ),
                             strokeWidth = 20.dp,
-                            total = "50"
+                            total = String.format("%.2f", today)
                         )
                     }
                     //TODO: circle button?
@@ -546,11 +561,11 @@ fun Stats(
     }
 }
 
-@Preview
-@Composable
-fun StatsPreview() {
-    Stats(tripName = "Barcelona")
-}
+//@Preview
+//@Composable
+//fun StatsPreview() {
+//    Stats(tripName = "Barcelona")
+//}
 
 
 

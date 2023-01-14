@@ -15,22 +15,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.example.anrdoidteamproject.*
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.Trip
 import com.example.anrdoidteamproject.ui.theme.*
-
-
-data class Wycieczka(val Name: String)
+import com.example.anrdoidteamproject.businessLogic.transferData
+import com.example.anrdoidteamproject.businessLogic.tripName
+import com.example.anrdoidteamproject.businessLogic.tripDescription
+import com.example.anrdoidteamproject.businessLogic.plannedAmount
+import com.example.anrdoidteamproject.businessLogic.numberOfDays
+import com.example.anrdoidteamproject.businessLogic.cat1foodMax
+import com.example.anrdoidteamproject.businessLogic.cat2sleepMax
+import com.example.anrdoidteamproject.businessLogic.cat3drinkMax
+import com.example.anrdoidteamproject.businessLogic.cat4atractionsMax
+import com.example.anrdoidteamproject.businessLogic.cat5planeMax
+import com.example.anrdoidteamproject.businessLogic.cat6transportMax
+import com.example.anrdoidteamproject.businessLogic.cat1food
+import com.example.anrdoidteamproject.businessLogic.cat2sleep
+import com.example.anrdoidteamproject.businessLogic.cat3drink
+import com.example.anrdoidteamproject.businessLogic.cat4atractions
+import com.example.anrdoidteamproject.businessLogic.cat5plane
+import com.example.anrdoidteamproject.businessLogic.cat6transport
+import com.example.anrdoidteamproject.businessLogic.TotalAmount
 
 
 @Composable
 fun TripCard
             (
-    trip: Wycieczka,
-    navController: NavController = rememberNavController()
+    trip: Trip,
+//    navController: NavController = rememberNavController(),
+    statsButtonOnClick: () -> Unit = {}
 ) {
 
     Column(
@@ -43,6 +57,11 @@ fun TripCard
 
             OutlinedButton(
                 onClick = {
+
+                    transferData(trip)
+
+
+ //                  statsButtonOnClick
 //                    navController.navigate(AppScreens.Stats.name)
                 },
                 Modifier.width(200.dp),
@@ -52,7 +71,7 @@ fun TripCard
                 )
             ) {
                 Text(
-                    text = trip.Name,
+                    text = trip.tripName,
                     color = Color.White,
                     fontSize = 30.sp,
                     fontFamily = FontFamily(
@@ -74,7 +93,7 @@ fun TripCard
 
 
 @Composable
-fun ListTrips(osobas: List<Wycieczka>) {
+fun ListTrips(osobas: List<Trip>) {
     LazyColumn {
         osobas.map { item { TripCard(it) } }
     }
@@ -87,69 +106,68 @@ fun TripsList(
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
     addtripButtonOnClick: () -> Unit = {},
-    statsButtonOnClick: () -> Unit = {}
+    statsButtonOnClick: () -> Unit = {},
+
 ) {
-    Scaffold(
-        bottomBar = {
-            bottomBar(
-                userInfoButtonOnClick = userInfoButtonOnClick,
-                homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
-            )
-        },
-        topBar = { topBar(message = stringResource(R.string.wycieczki)) },
-        modifier = Modifier.background(color = Color(0xff181f36)),
-        floatingActionButton = {
-            AddButton(
-                confirmOnClick = addtripButtonOnClick
-            )
-        },
 
-        ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.925f)
-                .background(color = Color(0xff181f36))
-        ) {
-            Row(
-            ) {
-
-                ListTrips(SampleData_trip.conversationSample)
-            }
-            Row(
-            ) {
-                PromptButton(
-                    label = R.string.test,
-                    onClick = statsButtonOnClick
+        Scaffold(
+            bottomBar = {
+                bottomBar(
+                    userInfoButtonOnClick = userInfoButtonOnClick,
+                    homeButtonOnClick = homeButtonOnClick,
+                    settingsButtonOnClick = settingsButtonOnClick
                 )
+            },
+            topBar = { topBar(message = stringResource(R.string.wycieczki)) },
+            modifier = Modifier.background(color = Color(0xff181f36)),
+            floatingActionButton = {
+                AddButton(
+                    confirmOnClick = addtripButtonOnClick
+                )
+            },
+
+            ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.925f)
+                    .background(color = Color(0xff181f36))
+            ) {
+                Row(
+                ) {
+
+                    ListTrips(SampleData_trip.SampleTrips)
+                }
+                Row(
+                ) {
+                    PromptButton(
+                        label = R.string.test,
+                        onClick = statsButtonOnClick
+                    )
+                }
+
             }
 
         }
 
-    }
 }
 
 object SampleData_trip {
 
-    val conversationSample = listOf(
-        Wycieczka(
-            "Barcelona"
-        ),
-        Wycieczka(
-            "Madryt"
-        ),
-        Wycieczka(
-            "Lizbona"
-        ),
-        Wycieczka(
-            "Warszawa"
-        ),
-        Wycieczka(
-            "Paryż"
-        )
+    val SampleTrips = listOf(
+
+        Trip(constructortestowytest = "","Barcelona","opis",2000.0,7,130.0,120.0,200.0,300.0,200.0,80.0,
+            listOf()),
+        Trip(constructortestowytest = "","Madryt","opis",1000.0,10,180.0,450.0,200.0,300.0,270.0,180.0,
+            listOf()),
+        Trip(constructortestowytest = "","Lizbona","opis",200.0,3,130.0,120.0,300.0,300.0,200.0,80.0,
+            listOf()),
+        Trip(constructortestowytest = "","Warszawa","opis",5000.0,5,130.0,120.0,200.0,370.0,200.0,580.0,
+            listOf()),
+
     )
 }
+
 
 @Preview
 @Composable

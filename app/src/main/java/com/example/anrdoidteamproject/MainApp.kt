@@ -189,7 +189,7 @@ fun MainApp(
                 settingsButtonOnClick = settingsButtonOnClick,
                 addExpense = addExpense,
                 bilansButton = balanceButton,
-                tripName = " "
+                //tripName = " "
             )
         }
         composable(AppScreens.TransferFunds.name) {

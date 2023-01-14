@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.*
@@ -42,7 +43,7 @@ fun TripCard(
                 onClick = {
 
                     transferData(trip)
-                    //navController.navigate(AppScreens.Stats.name)
+                    navController.navigate(AppScreens.Stats.name)
 
 
                 },
@@ -76,9 +77,9 @@ fun TripCard(
 
 
 @Composable
-fun ListTrips(osobas: List<Trip>) {
+fun ListTrips(trips: List<Trip>,navController: NavController = rememberNavController()) {
     LazyColumn {
-        osobas.map { item { TripCard(it) } }
+        trips.map { item { TripCard(it,navController) } }
     }
 }
 
@@ -90,6 +91,7 @@ fun TripsList(
     settingsButtonOnClick: () -> Unit = {},
     addtripButtonOnClick: () -> Unit = {},
     statsButtonOnClick: () -> Unit = {},
+    navController: NavController = rememberNavController()
 
 
     ) {
@@ -120,16 +122,17 @@ fun TripsList(
             Row(
             ) {
 
-                Preview_MultipleRadioButtonsTrip()
+                ListTrips(trips = SampleData_trip.SampleTrips,navController)
+                //Preview_MultipleRadioButtonsTrip()
             }
 
-            Row(
-            ) {
-                PromptButton(
-                    label = R.string.Szczegóły,
-                    onClick = statsButtonOnClick
-                )
-            }
+//            Row(
+//            ) {
+//                PromptButton(
+//                    label = R.string.Szczegóły,
+//                    onClick = statsButtonOnClick
+//                )
+//            }
 
         }
 

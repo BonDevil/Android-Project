@@ -20,6 +20,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.ui.theme.*
@@ -34,7 +36,8 @@ import kotlin.reflect.typeOf
 fun AddFriend(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    navController: NavController = rememberNavController()
 ) {
     var email by remember { mutableStateOf("") }
     var isDataRetrieved by remember { mutableStateOf(false) }
@@ -90,7 +93,10 @@ fun AddFriend(
                     }
                 })
             }
-            else{showEmailError=true}})
+            else{
+//                showEmailError=true
+                    navController.popBackStack()
+            }})
         },
         modifier = Modifier.background(color = Color(0xff181f36))
 

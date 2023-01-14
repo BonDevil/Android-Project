@@ -104,7 +104,9 @@ fun MainApp(
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
                 addtripButtonOnClick = addTripButtonOnClick,
-                statsButtonOnClick = statsButtonOnClick
+                statsButtonOnClick = statsButtonOnClick,
+                navController = navController
+
             )
 //          disable go back phone button
             BackHandler(true) {

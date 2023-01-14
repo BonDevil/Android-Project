@@ -2,6 +2,7 @@ package com.example.anrdoidteamproject
 
 
 import android.os.Build
+import android.provider.ContactsContract.Data
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
@@ -62,6 +63,10 @@ fun MainApp(
     transferFundsButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.TransferFunds.name) },
 
     ) {
+
+    val db = DatabaseConnection()
+    db.loadFriends()
+//    Log.d("eo","asdasdasdas ${DatabaseConnection.friendList[0]}")
 
     var user by remember { mutableStateOf(Firebase.auth.currentUser) }
     var naw = String()

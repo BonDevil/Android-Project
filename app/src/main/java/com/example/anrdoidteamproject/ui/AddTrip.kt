@@ -1,6 +1,7 @@
 
 package com.example.anrdoidteamproject.ui
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,10 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
-import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
-import com.example.anrdoidteamproject.businessLogic.Trip
-import com.example.anrdoidteamproject.businessLogic.expenses
-import com.example.anrdoidteamproject.businessLogic.persons2
+import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.*
 
 
@@ -41,6 +39,12 @@ var catatractions = 16.0
 var catplane = 16.0
 var cattransport = 16.0
 
+
+var tripNameG =""
+var tripDescriptionG =""
+var plannedAmountG =""
+var numberOfDaysG =""
+
 @Composable
 fun AddTrip(
     userInfoButtonOnClick: () -> Unit = {},
@@ -49,10 +53,10 @@ fun AddTrip(
     addFriendsToTrip: () -> Unit = {}
 ) {
 
-    var tripName by remember { mutableStateOf("") }
-    var tripDescription by remember { mutableStateOf("") }
-    var plannedAmount by remember { mutableStateOf("") }
-    var numberOfDays by remember { mutableStateOf("") }
+    var tripName by remember { mutableStateOf(tripNameG) }
+    var tripDescription by remember { mutableStateOf(tripDescriptionG) }
+    var plannedAmount by remember { mutableStateOf(plannedAmountG) }
+    var numberOfDays by remember { mutableStateOf(numberOfDaysG) }
     var expanded by remember { mutableStateOf(false) }
     var expandedcat by remember { mutableStateOf(false) }
     var showADDError by remember { mutableStateOf(false) }
@@ -67,7 +71,13 @@ fun AddTrip(
         topBar = { topBar(message = stringResource(R.string.dodaj_wycieczke)) },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { expanded = !expanded },
+                onClick = { expanded = !expanded
+
+                    tripNameG = tripName
+                    tripDescriptionG = tripDescription
+                    plannedAmountG = plannedAmount.toString()
+                    numberOfDaysG = numberOfDays.toString()
+                          },
                 backgroundColor = Color.White
             ) {
                 Icon(
@@ -83,6 +93,9 @@ fun AddTrip(
                     onClick1 = addFriendsToTrip,
                     onClick2 = {/*TODO*/
                         //lista osób
+                        //persons2(tu są osoby)
+                        Log.d("eo", persons2.toString())
+
                         if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
                             !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0)
                         {
@@ -449,6 +462,8 @@ fun Categories() {
     if (!catatractionstemp.isNullOrEmpty()) catatractions = catatractionstemp.toDouble()
     if (!catplanetemp.isNullOrEmpty()) catplane = catplanetemp.toDouble()
     if (!cattransporttemp.isNullOrEmpty()) cattransport = cattransporttemp.toDouble()
+
+
 
 
 }

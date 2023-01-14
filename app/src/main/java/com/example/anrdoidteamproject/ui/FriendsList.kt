@@ -91,13 +91,6 @@ fun FriendsList(
     invitationButton: () -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var friends = remember { mutableMapOf<String, String>() }
-    val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
-    val friendsRef =
-        DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
-    var isLoading by remember { mutableStateOf(true) }
-    var isFriendsLoaded by remember { mutableStateOf(false) }
-    var friendsAsUsers = remember { mutableListOf<User>() }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -137,38 +130,6 @@ fun FriendsList(
                 .fillMaxHeight()
                 .background(color = Color(0xff181f36))
         ) {
-            friendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    isLoading = false
-                    if (dataSnapshot.value != null) {
-                        friends = dataSnapshot.value as HashMap<String, String>
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
-
-            if (!isLoading) {
-                DatabaseConnection.friendList.clear()
-                for (userHashedMail in friends.keys) {
-                    val myRef = DatabaseConnection.db.getReference("Users/$userHashedMail")
-                    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            DatabaseConnection.friendList.add(dataSnapshot.getValue(User::class.java)!!)
-                            Log.d("eo", "friends as users1:$friendsAsUsers")
-                            if (friends.keys.last() == userHashedMail)
-                                isFriendsLoaded = true
-                        }
-                        override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
-                        }
-                    })
-                }
-                Log.d("eo", "friends as users2:$friendsAsUsers")
-            }
-            if (isFriendsLoaded)
             ListFriends(DatabaseConnection.friendList)
         }
     }

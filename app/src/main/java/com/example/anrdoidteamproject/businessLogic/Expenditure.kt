@@ -52,4 +52,6 @@ class Expenditure {
 //        this.persons = persons
         this.date = date
     }
+
+    constructor()
 }

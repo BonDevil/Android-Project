@@ -1,5 +1,6 @@
 package com.example.anrdoidteamproject.businessLogic
 
+import com.example.anrdoidteamproject.ui.historySample
 import java.lang.Double.min
 
 public var tripID: Int = 0
@@ -24,8 +25,6 @@ public var cat6transport: Double = 0.0
 
 public var TotalAmount: Double = 0.0
 
-public lateinit var expenses: List<Expenditure>
-
 public lateinit var persons: List<User_in_trip>
 
 
@@ -37,6 +36,10 @@ public var cat4atractionsBalance = min((cat4atractions / cat4atractionsMax), (1.
 public var cat5planeBalance = min((cat5plane / cat5planeMax), (1.0)).toFloat()
 public var cat6transportBalance = min((cat6transport / cat6transportMax), (1.0)).toFloat()
 
+public var historyEmptySample = listOf(
+    Expenditure(),
+)
+public var expenses: List<Expenditure> = historyEmptySample
 
 //w pozniejszej wersji do zmiany :D
 public var today = (plannedAmount / numberOfDays)

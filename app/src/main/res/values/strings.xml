@@ -48,7 +48,7 @@
     <string name="logowanie_powrot">Login</string>
     <string name="wylogowanie">Log out</string>
     <string name="akceptuj">Accept</string>
-    <string name="test" translatable="false">TEST</string>
+    <string name="Szczegóły">Details</string>
     <string name="zaplacone_przez">Paid by</string>
     <string name="dzisiaj">TODAY</string>
     <string name="lista_znajomych">Friends List</string>

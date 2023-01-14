@@ -52,4 +52,5 @@
     <string name="zaproszenia">EINLADUNGEN</string>
     <string name="toastNull">Alle Werte müssen ausgefüllt werden</string>
     <string name="toastCorectValue">Geben Sie den korrekten Wert ein</string>
+    <string name="Szczegóły">Einzelheiten</string>
 </resources>

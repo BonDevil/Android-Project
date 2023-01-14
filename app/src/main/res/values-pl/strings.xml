@@ -52,4 +52,5 @@
     <string name="zaproszenia">ZAPROSZENIA</string>
     <string name="toastNull">Wszystkie wartości muszą byc wypełnione</string>
     <string name="toastCorectValue">Wprowadź poprawną wartość</string>
+    <string name="Szczegóły">Szczegóły</string>
 </resources>

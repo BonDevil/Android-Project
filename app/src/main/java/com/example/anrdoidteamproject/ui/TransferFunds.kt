@@ -6,6 +6,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -31,7 +33,8 @@ import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.theme.*
 
-var value:Double = 0.0
+var value: Double = 0.0
+var selectedPerson: String=""
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
@@ -66,8 +69,8 @@ fun transferFunds() {
 
 
         Divider(color = Color.White, thickness = 2.dp)
-        Listpersons3(DatabaseConnection.friendList)
-
+        //Listpersons3(DatabaseConnection.friendList)
+        Preview_MultipleRadioButtons()
 
 
     }
@@ -157,6 +160,46 @@ object SampleData3 {
 }
 
 
+val Samplelist = listOf(
+    Osoba(
+        "Jakub",
+        "Roszkowski"
+    ),
+    Osoba(
+        "Piotr",
+        "Grygoruk"
+    ),
+    Osoba(
+        "Nataliia",
+        "Martynenko"
+    ),
+    Osoba(
+        "Adam",
+        "Nowak"
+    ),
+    Osoba(
+        "Jan",
+        "Kowalski"
+    ),
+    Osoba(
+        "Piotr",
+        "Grygoruk"
+    ),
+    Osoba(
+        "Nataliia",
+        "Martynenko"
+    ),
+    Osoba(
+        "Adam",
+        "Nowak"
+    ),
+    Osoba(
+        "Jan",
+        "Kowalski"
+    )
+)
+
+
 @Composable
 fun TransferFunds(
     navController: NavController = rememberNavController(),
@@ -178,19 +221,17 @@ fun TransferFunds(
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
 
-                if (value.toString().isNotEmpty()&& value!=0.0){
-            /*TODO*/
-                //wartosc zwrotu value
-                //value
-                //osoba lub osoby ktore mają miec usuniety zysk z bilansu (lista osob w wycieczce i zmienic bilans)
-                //(jakas zmienna albo lista)
+                if (value.toString().isNotEmpty() && value != 0.0 && selectedPerson!="") {
+                    /*TODO*/
+                    //wartosc zwrotu value
+                    //value
+                    //osoba lub osoby ktore mają miec usuniety zysk z bilansu (lista osob w wycieczce i zmienic bilans)
+                    selectedPerson
 
-                //osoba ktora zwraca koszty i ma miec polepszony bilans
-                //paying_person = Firebase.auth.currentUser.hashCode()
-                }
-
-                else{
-                    showADDError=true
+                    //osoba ktora zwraca koszty i ma miec polepszony bilans
+                    //paying_person = Firebase.auth.currentUser.hashCode()
+                } else {
+                    showADDError = true
                 }
 
             }
@@ -202,7 +243,7 @@ fun TransferFunds(
     ) {
         if (showADDError) {
             Toast.makeText(
-                LocalContext.current,stringResource(R.string.toastNull) ,
+                LocalContext.current, stringResource(R.string.toastNull),
                 Toast.LENGTH_SHORT
             ).show()
             showADDError = false
@@ -219,12 +260,11 @@ fun TransferFunds(
     }
 }
 
-@Preview
-@Composable
-fun TransferFundsPreview() {
-    TransferFunds()
-}
-
+//@Preview
+//@Composable
+//fun TransferFundsPreview() {
+//    AppScreens.TransferFunds()
+//}
 
 
 @Composable
@@ -250,8 +290,80 @@ fun TextFieldWithLabel1(
         textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
     )
     if (fieldValue.value.toString().isNotEmpty())
-    value=fieldValue.value.toString().toDouble()
-    else value=0.0
+        value = fieldValue.value.toString().toDouble()
+    else value = 0.0
 
 }
 
+
+@Preview
+@Composable
+fun Preview_MultipleRadioButtons() {
+    val selectedValue = remember { mutableStateOf("") }
+
+    val isSelectedItem: (String) -> Boolean = { selectedValue.value == it }
+    val onChangeState: (String) -> Unit = { selectedValue.value = it }
+
+    val items = DatabaseConnection.friendList
+    Column(Modifier.padding(8.dp)) {
+//        Text(text = "Selected value: ${selectedValue.value.ifEmpty { "NONE" }}")
+        items.forEach { item ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .selectable(
+                        selected = isSelectedItem(item.email),
+                        onClick = {
+                            onChangeState(item.email)
+                            selectedPerson=item.email
+                                  },
+                        role = Role.RadioButton
+                    )
+                    .padding(8.dp)
+            ) {
+
+
+                Column(
+                    modifier = Modifier
+                        .padding(20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(
+                            selected = isSelectedItem(item.email),
+                            onClick = null,
+                            colors = RadioButtonDefaults.colors(
+                                selectedColor = Color.White,
+                                unselectedColor = Color.White,
+                                disabledColor = Color.LightGray
+                            )
+                        )
+                        Spacer(modifier = Modifier.width(25.dp))
+                        Text(
+                            text = item.firstName + " " + item.lastName,
+                            color = Color.White,
+                            fontSize = 25.sp,
+                            fontFamily = FontFamily(
+                                Font(R.font.century_gothic)
+                            )
+                        )
+                        Spacer(modifier = Modifier.width(1.dp))
+
+                    }
+                    Divider(color = Color.White, thickness = 2.dp)
+
+                }
+
+
+//                RadioButton(
+//                    selected = isSelectedItem(item.email),
+//                    onClick = null
+//                )
+//                Text(
+//                    text = item.firstName,
+//                    modifier = Modifier.fillMaxWidth()
+//                )
+            }
+        }
+    }
+}

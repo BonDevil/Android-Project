@@ -1,6 +1,5 @@
 package com.example.anrdoidteamproject.ui
 
-import android.provider.MediaStore.DownloadColumns
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,7 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.Expenditure
 import com.example.anrdoidteamproject.ui.theme.*
+import com.example.anrdoidteamproject.businessLogic.expenses
 
 
 @Composable
@@ -54,7 +55,7 @@ fun History(
                 .background(color = Color(0xff181f36))
         ) {
 
-                ListEx(expenses = SampleDataExpenditure.conversationSample)
+                ListEx(expenses = expenses)
 
         }
     }
@@ -78,17 +79,11 @@ fun HistoryPreview() {
 
 
 
-data class Expenditure(
-    val category: String,
-    val paying_person_name: String,
-    val paying_person_full_name: String,
-    val date: String,
-    val price: Double
-)
+
 
 
 @Composable
-fun ExpenditureCard(ex: Expenditure) {
+fun ExpenditureCard(expenditure: Expenditure) {
     Column(
         modifier = Modifier
             .fillMaxSize().padding(10.dp),
@@ -96,7 +91,7 @@ fun ExpenditureCard(ex: Expenditure) {
     ) {
         Row(modifier = Modifier.align(Alignment.Start)) {
             Text(
-                text = ex.category,
+                text = expenditure.name,
                 color = Color.White,
                 fontSize = 30.sp,
                 fontFamily = FontFamily(
@@ -106,7 +101,7 @@ fun ExpenditureCard(ex: Expenditure) {
         }
         Row(modifier = Modifier.align(Alignment.End)) {
             Text(
-                text = ex.price.toString(),
+                text = expenditure.value.toString(),
                 color = Color.Cyan,
                 fontSize = 40.sp,
                 fontFamily = FontFamily(
@@ -126,7 +121,7 @@ fun ExpenditureCard(ex: Expenditure) {
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = ex.paying_person_name,
+                text = expenditure.paying_person,
                 color = Color.Red,
                 fontSize = 20.sp,
                 fontFamily = FontFamily(
@@ -134,22 +129,22 @@ fun ExpenditureCard(ex: Expenditure) {
                 )
             )
 
-            Spacer(modifier = Modifier.width(6.dp))
-
-            Text(
-                text = ex.paying_person_full_name,
-                color = Color.Red,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                )
-            )
+//            Spacer(modifier = Modifier.width(6.dp))
+//
+//            Text(
+//                text = ex.paying_person_full_name,
+//                color = Color.Red,
+//                fontSize = 20.sp,
+//                fontFamily = FontFamily(
+//                    Font(R.font.century_gothic)
+//                )
+//            )
             Spacer(modifier = Modifier.width(1.dp))
 
         }
         Row(modifier = Modifier.align(Alignment.End)) {
             Text(
-                text = ex.date,
+                text = expenditure.date,
                 color = Color.White,
                 fontSize = 25.sp,
                 fontFamily = FontFamily(
@@ -169,46 +164,4 @@ fun ListEx(expenses: List<Expenditure>) {
     LazyColumn(modifier = Modifier.padding(bottom = 180.dp)) {
         expenses.map { item { ExpenditureCard(it) } }
     }
-}
-
-
-object SampleDataExpenditure {
-    // Sample conversation data
-    val conversationSample = listOf(
-        Expenditure(
-            category = "Jedzenie",
-            paying_person_name = "Jan",
-            paying_person_full_name = "Nowak",
-            date = "23.10.2020",
-            price = 20.86
-        ),
-        Expenditure(
-            category = "Transport",
-            paying_person_name = "Jan",
-            paying_person_full_name = "Kowalski",
-            date = "23.10.2020",
-            price = 20.86
-        ),
-        Expenditure(
-            category = "Hotel",
-            paying_person_name = "Adam",
-            paying_person_full_name = "Nowak",
-            date = "23.10.2022",
-            price = 20.86
-        ),
-        Expenditure(
-            category = "Jedzenie",
-            paying_person_name = "Jakub",
-            paying_person_full_name = "Roszkowski",
-            date = "23.11.2020",
-            price = 120.86
-        ),
-        Expenditure(
-            category = "Picie",
-            paying_person_name = "Piotr",
-            paying_person_full_name = "Grygoruk",
-            date = "23.12.2020",
-            price = 24.86
-        )
-    )
 }

@@ -91,8 +91,8 @@ fun transferData(trip:Trip){
     cat4atractionsBalanceTotal = min((cat4atractions / plannedAmount), (1.0)).toFloat()
     cat5planeBalanceTotal = min((cat5plane / plannedAmount), (1.0)).toFloat()
     cat6transportBalanceTotal = min((cat6transport / plannedAmount), (1.0)).toFloat()
+    expenses=trip.expenses
 
 //TODO()
-//    expenses=trip.expenses
 //    persons=trip.persons
 }

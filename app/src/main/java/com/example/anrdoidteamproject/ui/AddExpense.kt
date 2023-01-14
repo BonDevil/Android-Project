@@ -121,7 +121,7 @@ fun AddExpense(
             ConfirmButton(confirmOnClick = {
                 if (!expenseSUM.value.isNullOrEmpty() && !expenseName.value.isNullOrEmpty()&& expenseSUM.value.toDouble()!=0.0) {
                     val myExpense = com.example.anrdoidteamproject.businessLogic.Expenditure(
-                        paying_person = Firebase.auth.currentUser.hashCode(),
+                        paying_person = Firebase.auth.currentUser?.email.toString(),
                         category = category,
                         value = expenseSUM.value.toDouble(),
                         name = expenseName.value.toString()

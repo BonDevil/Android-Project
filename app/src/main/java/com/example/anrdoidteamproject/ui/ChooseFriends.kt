@@ -16,10 +16,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
-import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
-import com.example.anrdoidteamproject.businessLogic.User
-import com.example.anrdoidteamproject.businessLogic.persons
+import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.CheckBoxDemo
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
@@ -30,11 +29,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import com.example.anrdoidteamproject.businessLogic.persons2
-
 
 
 var list: ArrayList<String> = ArrayList()
+var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
 
 
 @Composable
@@ -47,7 +45,7 @@ fun PersonCard2(user: User) {
         Row(modifier = Modifier.padding(20.dp)) {
             CheckBoxDemo2(user.email)
             Text(
-                text = user.firstName+" "+user.lastName,
+                text = user.firstName + " " + user.lastName,
                 color = Color.White,
                 fontSize = 30.sp,
                 fontFamily = FontFamily(
@@ -81,10 +79,15 @@ fun CheckBoxDemo2(email: String) {
         checked = checkedState.value,
         onCheckedChange = {
             checkedState.value = it
-            if (checkedState.value)
-            list.add(email)
-            else
+            if (checkedState.value) {
+                list.add(email)
+                listUserInTrip.add(User_in_trip(email))
+            } else {
                 list.remove(email)
+                listUserInTrip.remove(
+                    User_in_trip(email)
+                )
+            }
 
         }
     )
@@ -115,7 +118,8 @@ fun ChooseFriends(
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
                 persons2 = list
-            /*TODO*/
+                personsUser_In_Trip_inCreate = listUserInTrip
+                /*TODO*/
             }
             )
         },
@@ -165,11 +169,11 @@ fun ChooseFriends(
 }
 
 
-@Preview
-@Composable
-fun ChooseFriendsPreview() {
-    ChooseFriends()
-}
+//@Preview
+//@Composable
+//fun ChooseFriendsPreview() {
+//    AppScreens.ChooseFriends()
+//}
 
 
 

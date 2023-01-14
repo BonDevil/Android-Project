@@ -28,6 +28,7 @@ public var TotalAmount: Double = 0.0
 public lateinit var persons: List<User_in_trip>
 
 public lateinit var persons2: List<String>
+public lateinit var personsUser_In_Trip_inCreate: List<User_in_trip>
 
 
 public var cat1foodBalance = min((cat1food / cat1foodMax), (1.0)).toFloat()

@@ -94,7 +94,9 @@ fun AddTrip(
                     onClick2 = {/*TODO*/
                         //lista osób
                         //persons2(tu są osoby)
-                        Log.d("eo", persons2.toString())
+                        //personsUser_In_Trip_inCreate to z klasą zeby bilans był
+                        Log.d("eee", persons2.toString())
+                        Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
 
                         if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
                             !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0)

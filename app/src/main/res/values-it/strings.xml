@@ -61,4 +61,7 @@
     <string name="showRegisterError">Dati errati, registrazione fallita</string>
     <string name="ThePasswordIsTooShort">La password è troppo breve</string>
     <string name="toastPasswordsDoNotMatch">Le password non corrispondono</string>
+    <string name="expenses">Spese</string>
+    <string name="refunds">Rimborsi</string>
+    <string name="zaplacone_dla">Pagato per</string>
 </resources>

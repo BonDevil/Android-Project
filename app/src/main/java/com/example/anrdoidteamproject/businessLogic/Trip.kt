@@ -26,6 +26,8 @@ class Trip {
 
     public lateinit var persons: List<User_in_trip>
 
+    public lateinit var historyReturns: List<TransferMoney>
+
 
     constructor(
         tripName: String,
@@ -39,7 +41,8 @@ class Trip {
         cat5planeMax: Double,
         cat6transportMax: Double,
         persons: List<User_in_trip>,
-        expenses: List<Expenditure>
+        expenses: List<Expenditure>,
+        historyReturns: List<TransferMoney>,
     ) {
         this.tripName = tripName
         this.tripDescription = tripDescription
@@ -53,6 +56,7 @@ class Trip {
         this.cat6transportMax = cat6transportMax
         this.persons = persons
         this.expenses = expenses
+        this.historyReturns = historyReturns
     }
 
 
@@ -70,6 +74,7 @@ class Trip {
         cat5planeMax: Double,
         cat6transportMax: Double,
         expenses: List<Expenditure>,
+        historyReturns: List<TransferMoney>,
     ) {
         this.tripName = tripName
         this.tripDescription = tripDescription
@@ -81,6 +86,7 @@ class Trip {
         this.cat4atractionsMax = cat4atractionsMax
         this.cat5planeMax = cat5planeMax
         this.cat6transportMax = cat6transportMax
+        this.historyReturns = historyReturns
         this.expenses = expenses
         this.cat1food = 200.0
         this.cat2sleep = 100.0

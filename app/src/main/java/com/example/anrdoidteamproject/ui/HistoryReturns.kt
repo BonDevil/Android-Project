@@ -4,7 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.material.SnackbarDefaults.backgroundColor
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,17 +19,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.Expenditure
+import com.example.anrdoidteamproject.businessLogic.TransferMoney
 import com.example.anrdoidteamproject.ui.theme.*
 import com.example.anrdoidteamproject.businessLogic.expenses
+import com.example.anrdoidteamproject.businessLogic.historyReturns
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @Composable
-fun History(
+fun HistoryReturns(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
     topbarButton: () -> Unit = {},
-    historyReturnsButton: () -> Unit = {},
+    HistoryButton: () -> Unit = {},
 ) {
 
     Scaffold(
@@ -48,29 +53,29 @@ fun History(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = historyReturnsButton,
+                onClick = HistoryButton,
                 shape = RectangleShape,
                 backgroundColor = Color(26, 51, 101),
             ) {
 
-                Text(text = stringResource(R.string.refunds), color = Color.White,
-                fontSize = 20.sp)
+                Text(
+                    text = stringResource(R.string.expenses), color = Color.White,
+                    fontSize = 20.sp
+                )
             }
-        }
-        ,
+        },
         floatingActionButtonPosition = FabPosition.Center,
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
         Row(
-
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .background(color = Color(0xff181f36))
         ) {
 
-                ListEx(expenses = expenses)
+            ListRET(returns = historyReturns)
 
         }
     }
@@ -78,53 +83,15 @@ fun History(
 
 }
 
-@Preview
-@Composable
-fun HistoryPreview() {
-    History()
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @Composable
-fun ExpenditureCard(expenditure: Expenditure) {
+fun ReturnCard(ret: TransferMoney) {
     Column(
         modifier = Modifier
-            .fillMaxSize().padding(10.dp),
+            .fillMaxSize()
+            .padding(10.dp),
 
-    ) {
-        Row(modifier = Modifier.align(Alignment.Start)) {
-            Text(
-                text = expenditure.name,
-                color = Color.White,
-                fontSize = 30.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                )
-            )
-        }
-        Row(modifier = Modifier.align(Alignment.End)) {
-            Text(
-                text = expenditure.value.toString(),
-                color = Color.Cyan,
-                fontSize = 40.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
-                )
-            )
-        }
-
+        ) {
         Row(modifier = Modifier.align(Alignment.Start)) {
             Text(
                 text = stringResource(R.string.zaplacone_przez),
@@ -136,30 +103,48 @@ fun ExpenditureCard(expenditure: Expenditure) {
             )
             Spacer(modifier = Modifier.width(6.dp))
             Text(
-                text = expenditure.paying_person,
+                text = ret.paying_person,
                 color = Color.Red,
                 fontSize = 20.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )
             )
-
-//            Spacer(modifier = Modifier.width(6.dp))
-//
-//            Text(
-//                text = ex.paying_person_full_name,
-//                color = Color.Red,
-//                fontSize = 20.sp,
-//                fontFamily = FontFamily(
-//                    Font(R.font.century_gothic)
-//                )
-//            )
-            Spacer(modifier = Modifier.width(1.dp))
-
+        }
+        Row(modifier = Modifier.align(Alignment.Start)) {
+            Text(
+                text = stringResource(R.string.zaplacone_przez),
+                color = Color.White,
+                fontSize = 20.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                )
+            )
+            Spacer(modifier = Modifier.width(6.dp))
+            Text(
+                text = ret.receiving_person,
+                color = Color.Green,
+                fontSize = 20.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                )
+            )
         }
         Row(modifier = Modifier.align(Alignment.End)) {
             Text(
-                text = expenditure.date,
+                text = ret.value.toString(),
+                color = Color.Cyan,
+                fontSize = 40.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                )
+            )
+        }
+
+
+        Row(modifier = Modifier.align(Alignment.End)) {
+            Text(
+                text = ret.date,
                 color = Color.White,
                 fontSize = 25.sp,
                 fontFamily = FontFamily(
@@ -175,8 +160,8 @@ fun ExpenditureCard(expenditure: Expenditure) {
 
 
 @Composable
-fun ListEx(expenses: List<Expenditure>) {
+fun ListRET(returns: List<TransferMoney>) {
     LazyColumn(modifier = Modifier.padding(bottom = 180.dp)) {
-        expenses.map { item { ExpenditureCard(it) } }
+        returns.map { item { ReturnCard(it) } }
     }
 }

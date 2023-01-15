@@ -120,7 +120,8 @@ fun AddTrip(
                                     cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
                                     cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
                                     persons = personsUser_In_Trip_inCreate,
-                                    expenses = listOf()
+                                    expenses = listOf(),
+                                    historyReturns = listOf()
                                 )
                             )
 

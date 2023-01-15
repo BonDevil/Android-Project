@@ -61,6 +61,9 @@
     <string name="toastPasswordsDoNotMatch">las contraseñas no coinciden</string>
     <string name="ThePasswordIsTooShort">La contraseña es demasiado corta.</string>
     <string name="showRegisterError">Datos incorrectos, registro fallido</string>
+    <string name="expenses">Gastos</string>
+    <string name="refunds">Reembolsos</string>
+    <string name="zaplacone_dla">Pagado</string>
 
 
 </resources>

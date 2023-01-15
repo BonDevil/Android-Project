@@ -244,7 +244,8 @@ object SampleData_trip {
             300.0,
             200.0,
             80.0,
-            historySample
+            historySample,
+            historyReturnsSample
         ),
         Trip(
             constructortestowytest = "",
@@ -258,7 +259,8 @@ object SampleData_trip {
             300.0,
             270.0,
             180.0,
-            historySample2
+            historySample2,
+            historyReturnsSample
         ),
         Trip(
             constructortestowytest = "",
@@ -272,7 +274,8 @@ object SampleData_trip {
             300.0,
             200.0,
             80.0,
-            historySample3
+            historySample3,
+            historyReturnsSample
         ),
         Trip(
             constructortestowytest = "",
@@ -286,7 +289,8 @@ object SampleData_trip {
             670.0,
             600.0,
             580.0,
-            historySample4
+            historySample4,
+            historyReturnsSample
         ),
 
         )
@@ -324,6 +328,21 @@ val historySample4 = listOf(
     Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Picie", "20-08-2020"),
     Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Wiecej Picia", "20-08-2020"),
 )
+
+
+val historyReturnsSample = listOf(
+
+    TransferMoney("","Jan Nowak","Adam Kowalski",21.37,"12-4-2022"),
+    TransferMoney("","Jan Roszkowski","Adam Kowalski",37.37,"12-3-2022"),
+    TransferMoney("","Jan Nowak","Jakub Roszkowski",435.37,"12-7-2022"),
+    TransferMoney("","Piotr Grygoruk","Adam Kowalski",43.37,"19-4-2022"),
+    TransferMoney("","Jan Kowalski","Adam Kowalski",21.37,"12-4-2022"),
+    TransferMoney("","Jan Roszkowski","Leo Messi",37.37,"12-3-2020"),
+    TransferMoney("","Jan Nowak","Jakub Roszkowski",5.37,"26-7-2022"),
+    TransferMoney("","Piotr Grygoruk","Adam Kowalski",0.37,"30-4-2020"),
+)
+
+
 
 
 @Preview

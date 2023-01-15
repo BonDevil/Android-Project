@@ -32,6 +32,8 @@ import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.User
 import com.example.anrdoidteamproject.ui.theme.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 var value: Double = 0.0
 var selectedPerson: String=""
@@ -192,11 +194,12 @@ fun TextFieldWithLabel1(
 @Preview
 @Composable
 fun Preview_MultipleRadioButtons() {
-    val selectedValue = remember { mutableStateOf("") }
+
+    val selectedValue = remember { mutableStateOf(selectedPerson) }
 
     val isSelectedItem: (String) -> Boolean = { selectedValue.value == it }
     val onChangeState: (String) -> Unit = { selectedValue.value = it }
-
+//TODO()tu zmienic na liste osob w wycieczce
     val items = DatabaseConnection.friendList
     Column(Modifier.padding(8.dp)) {
 //        Text(text = "Selected value: ${selectedValue.value.ifEmpty { "NONE" }}")

@@ -61,4 +61,7 @@
     <string name="toastPasswordsDoNotMatch">Die Passwörter stimmen nicht überein</string>
     <string name="ThePasswordIsTooShort">Das Passwort ist zu kurz</string>
     <string name="showRegisterError">Falsche Daten, Anmeldung fehlgeschlagen</string>
+    <string name="expenses">Kosten</string>
+    <string name="refunds">Rückerstattungen</string>
+    <string name="zaplacone_dla">Bezahlt für</string>
 </resources>

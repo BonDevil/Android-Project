@@ -61,4 +61,7 @@
     <string name="toastPasswordsDoNotMatch">Hasła nie zgadzają się ze sobą</string>
     <string name="ThePasswordIsTooShort">Podano za krótkie hasło</string>
     <string name="showRegisterError">Błędne dane, rejestracja nie powiódła się</string>
+    <string name="refunds">Zwroty pieniędzy</string>
+    <string name="expenses">Wydatki</string>
+    <string name="zaplacone_dla">Zapłacanoce dla</string>
 </resources>

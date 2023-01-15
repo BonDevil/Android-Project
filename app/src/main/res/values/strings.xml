@@ -50,6 +50,7 @@
     <string name="akceptuj">Accept</string>
     <string name="Szczegóły">Details</string>
     <string name="zaplacone_przez">Paid by</string>
+    <string name="zaplacone_dla">Paid for</string>
     <string name="dzisiaj">TODAY</string>
     <string name="lista_znajomych">Friends List</string>
     <string name="kategorie_przycisk">Category balance</string>
@@ -65,4 +66,6 @@
     <string name="toastPasswordsDoNotMatch">The passwords do not match</string>
     <string name="ThePasswordIsTooShort">The password is too short</string>
     <string name="showRegisterError">Incorrect data, registration failed</string>
+    <string name="refunds">Refunds</string>
+    <string name="expenses">Expenses</string>
 </resources>

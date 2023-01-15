@@ -32,6 +32,7 @@ enum class AppScreens() {
     EditPayment,
     FriendsList,
     History,
+    HistoryReturns,
     LogIn,
     MenuPayment,
     Register,
@@ -60,6 +61,7 @@ fun MainApp(
     invitationButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Invitations.name) },
     balanceButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.Balance.name) },
     historyButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.History.name) },
+    historyReturnsButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.HistoryReturns.name) },
     transferFundsButton: () -> Unit = { navController.navigateSingleTopTo(AppScreens.TransferFunds.name) },
 
     ) {
@@ -182,7 +184,17 @@ fun MainApp(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
-                topbarButton = balanceButton
+                topbarButton = balanceButton,
+                historyReturnsButton= historyReturnsButton
+            )
+        }
+        composable(AppScreens.HistoryReturns.name) {
+            HistoryReturns(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick,
+                topbarButton = balanceButton,
+                HistoryButton=historyButton,
             )
         }
         composable(AppScreens.MenuPayment.name) {

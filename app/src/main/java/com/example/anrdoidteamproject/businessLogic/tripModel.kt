@@ -42,7 +42,14 @@ public var cat6transportBalance = min((cat6transport / cat6transportMax), (1.0))
 public var historyEmptySample = listOf(
     Expenditure(),
 )
+
+public var historyReturnSample = listOf(
+    TransferMoney(),
+)
+
 public var expenses: List<Expenditure> = historyEmptySample
+
+public var historyReturns: List<TransferMoney> = historyReturnSample
 
 //w pozniejszej wersji do zmiany :D
 public var today = (plannedAmount / numberOfDays)
@@ -116,6 +123,9 @@ fun transferData(trip:Trip){
 
 
     expenses=trip.expenses
+
+    historyReturns=trip.historyReturns
+
 
 //TODO()
 //    persons=trip.persons

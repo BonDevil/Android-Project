@@ -215,7 +215,7 @@ fun AddExpense(
                 )
                 Spacer(modifier = Modifier.height(15.dp))
 
-
+//TODO()tu zmienic na liste osob w wycieczce
                 Divider(color = Color.White, thickness = 2.dp)
                 Listpersons3(DatabaseConnection.friendList)
             }

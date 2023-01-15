@@ -1,6 +1,6 @@
 package com.example.anrdoidteamproject.ui
 
-
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,28 +13,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-<<<<<<< HEAD
-=======
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
->>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
-<<<<<<< HEAD
-var choosenFriendsMails: ArrayList<String> = ArrayList()
-var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
-=======
 
 private var list: ArrayList<String> = ArrayList()
 private var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
->>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
 
 
 @Composable
@@ -44,10 +43,7 @@ fun PersonCard2(user: User) {
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Row(
-            modifier = Modifier.padding(20.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
+        Row(modifier = Modifier.padding(20.dp)) {
             CheckBoxDemo2(user.email)
             Text(
                 text = user.firstName + " " + user.lastName,
@@ -59,6 +55,7 @@ fun PersonCard2(user: User) {
             )
 
             Spacer(modifier = Modifier.width(4.dp))
+
             Spacer(modifier = Modifier.width(1.dp))
 
         }
@@ -84,10 +81,10 @@ fun CheckBoxDemo2(email: String) {
         onCheckedChange = {
             checkedState.value = it
             if (checkedState.value) {
-                choosenFriendsMails.add(email)
+                list.add(email)
                 listUserInTrip.add(User_in_trip(email))
             } else {
-                choosenFriendsMails.remove(email)
+                list.remove(email)
                 listUserInTrip.remove(
                     User_in_trip(email)
                 )
@@ -115,15 +112,11 @@ fun ChooseFriends(
         topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
-                persons2 = choosenFriendsMails
+                persons2 = list
                 personsUser_In_Trip_inCreate = listUserInTrip
-<<<<<<< HEAD
-
-=======
                 navController.popBackStack()
 
                 /*TODO*/
->>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
             }
             )
         },
@@ -136,9 +129,13 @@ fun ChooseFriends(
                 .background(color = Color(0xff181f36))
         ) {
             listChooseFriends(users = DatabaseConnection.friendList)
+
         }
     }
 }
+
+
+
 
 
 

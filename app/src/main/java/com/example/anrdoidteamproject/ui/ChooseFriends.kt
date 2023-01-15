@@ -1,6 +1,6 @@
 package com.example.anrdoidteamproject.ui
 
-import android.util.Log
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,25 +13,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
-import com.example.anrdoidteamproject.ui.theme.CheckBoxDemo
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.tasks.await
 
-
-var list: ArrayList<String> = ArrayList()
+var choosenFriendsMails: ArrayList<String> = ArrayList()
 var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
 
 
@@ -42,7 +32,10 @@ fun PersonCard2(user: User) {
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Row(modifier = Modifier.padding(20.dp)) {
+        Row(
+            modifier = Modifier.padding(20.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
             CheckBoxDemo2(user.email)
             Text(
                 text = user.firstName + " " + user.lastName,
@@ -54,7 +47,6 @@ fun PersonCard2(user: User) {
             )
 
             Spacer(modifier = Modifier.width(4.dp))
-
             Spacer(modifier = Modifier.width(1.dp))
 
         }
@@ -80,10 +72,10 @@ fun CheckBoxDemo2(email: String) {
         onCheckedChange = {
             checkedState.value = it
             if (checkedState.value) {
-                list.add(email)
+                choosenFriendsMails.add(email)
                 listUserInTrip.add(User_in_trip(email))
             } else {
-                list.remove(email)
+                choosenFriendsMails.remove(email)
                 listUserInTrip.remove(
                     User_in_trip(email)
                 )
@@ -99,13 +91,6 @@ fun ChooseFriends(
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {}
 ) {
-    var friends = remember { mutableMapOf<String, String>() }
-    val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
-    val friendsRef =
-        DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
-    var isLoading by remember { mutableStateOf(true) }
-    var isFriendsLoaded by remember { mutableStateOf(false) }
-    var friendsAsUsers = remember { mutableListOf<User>() }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -117,9 +102,9 @@ fun ChooseFriends(
         topBar = { topBar(message = stringResource(R.string.dodaj_znajomych)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
-                persons2 = list
+                persons2 = choosenFriendsMails
                 personsUser_In_Trip_inCreate = listUserInTrip
-                /*TODO*/
+
             }
             )
         },
@@ -131,50 +116,10 @@ fun ChooseFriends(
                 .fillMaxHeight()
                 .background(color = Color(0xff181f36))
         ) {
-            friendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    isLoading = false
-                    if (dataSnapshot.value != null) {
-                        friends = dataSnapshot.value as HashMap<String, String>
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
-
-            if (!isLoading) {
-                for (userHashedMail in friends.keys) {
-                    val myRef = DatabaseConnection.db.getReference("Users/$userHashedMail")
-                    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            friendsAsUsers.add(dataSnapshot.getValue(User::class.java)!!)
-                            Log.d("eo", "friends as users1:$friendsAsUsers")
-                            if (friends.keys.last() == userHashedMail)
-                                isFriendsLoaded = true
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
-                        }
-                    })
-                }
-                Log.d("eo", "friends as users2:$friendsAsUsers")
-            }
-            if (isFriendsLoaded)
-                listChooseFriends(users = friendsAsUsers)
+            listChooseFriends(users = DatabaseConnection.friendList)
         }
     }
 }
-
-
-//@Preview
-//@Composable
-//fun ChooseFriendsPreview() {
-//    AppScreens.ChooseFriends()
-//}
-
 
 
 

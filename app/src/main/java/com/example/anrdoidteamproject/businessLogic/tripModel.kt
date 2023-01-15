@@ -25,10 +25,8 @@ public var cat6transport: Double = 0.0
 
 public var TotalAmount: Double = 0.0
 
-public lateinit var persons: List<User_in_trip>
-
-public lateinit var persons2: List<String>
-public lateinit var personsUser_In_Trip_inCreate: List<User_in_trip>
+public var persons2: List<String> = listOf()
+public var personsUser_In_Trip_inCreate: List<User_in_trip> = listOf()
 
 
 public var cat1foodBalance = min((cat1food / cat1foodMax), (1.0)).toFloat()
@@ -70,30 +68,30 @@ public var cat5planeBalanceTotalALL = min((cat5plane / TotalAmount), (1.0)).toFl
 public var cat6transportBalanceTotalALL = min((cat6transport / TotalAmount), (1.0)).toFloat()
 
 
-fun transferData(trip:Trip){
+fun transferData(trip: Trip) {
     //TODO()
     //to trzeba zmienic
     tripID = 0
 
-    tripName=trip.tripName
-    tripDescription= trip.tripDescription
-    plannedAmount=trip.plannedAmount
-    numberOfDays=trip.numberOfDays
-    TotalAmount=trip.TotalAmount
+    tripName = trip.tripName
+    tripDescription = trip.tripDescription
+    plannedAmount = trip.plannedAmount
+    numberOfDays = trip.numberOfDays
+    TotalAmount = trip.TotalAmount
 
-    cat1foodMax=trip.cat1foodMax
-    cat2sleepMax=trip.cat2sleepMax
-    cat3drinkMax=trip.cat3drinkMax
-    cat4atractionsMax=trip.cat4atractionsMax
-    cat5planeMax=trip.cat5planeMax
-    cat6transportMax=trip.cat6transportMax
+    cat1foodMax = trip.cat1foodMax
+    cat2sleepMax = trip.cat2sleepMax
+    cat3drinkMax = trip.cat3drinkMax
+    cat4atractionsMax = trip.cat4atractionsMax
+    cat5planeMax = trip.cat5planeMax
+    cat6transportMax = trip.cat6transportMax
 
-    cat1food=trip.cat1food
-    cat2sleep=trip.cat2sleep
-    cat3drink=trip.cat3drink
-    cat4atractions=trip.cat4atractions
-    cat5plane=trip.cat5plane
-    cat6transport=trip.cat6transport
+    cat1food = trip.cat1food
+    cat2sleep = trip.cat2sleep
+    cat3drink = trip.cat3drink
+    cat4atractions = trip.cat4atractions
+    cat5plane = trip.cat5plane
+    cat6transport = trip.cat6transport
 
     cat1foodBalance = min((cat1food / cat1foodMax), (1.0)).toFloat()
     cat2sleepBalance = min((cat2sleep / cat2sleepMax), (1.0)).toFloat()
@@ -119,12 +117,9 @@ fun transferData(trip:Trip){
     cat5planeBalanceTotalALL = min((cat5plane / TotalAmount), (1.0)).toFloat()
     cat6transportBalanceTotalALL = min((cat6transport / TotalAmount), (1.0)).toFloat()
 
+    expenses = trip.expenses
 
-
-
-    expenses=trip.expenses
-
-    historyReturns=trip.historyReturns
+    historyReturns = trip.historyReturns
 
 
 //TODO()

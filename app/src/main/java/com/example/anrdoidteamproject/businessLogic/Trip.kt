@@ -22,11 +22,11 @@ class Trip {
 
     public var TotalAmount: Double = 0.0
 
-    public lateinit var expenses: List<Expenditure>
+    public var expenses: List<Expenditure> = listOf()
 
-    public lateinit var persons: List<User_in_trip>
+    public var tripUsers: List<User_in_trip> = listOf()
 
-    public lateinit var historyReturns: List<TransferMoney>
+    public var historyReturns: List<TransferMoney> = listOf()
 
 
     constructor(
@@ -40,7 +40,7 @@ class Trip {
         cat4atractionsMax: Double,
         cat5planeMax: Double,
         cat6transportMax: Double,
-        persons: List<User_in_trip>,
+        tripUsers: List<User_in_trip>,
         expenses: List<Expenditure>,
         historyReturns: List<TransferMoney>,
     ) {
@@ -54,7 +54,7 @@ class Trip {
         this.cat4atractionsMax = cat4atractionsMax
         this.cat5planeMax = cat5planeMax
         this.cat6transportMax = cat6transportMax
-        this.persons = persons
+        this.tripUsers = tripUsers
         this.expenses = expenses
         this.historyReturns = historyReturns
     }

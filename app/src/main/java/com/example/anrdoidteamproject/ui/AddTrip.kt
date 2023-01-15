@@ -99,11 +99,12 @@ fun AddTrip(
                         //lista osób
                         //persons2(tu są osoby)
                         //personsUser_In_Trip_inCreate to z klasą zeby bilans był
-                        Log.d("eee", persons2.toString())
-                        Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
+//                        Log.d("eee", persons2.toString())
+//                        Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
 
                         if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
                             !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0
+                            && !persons2.isNullOrEmpty()
                         ) {
                             val tripRef = DatabaseConnection.db.getReference("trips")
                             val newTripRef = tripRef.push()
@@ -119,12 +120,11 @@ fun AddTrip(
                                     cat4atractionsMax = catatractions * plannedAmount.toDouble() * 0.01,
                                     cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
                                     cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
-                                    persons = personsUser_In_Trip_inCreate,
+                                    tripUsers = personsUser_In_Trip_inCreate,
                                     expenses = listOf(),
                                     historyReturns = listOf()
                                 )
                             )
-
                             showADD = true
                             navController.popBackStack()
                         } else {
@@ -140,7 +140,6 @@ fun AddTrip(
     ) {
         Column(
             modifier = Modifier
-
                 .background(Color(24, 31, 54))
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
@@ -170,7 +169,6 @@ fun AddTrip(
                 horizontalAlignment = Alignment.Start,
 
                 ) {
-
 
 //                trip name
                 Text(

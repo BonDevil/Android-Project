@@ -160,7 +160,8 @@ fun MainApp(
             ChooseFriends(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
-                settingsButtonOnClick = settingsButtonOnClick
+                settingsButtonOnClick = settingsButtonOnClick,
+                navController = navController
             )
         }
         composable(AppScreens.EditPayment.name) {

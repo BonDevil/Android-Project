@@ -16,10 +16,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
-import com.example.anrdoidteamproject.ui.theme.CheckBoxDemo
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
@@ -31,8 +32,8 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 
-var list: ArrayList<String> = ArrayList()
-var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
+private var list: ArrayList<String> = ArrayList()
+private var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
 
 
 @Composable
@@ -97,7 +98,8 @@ fun CheckBoxDemo2(email: String) {
 fun ChooseFriends(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    navController: NavController = rememberNavController()
 ) {
     var friends = remember { mutableMapOf<String, String>() }
     val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
@@ -119,6 +121,8 @@ fun ChooseFriends(
             ConfirmButton(confirmOnClick = {
                 persons2 = list
                 personsUser_In_Trip_inCreate = listUserInTrip
+                navController.popBackStack()
+
                 /*TODO*/
             }
             )

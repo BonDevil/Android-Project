@@ -116,6 +116,7 @@ fun TransferFunds(
                     //osoba ktora zwraca koszty i ma miec polepszony bilans
                     //paying_person = Firebase.auth.currentUser.hashCode()
 
+                    selectedPerson=""
                     showADD=true
                     navController.popBackStack()
                 } else {

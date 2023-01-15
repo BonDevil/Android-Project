@@ -66,8 +66,8 @@ fun MainApp(
 
     ) {
 
-    val db = DatabaseConnection()
-    db.loadFriends()
+//    val db = DatabaseConnection()
+//    db.loadFriends()
 //    Log.d("eo","asdasdasdas ${DatabaseConnection.friendList[0]}")
 
     var user by remember { mutableStateOf(Firebase.auth.currentUser) }

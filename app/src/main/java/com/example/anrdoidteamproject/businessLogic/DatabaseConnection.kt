@@ -14,6 +14,7 @@ class DatabaseConnection {
         val db =
             FirebaseDatabase.getInstance("https://androidteamproject-37498-default-rtdb.europe-west1.firebasedatabase.app/")
         var friendList = mutableStateListOf<User>()
+        var tripList = mutableStateListOf<Trip>()
     }
 
     @Composable
@@ -21,8 +22,7 @@ class DatabaseConnection {
         var friends = remember { mutableMapOf<String, String>() }
         val currentUserHashedEmail = Firebase.auth.currentUser?.email.hashCode()
         val friendsRef =
-            DatabaseConnection.db.getReference("Users/$currentUserHashedEmail/friends")
-        var isLoading by remember { mutableStateOf(true) }
+            db.getReference("Users/$currentUserHashedEmail/friends")
         var isFriendsLoaded by remember { mutableStateOf(false) }
         var friendsAsUsers = remember { mutableListOf<User>() }
         friendList.clear()
@@ -33,7 +33,7 @@ class DatabaseConnection {
                     friends = dataSnapshot.value as HashMap<String, String>
                     for (userHashedMail in friends.keys) {
                         Log.d("essa", "$userHashedMail")
-                        val myRef = DatabaseConnection.db.getReference("Users/$userHashedMail")
+                        val myRef = db.getReference("Users/$userHashedMail")
                         myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 DatabaseConnection.friendList.add(dataSnapshot.getValue(User::class.java)!!)
@@ -49,6 +49,33 @@ class DatabaseConnection {
                     }
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    @Composable
+    fun loadTrips() {
+        tripList.clear()
+        val currentUserEmail = Firebase.auth.currentUser?.email
+        val tripsRef = db.getReference("trips")
+        tripsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (childSnapshot in snapshot.children) {
+                    val trip = childSnapshot.getValue(Trip::class.java)
+                    if (trip != null) {
+                        for (tripUser in trip.tripUsers) {
+                            Log.d("eo", "aaaaabbbbbb$trip")
+                            if (tripUser.id == currentUserEmail) {
+                                tripList.add(trip)
+                            }
+                        }
+                    }
+                }
+            }
+
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }

@@ -28,9 +28,7 @@ import com.example.anrdoidteamproject.ui.theme.*
 fun TripCard(
     trip: Trip,
     navController: NavController = rememberNavController(),
-
-    ) {
-
+) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -38,13 +36,11 @@ fun TripCard(
     ) {
         Row(modifier = Modifier.padding(20.dp)) {
 
-
             OutlinedButton(
                 onClick = {
 
                     transferData(trip)
                     navController.navigate(AppScreens.Stats.name)
-
 
                 },
                 Modifier.width(200.dp),
@@ -63,23 +59,17 @@ fun TripCard(
                 )
 
                 Spacer(modifier = Modifier.width(4.dp))
-
-                Spacer(modifier = Modifier.width(1.dp))
-
             }
         }
         Divider(color = Color.White, thickness = 2.dp)
-
     }
-
-
 }
 
 
 @Composable
-fun ListTrips(trips: List<Trip>,navController: NavController = rememberNavController()) {
+fun ListTrips(trips: List<Trip>, navController: NavController = rememberNavController()) {
     LazyColumn {
-        trips.map { item { TripCard(it,navController) } }
+        trips.map { item { TripCard(it, navController) } }
     }
 }
 
@@ -92,12 +82,11 @@ fun TripsList(
     addtripButtonOnClick: () -> Unit = {},
     statsButtonOnClick: () -> Unit = {},
     navController: NavController = rememberNavController()
-
-
-    ) {
+) {
 
     val db = DatabaseConnection()
     db.loadFriends()
+    db.loadTrips()
 
     Scaffold(
         bottomBar = {
@@ -114,8 +103,7 @@ fun TripsList(
                 confirmOnClick = addtripButtonOnClick
             )
         },
-
-        ) {
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -126,10 +114,9 @@ fun TripsList(
             Row(
             ) {
 
-                ListTrips(trips = SampleData_trip.SampleTrips,navController)
+                ListTrips(trips = DatabaseConnection.tripList, navController)
                 //Preview_MultipleRadioButtonsTrip()
             }
-
 //            Row(
 //            ) {
 //                PromptButton(
@@ -144,7 +131,6 @@ fun TripsList(
 
 }
 
-
 @Composable
 fun Preview_MultipleRadioButtonsTrip() {
     val selectedValue = remember { mutableStateOf("") }
@@ -152,7 +138,7 @@ fun Preview_MultipleRadioButtonsTrip() {
     val isSelectedItem: (String) -> Boolean = { selectedValue.value == it }
     val onChangeState: (String) -> Unit = { selectedValue.value = it }
 
-    val items = SampleData_trip.SampleTrips
+    val items = DatabaseConnection.tripList
     Column(Modifier.padding(8.dp)) {
 //        Text(text = "Selected value: ${selectedValue.value.ifEmpty { "NONE" }}")
         items.forEach { item ->
@@ -169,8 +155,6 @@ fun Preview_MultipleRadioButtonsTrip() {
                         role = Role.RadioButton
                     )
             ) {
-
-
                 Column(
                     modifier = Modifier
                         .padding(20.dp),
@@ -232,122 +216,119 @@ fun Preview_MultipleRadioButtonsTrip() {
 }
 
 
-object SampleData_trip {
-
-    val SampleTrips = listOf(
-
-        Trip(
-            constructortestowytest = "",
-            "Barcelona",
-            "opis",
-            1000.0,
-            7,
-            130.0,
-            120.0,
-            200.0,
-            300.0,
-            200.0,
-            80.0,
-            historySample,
-            historyReturnsSample
-        ),
-        Trip(
-            constructortestowytest = "",
-            "Madryt",
-            "opis",
-            2000.0,
-            10,
-            180.0,
-            450.0,
-            200.0,
-            300.0,
-            270.0,
-            180.0,
-            historySample2,
-            historyReturnsSample
-        ),
-        Trip(
-            constructortestowytest = "",
-            "Lizbona",
-            "opis",
-            200.0,
-            3,
-            130.0,
-            120.0,
-            300.0,
-            300.0,
-            200.0,
-            80.0,
-            historySample3,
-            historyReturnsSample
-        ),
-        Trip(
-            constructortestowytest = "",
-            "Warszawa",
-            "opis",
-            5000.0,
-            5,
-            530.0,
-            920.0,
-            600.0,
-            670.0,
-            600.0,
-            580.0,
-            historySample4,
-            historyReturnsSample
-        ),
-
-        )
-}
-
-val historySample = listOf(
-    Expenditure("", "Jan Nowak", "cat1food", 20.86, "Jedzenie", "10-08-2020"),
-    Expenditure("", "Leo Messi", "cat1food", 120.86, "Piłeczka", "10-08-2020"),
-    Expenditure("", "Wilfredo León", "cat1food", 800.86, "Siateczka", "15-02-2020"),
-    Expenditure("", "Jan Kowalski", "cat1food", 20.86, "Transport", "19-01-2020"),
-    Expenditure("", "Adam Nowak", "cat1food", 800.86, "Hotel", "18-08-2020"),
-    Expenditure("", "Jakub Roszkowski", "cat1food", 800.86, "Jedzenie", "10-03-2020"),
-    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Picie", "20-08-2020"),
-    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Wiecej Picia", "20-08-2020"),
-)
-
-
-val historySample2 = listOf(
-    Expenditure("", "Jan Nowak", "cat1food", 20.86, "Jedzenie", "10-08-2020"),
-    Expenditure("", "Leo Messi", "cat1food", 120.86, "Piłeczka", "10-08-2020"),
-    Expenditure("", "Jakub Roszkowski", "cat1food", 800.86, "Jedzenie", "10-03-2020"),
-    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Picie", "20-08-2020"),
-    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Wiecej Picia", "20-08-2020"),
-)
-
-
-val historySample3 = listOf(
-    Expenditure("", "Jan Nowak", "cat1food", 20.86, "Jedzenie", "10-08-2020"),
-    Expenditure("", "Leo Messi", "cat1food", 120.86, "Piłeczka", "10-08-2020"),
-)
-
-
-val historySample4 = listOf(
-    Expenditure("", "Jakub Roszkowski", "cat1food", 800.86, "Jedzenie", "10-03-2020"),
-    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Picie", "20-08-2020"),
-    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Wiecej Picia", "20-08-2020"),
-)
-
-
-val historyReturnsSample = listOf(
-
-    TransferMoney("","Jan Nowak","Adam Kowalski",21.37,"12-4-2022"),
-    TransferMoney("","Jan Roszkowski","Adam Kowalski",37.37,"12-3-2022"),
-    TransferMoney("","Jan Nowak","Jakub Roszkowski",435.37,"12-7-2022"),
-    TransferMoney("","Piotr Grygoruk","Adam Kowalski",43.37,"19-4-2022"),
-    TransferMoney("","Jan Kowalski","Adam Kowalski",21.37,"12-4-2022"),
-    TransferMoney("","Jan Roszkowski","Leo Messi",37.37,"12-3-2020"),
-    TransferMoney("","Jan Nowak","Jakub Roszkowski",5.37,"26-7-2022"),
-    TransferMoney("","Piotr Grygoruk","Adam Kowalski",0.37,"30-4-2020"),
-)
-
-
-
+//object SampleData_trip {
+//
+//    val SampleTrips = listOf(
+//
+//        Trip(
+//            constructortestowytest = "",
+//            "Barcelona",
+//            "opis",
+//            1000.0,
+//            7,
+//            130.0,
+//            120.0,
+//            200.0,
+//            300.0,
+//            200.0,
+//            80.0,
+//            historySample,
+//            historyReturnsSample
+//        ),
+//        Trip(
+//            constructortestowytest = "",
+//            "Madryt",
+//            "opis",
+//            2000.0,
+//            10,
+//            180.0,
+//            450.0,
+//            200.0,
+//            300.0,
+//            270.0,
+//            180.0,
+//            historySample2,
+//            historyReturnsSample
+//        ),
+//        Trip(
+//            constructortestowytest = "",
+//            "Lizbona",
+//            "opis",
+//            200.0,
+//            3,
+//            130.0,
+//            120.0,
+//            300.0,
+//            300.0,
+//            200.0,
+//            80.0,
+//            historySample3,
+//            historyReturnsSample
+//        ),
+//        Trip(
+//            constructortestowytest = "",
+//            "Warszawa",
+//            "opis",
+//            5000.0,
+//            5,
+//            530.0,
+//            920.0,
+//            600.0,
+//            670.0,
+//            600.0,
+//            580.0,
+//            historySample4,
+//            historyReturnsSample
+//        ),
+//
+//        )
+//}
+//
+//val historySample = listOf(
+//    Expenditure("", "Jan Nowak", "cat1food", 20.86, "Jedzenie", "10-08-2020"),
+//    Expenditure("", "Leo Messi", "cat1food", 120.86, "Piłeczka", "10-08-2020"),
+//    Expenditure("", "Wilfredo León", "cat1food", 800.86, "Siateczka", "15-02-2020"),
+//    Expenditure("", "Jan Kowalski", "cat1food", 20.86, "Transport", "19-01-2020"),
+//    Expenditure("", "Adam Nowak", "cat1food", 800.86, "Hotel", "18-08-2020"),
+//    Expenditure("", "Jakub Roszkowski", "cat1food", 800.86, "Jedzenie", "10-03-2020"),
+//    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Picie", "20-08-2020"),
+//    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Wiecej Picia", "20-08-2020"),
+//)
+//
+//
+//val historySample2 = listOf(
+//    Expenditure("", "Jan Nowak", "cat1food", 20.86, "Jedzenie", "10-08-2020"),
+//    Expenditure("", "Leo Messi", "cat1food", 120.86, "Piłeczka", "10-08-2020"),
+//    Expenditure("", "Jakub Roszkowski", "cat1food", 800.86, "Jedzenie", "10-03-2020"),
+//    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Picie", "20-08-2020"),
+//    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Wiecej Picia", "20-08-2020"),
+//)
+//
+//
+//val historySample3 = listOf(
+//    Expenditure("", "Jan Nowak", "cat1food", 20.86, "Jedzenie", "10-08-2020"),
+//    Expenditure("", "Leo Messi", "cat1food", 120.86, "Piłeczka", "10-08-2020"),
+//)
+//
+//
+//val historySample4 = listOf(
+//    Expenditure("", "Jakub Roszkowski", "cat1food", 800.86, "Jedzenie", "10-03-2020"),
+//    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Picie", "20-08-2020"),
+//    Expenditure("", "Piotr Grygoruk", "cat1food", 24.86, "Wiecej Picia", "20-08-2020"),
+//)
+//
+//
+//val historyReturnsSample = listOf(
+//
+//    TransferMoney("", "Jan Nowak", "Adam Kowalski", 21.37, "12-4-2022"),
+//    TransferMoney("", "Jan Roszkowski", "Adam Kowalski", 37.37, "12-3-2022"),
+//    TransferMoney("", "Jan Nowak", "Jakub Roszkowski", 435.37, "12-7-2022"),
+//    TransferMoney("", "Piotr Grygoruk", "Adam Kowalski", 43.37, "19-4-2022"),
+//    TransferMoney("", "Jan Kowalski", "Adam Kowalski", 21.37, "12-4-2022"),
+//    TransferMoney("", "Jan Roszkowski", "Leo Messi", 37.37, "12-3-2020"),
+//    TransferMoney("", "Jan Nowak", "Jakub Roszkowski", 5.37, "26-7-2022"),
+//    TransferMoney("", "Piotr Grygoruk", "Adam Kowalski", 0.37, "30-4-2020"),
+//)
 
 @Preview
 @Composable

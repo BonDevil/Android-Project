@@ -1,6 +1,5 @@
 package com.example.anrdoidteamproject.businessLogic
 
-import com.example.anrdoidteamproject.ui.historySample
 import java.lang.Double.min
 
 public var tripID: Int = 0

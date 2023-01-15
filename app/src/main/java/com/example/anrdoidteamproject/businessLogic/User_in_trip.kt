@@ -7,4 +7,6 @@ class User_in_trip {
 
     public var id: String = ""
     public var balance: Double = 0.0
+
+    constructor()
 }

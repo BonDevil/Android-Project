@@ -64,4 +64,6 @@
     <string name="expenses">Kosten</string>
     <string name="refunds">Rückerstattungen</string>
     <string name="zaplacone_dla">Bezahlt für</string>
+    <string name="aboutText">Die Anwendung „Trip Count“ ist ein studentisches Projekt, Sie können während oder außerhalb von Reisen mit Ihren Freunden abrechnen. Darin können Sie sehen, für welche Kategorien Sie Ihr Geld ausgeben. Nachdem Sie die Ausgaben hinzugefügt haben, können Sie den Saldo der Reiseteilnehmer beobachten und dann die Erstattung hinzufügen.</string>
+    <string name="about">Über App</string>
 </resources>

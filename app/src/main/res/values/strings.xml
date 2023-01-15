@@ -68,4 +68,7 @@
     <string name="showRegisterError">Incorrect data, registration failed</string>
     <string name="refunds">Refunds</string>
     <string name="expenses">Expenses</string>
+    <string name="about">About App</string>
+    <string name="aboutText">The "Trip Count" application is a student project, you can settle accounts with your friends during or outside of trips.
+You can see in it what categories you spend your money on. After adding expenses, you are able to observe the balance of the trip participants and then add the reimbursement.</string>
 </resources>

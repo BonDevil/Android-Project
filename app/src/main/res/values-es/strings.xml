@@ -64,6 +64,8 @@
     <string name="expenses">Gastos</string>
     <string name="refunds">Reembolsos</string>
     <string name="zaplacone_dla">Pagado</string>
+    <string name="aboutText">La aplicación \"Trip Count\" es un proyecto estudiantil, puedes saldar cuentas con tus amigos durante o fuera de los viajes. Puedes ver en él en qué categorías gastas tu dinero. Después de agregar los gastos, puede observar el saldo de los participantes del viaje y luego agregar el reembolso.</string>
+    <string name="about">Acerca de la aplicación</string>
 
 
 </resources>

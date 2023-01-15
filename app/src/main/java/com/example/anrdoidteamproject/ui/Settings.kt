@@ -3,10 +3,8 @@ package com.example.anrdoidteamproject.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -14,15 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.translator
+import com.example.anrdoidteamproject.ui.theme.PromptButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 import java.util.*
 
-var selectedIndex=0
+var selectedIndex = 0
 
 
 @Composable
@@ -31,8 +33,8 @@ fun ChooseLanguage() {
     Column(
         modifier = Modifier
             .padding(20.dp)
-            .background(Color(24, 31, 54))
-            .fillMaxSize(),
+            .background(Color(24, 31, 54)),
+
         horizontalAlignment = Alignment.CenterHorizontally,
 
         )
@@ -82,7 +84,6 @@ fun DropdownDemo() {
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
             .wrapContentSize(Alignment.TopStart)
     ) {
         Text(
@@ -97,7 +98,7 @@ fun DropdownDemo() {
                 ),
             fontSize = 30.sp,
 
-            ) 
+            )
 
         DropdownMenu(
             expanded = expanded,
@@ -109,7 +110,7 @@ fun DropdownDemo() {
             items.forEachIndexed { index, s ->
                 DropdownMenuItem(onClick = {
                     selectedIndexTemp = index
-                    selectedIndex=selectedIndexTemp
+                    selectedIndex = selectedIndexTemp
                     expanded = false
 
                 }) {
@@ -131,6 +132,7 @@ fun Settings(
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {}
 ) {
+    var showAbout by remember { mutableStateOf(false) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -144,14 +146,33 @@ fun Settings(
 
     ) {
 
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(color = Color(0xff181f36))
+                .background(color = Color(0xff181f36)),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            ChooseLanguage()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color(0xff181f36))
+            ) {
+                ChooseLanguage()
+            }
+            Row() {
+                PromptButton(
+                    label = R.string.about,
+                    onClick = {
+                        showAbout = true
+                    }
+                )
+                if (showAbout) {
+                    AboutDialog({ showAbout = false })
+                }
+            }
         }
+
     }
 }
 
@@ -173,4 +194,42 @@ fun translator(lan: String) {
     configuration.locale = locale
     resources.updateConfiguration(configuration, resources.displayMetrics)
 
+}
+
+
+@Composable
+fun AboutDialog(onDismiss: () -> Unit) {
+    Dialog(onDismissRequest = { onDismiss() }) {
+
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier,
+            elevation = 8.dp
+        ) {
+            Column(
+                Modifier
+                    .background(Color.White)
+                    .padding(12.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.aboutText),
+                    Modifier
+                        .padding(8.dp), textAlign = TextAlign.Center
+                )
+                Row {
+                    Button(
+                        onClick = {
+                            onDismiss()
+                        },
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                            .weight(1F)
+                    ) {
+                        Text(text = "OK")
+                    }
+                }
+            }
+        }
+    }
 }

@@ -64,4 +64,6 @@
     <string name="refunds">Zwroty pieniędzy</string>
     <string name="expenses">Wydatki</string>
     <string name="zaplacone_dla">Zapłacanoce dla</string>
+    <string name="aboutText">"Aplikacja \"Trip Count\" jest studenckim projektem, można w niej rozliczać się ze znajomymi w czasie wycieczek lub poza nimi. Możesz w niej zobaczyć na jakie kategorie wydajesz pieniądze. Po dodaniu wydatków jesteś w stanie zaobserwować jaki bilans mają uczestnicy wycieczki a potem dodać zwrot kosztów. "</string>
+    <string name="about">O Aplikacji</string>
 </resources>

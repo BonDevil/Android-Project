@@ -64,4 +64,6 @@
     <string name="expenses">Spese</string>
     <string name="refunds">Rimborsi</string>
     <string name="zaplacone_dla">Pagato per</string>
+    <string name="aboutText">L\'applicazione \"Trip Count\" è un progetto studentesco, puoi regolare i conti con i tuoi amici durante o al di fuori dei viaggi. Puoi vedere in quali categorie spendi i tuoi soldi. Dopo aver aggiunto le spese, puoi osservare il saldo dei partecipanti al viaggio e quindi aggiungere il rimborso.</string>
+    <string name="about">Informazioni sull\'app</string>
 </resources>

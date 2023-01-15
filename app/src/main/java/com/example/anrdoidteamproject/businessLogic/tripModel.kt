@@ -25,8 +25,15 @@ public var cat6transport: Double = 0.0
 
 public var TotalAmount: Double = 0.0
 
+<<<<<<< HEAD
 public var persons2: List<String> = listOf()
 public var personsUser_In_Trip_inCreate: List<User_in_trip> = listOf()
+=======
+public lateinit var persons: List<User_in_trip>
+
+public var persons2: ArrayList<String> = ArrayList()
+public var personsUser_In_Trip_inCreate: ArrayList<User_in_trip> =ArrayList()
+>>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
 
 
 public var cat1foodBalance = min((cat1food / cat1foodMax), (1.0)).toFloat()

@@ -15,14 +15,26 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+<<<<<<< HEAD
+=======
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.AppScreens
+>>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.ConfirmButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
 
+<<<<<<< HEAD
 var choosenFriendsMails: ArrayList<String> = ArrayList()
 var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
+=======
+
+private var list: ArrayList<String> = ArrayList()
+private var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
+>>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
 
 
 @Composable
@@ -89,7 +101,8 @@ fun CheckBoxDemo2(email: String) {
 fun ChooseFriends(
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
+    navController: NavController = rememberNavController()
 ) {
     Scaffold(
         bottomBar = {
@@ -104,7 +117,13 @@ fun ChooseFriends(
             ConfirmButton(confirmOnClick = {
                 persons2 = choosenFriendsMails
                 personsUser_In_Trip_inCreate = listUserInTrip
+<<<<<<< HEAD
 
+=======
+                navController.popBackStack()
+
+                /*TODO*/
+>>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
             }
             )
         },

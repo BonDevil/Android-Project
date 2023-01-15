@@ -17,6 +17,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,12 +38,14 @@ import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
 import com.example.anrdoidteamproject.businessLogic.Trip
 import com.example.anrdoidteamproject.businessLogic.User
+import com.example.anrdoidteamproject.businessLogic.User_in_trip
 import com.example.anrdoidteamproject.ui.theme.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-var category = "food"
-
+private var category = "food"
+private var list: ArrayList<String> = ArrayList()
+private var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
 
 @Composable
 fun DropdownCategories() {
@@ -129,15 +132,22 @@ fun AddExpense(
                         name = expenseName.value.toString()
 
                     )
+                    /*TODO*/
+                    /*TODO przechodzenie po liscie uzytkownikow w grupie zeby zmienic bilans */
+                    listUserInTrip
+                    list
+
+
                     //jak sie uda to:
+                    listUserInTrip.clear()
+                    list.clear()
                     showADD=true
                     navController.popBackStack()
                 }
                 else{
                     showADDError=true
                 }
-                /*TODO*/
-                /*TODO przechodzenie po liscie uzytkownikow w grupie zeby zmienic bilans */
+
 
             }
             )
@@ -235,7 +245,7 @@ fun PersonCard3(user: User) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row() {
-            CheckBoxDemo()
+            CheckBoxDemo(user.email)
             Text(
                 text = user.firstName + " " + user.lastName,
                 color = Color.White,
@@ -262,4 +272,30 @@ fun Listpersons3(user: List<User>) {
     ) {
         user.map { item { PersonCard3(it) } }
     }
+}
+
+
+
+
+
+
+@Composable
+fun CheckBoxDemo(email: String) {
+    val checkedState = rememberSaveable { mutableStateOf(false) }
+    Checkbox(
+        checked = checkedState.value,
+        onCheckedChange = {
+            checkedState.value = it
+            if (checkedState.value) {
+                list.add(email)
+                listUserInTrip.add(User_in_trip(email))
+            } else {
+                list.remove(email)
+                listUserInTrip.remove(
+                    User_in_trip(email)
+                )
+            }
+
+        }
+    )
 }

@@ -31,6 +31,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 var catfood = 16.0
@@ -99,8 +101,15 @@ fun AddTrip(
                         //lista osób
                         //persons2(tu są osoby)
                         //personsUser_In_Trip_inCreate to z klasą zeby bilans był
+<<<<<<< HEAD
 //                        Log.d("eee", persons2.toString())
 //                        Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
+=======
+                        persons2.add(Firebase.auth.currentUser?.email.toString())
+                        personsUser_In_Trip_inCreate.add(User_in_trip(Firebase.auth.currentUser?.email.toString()))
+                        Log.d("eee", persons2.toString())
+                        Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
+>>>>>>> 1df04e51d30910daf9a0769b19b6e3aee3988a31
 
                         if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
                             !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0
@@ -130,6 +139,8 @@ fun AddTrip(
                         } else {
                             showADDError = true
                         }
+                        persons2.clear()
+                        personsUser_In_Trip_inCreate.clear()
                     },
                     drawable = R.drawable.img_add_user,
                     drawable2 = Icons.Filled.Check

@@ -25,6 +25,7 @@ class DatabaseConnection {
         var isLoading by remember { mutableStateOf(true) }
         var isFriendsLoaded by remember { mutableStateOf(false) }
         var friendsAsUsers = remember { mutableListOf<User>() }
+        friendList.clear()
 
         friendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

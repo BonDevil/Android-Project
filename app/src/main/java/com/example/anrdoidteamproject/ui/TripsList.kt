@@ -95,6 +95,10 @@ fun TripsList(
 
 
     ) {
+
+    val db = DatabaseConnection()
+    db.loadFriends()
+
     Scaffold(
         bottomBar = {
             bottomBar(

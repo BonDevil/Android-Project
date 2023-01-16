@@ -210,10 +210,10 @@ fun Register(
                                     showRegisterError = true
                                 }
                             }
-                    } else if (password.length >= 6) {
+                    } else if (password.length <= 6) {
                         ThePasswordIsTooShort= true
 
-                    } else if (password.equals(repeatPassword)) {
+                    } else if (password != repeatPassword) {
                         passwordsDoNotMatch= true
                     }
                 })

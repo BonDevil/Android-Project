@@ -22,6 +22,7 @@ public var cat4atractions: Double = 0.0
 public var cat5plane: Double = 0.0
 public var cat6transport: Double = 0.0
 
+
 public var TotalAmount: Double = 0.0
 
 public lateinit var tripUsers: List<User_in_trip>
@@ -117,4 +118,5 @@ fun transferData(trip:Trip,key:String?){
     historyReturns=trip.historyReturns
 
     tripUsers=trip.tripUsers
+
 }

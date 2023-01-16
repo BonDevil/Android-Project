@@ -130,6 +130,10 @@ fun AddTrip(
                                 )
                             )
 
+                            tripNameG = ""
+                            tripDescriptionG = ""
+                            plannedAmountG = ""
+                            numberOfDaysG = ""
                             showADD = true
                             navController.popBackStack()
                         } else {

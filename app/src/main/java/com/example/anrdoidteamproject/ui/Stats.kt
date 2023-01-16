@@ -1,16 +1,10 @@
 package com.example.anrdoidteamproject.ui
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Paint
-import android.os.Bundle
-import android.widget.ImageView
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,23 +12,16 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.key.Key.Companion.H
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.PlaceholderVerticalAlign
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
-import com.example.anrdoidteamproject.ui.theme.Actionbuton2
 import com.example.anrdoidteamproject.ui.theme.PromptButton
 import com.example.anrdoidteamproject.ui.theme.bottomBar
 import com.example.anrdoidteamproject.ui.theme.topBar
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import java.lang.Math.cos
 import java.lang.Math.sin
 
@@ -214,7 +201,7 @@ fun DrawGradientCircle(
                 size.width / 2,
                 size.height / 2,
                 Paint().apply {
-                    textSize = 100f
+                    textSize = 75f
                     color = Color.White.hashCode()
                     textAlign = Paint.Align.CENTER
                 }
@@ -511,7 +498,8 @@ fun Stats(
                                 )
                             ),
                             strokeWidth = 30.dp,
-                            total = String.format("%.2f", TotalAmount)
+                            //total = String.format("%.2f", TotalAmount)
+                            total = TotalAmount.toString()
                         )
                     } else {
                         DrawGradientCircle(
@@ -528,7 +516,8 @@ fun Stats(
                                 )
                             ),
                             strokeWidth = 30.dp,
-                            total = String.format("%.2f", TotalAmount)
+//                            total = String.format("%.2f", TotalAmount)
+                                    total = TotalAmount.toString()
                         )
                     }
                 }

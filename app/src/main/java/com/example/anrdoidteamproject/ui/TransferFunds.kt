@@ -1,8 +1,10 @@
 package com.example.anrdoidteamproject.ui
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -83,6 +85,7 @@ fun transferFunds(
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TransferFunds(
     navController: NavController = rememberNavController(),
@@ -112,10 +115,19 @@ fun TransferFunds(
 
                     val tripRef = DatabaseConnection.db.getReference("trips")
 
+                    var TransferTemp: ArrayList<TransferMoney> =ArrayList()
+
+                    var ex: TransferMoney = TransferMoney(Firebase.auth.currentUser?.email.toString(),
+                        selectedPerson, value)
+
+                    TransferTemp = historyReturns
+
 
                     tripRef.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             if (value != 0.0) {
+
+                                TransferTemp.add(ex)
                                 Log.d("eeeee", selectedPerson.toString())
                                 for (user in tripUsers) {
                                     if (Firebase.auth.currentUser?.email.toString() == user.id) {
@@ -132,6 +144,9 @@ fun TransferFunds(
 
                                 tripRef.child(tripID.toString()).child("tripUsers").setValue(
                                     tripUsers
+                                )
+                                tripRef.child(tripID.toString()).child("historyReturns").setValue(
+                                    TransferTemp
                                 )
 
 

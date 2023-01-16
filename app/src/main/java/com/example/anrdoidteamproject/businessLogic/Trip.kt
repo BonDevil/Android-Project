@@ -26,7 +26,7 @@ class Trip {
 
     public var tripUsers: List<User_in_trip> = listOf()
 
-    public var historyReturns: List<TransferMoney> = listOf()
+    public var historyReturns: ArrayList<TransferMoney> = ArrayList()
 
 
     constructor(
@@ -42,7 +42,7 @@ class Trip {
         cat6transportMax: Double,
         tripUsers: List<User_in_trip>,
         expenses: ArrayList<Expenditure>,
-        historyReturns: List<TransferMoney>,
+        historyReturns: ArrayList<TransferMoney>,
     ) {
         this.tripName = tripName
         this.tripDescription = tripDescription
@@ -74,7 +74,7 @@ class Trip {
         cat5planeMax: Double,
         cat6transportMax: Double,
         expenses: ArrayList<Expenditure>,
-        historyReturns: List<TransferMoney>,
+        historyReturns: ArrayList<TransferMoney>,
     ) {
         this.tripName = tripName
         this.tripDescription = tripDescription

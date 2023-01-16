@@ -113,7 +113,7 @@ fun ReturnCard(ret: TransferMoney) {
         }
         Row(modifier = Modifier.align(Alignment.Start)) {
             Text(
-                text = stringResource(R.string.zaplacone_przez),
+                text = stringResource(R.string.zaplacone_dla),
                 color = Color.White,
                 fontSize = 20.sp,
                 fontFamily = FontFamily(

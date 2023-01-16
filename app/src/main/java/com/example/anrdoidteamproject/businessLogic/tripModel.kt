@@ -38,13 +38,10 @@ public var cat4atractionsBalance = min((cat4atractions / cat4atractionsMax), (1.
 public var cat5planeBalance = min((cat5plane / cat5planeMax), (1.0)).toFloat()
 public var cat6transportBalance = min((cat6transport / cat6transportMax), (1.0)).toFloat()
 
-public var historyReturnSample = listOf(
-    TransferMoney(),
-)
 
 public var expenses: ArrayList<Expenditure> = ArrayList()
 
-public var historyReturns: List<TransferMoney> = historyReturnSample
+public var historyReturns: ArrayList<TransferMoney> = ArrayList()
 
 //w pozniejszej wersji do zmiany :D
 public var today = (plannedAmount / numberOfDays)

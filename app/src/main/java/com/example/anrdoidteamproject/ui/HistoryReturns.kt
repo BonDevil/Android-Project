@@ -75,7 +75,7 @@ fun HistoryReturns(
                 .background(color = Color(0xff181f36))
         ) {
 
-            ListRET(returns = historyReturns)
+            ListRET(returns = historyReturns.asReversed())
 
         }
     }

@@ -70,7 +70,7 @@ fun History(
                 .background(color = Color(0xff181f36))
         ) {
 
-                ListEx(expenses = expenses)
+                ListEx(expenses = expenses.asReversed())
 
         }
     }

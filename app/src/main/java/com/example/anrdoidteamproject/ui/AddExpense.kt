@@ -241,21 +241,8 @@ fun AddExpense(
 
                     })
 
-                    val myExpense = com.example.anrdoidteamproject.businessLogic.Expenditure(
-                        paying_person = Firebase.auth.currentUser?.email.toString(),
-                        category = category,
-                        value = expenseSUM.value.toDouble(),
-                        name = expenseName.value.toString()
-
-                    )
-                    /*TODO*/
-                    /*TODO przechodzenie po liscie uzytkownikow w grupie zeby zmienic bilans */
-                    listUserInTrip
-                    list
-
 
                     //Start
-
                     var TripGIT: Trip = Trip()
                     val tripsRef = DatabaseConnection.db.getReference("trips")
                     tripsRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -282,15 +269,11 @@ fun AddExpense(
                             TODO("Not yet implemented")
                         }
                     })
-
-
                     //END
 
 
-                    //jak sie uda to:
-                    var trip = DatabaseConnection().loadTrip()
+
                     if (!isLoading) {
-                        Log.d("eeeee", trip.tripName)
                         transferData(TripGIT, tripID)
                         listUserInTrip.clear()
                         list.clear()
@@ -303,11 +286,6 @@ fun AddExpense(
                 } else {
                     showADDError = true
                 }
-
-//                TotalAmount +=expenseSUM.value.toDouble()
-//                transferData( DatabaseConnection().loadTrip() , tripID)
-
-
             }
             )
         },
@@ -390,7 +368,6 @@ fun AddExpense(
                 )
                 Spacer(modifier = Modifier.height(15.dp))
 
-//TODO()tu zmienic na liste osob w wycieczce
                 Divider(color = Color.White, thickness = 2.dp)
                 Listpersons3(tripUsers)
             }

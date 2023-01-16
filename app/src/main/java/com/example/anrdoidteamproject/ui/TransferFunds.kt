@@ -1,6 +1,7 @@
 package com.example.anrdoidteamproject.ui
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -29,14 +30,16 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
-import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
-import com.example.anrdoidteamproject.businessLogic.User
+import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 var value: Double = 0.0
-var selectedPerson: String=""
+var selectedPerson: String = ""
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
@@ -80,20 +83,19 @@ fun transferFunds(
 }
 
 
-
-
-
-
 @Composable
 fun TransferFunds(
     navController: NavController = rememberNavController(),
     userInfoButtonOnClick: () -> Unit = {},
     homeButtonOnClick: () -> Unit = {},
-    settingsButtonOnClick: () -> Unit = {}
+    settingsButtonOnClick: () -> Unit = {},
 ) {
 
     var showADDError by remember { mutableStateOf(false) }
     var showADD by remember { mutableStateOf(false) }
+
+    var isLoadingAnimation by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -106,19 +108,83 @@ fun TransferFunds(
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
 
-                if (value.toString().isNotEmpty() && value != 0.0 && selectedPerson!="") {
-                    /*TODO*/
-                    //wartosc zwrotu value
-                    //value
-                    //osoba lub osoby ktore mają miec usuniety zysk z bilansu (lista osob w wycieczce i zmienic bilans)
-                    selectedPerson
+                if (value.toString().isNotEmpty() && value != 0.0 && selectedPerson != "") {
 
-                    //osoba ktora zwraca koszty i ma miec polepszony bilans
-                    //paying_person = Firebase.auth.currentUser.hashCode()
+                    val tripRef = DatabaseConnection.db.getReference("trips")
 
-                    selectedPerson=""
-                    showADD=true
-                    navController.popBackStack()
+
+                    tripRef.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (value != 0.0) {
+                                Log.d("eeeee", selectedPerson.toString())
+                                for (user in tripUsers) {
+                                    if (Firebase.auth.currentUser?.email.toString() == user.id) {
+                                        //Log.d("eeeee", user.balance.toString())
+                                        user.balance = user.balance + value
+                                    }
+                                }
+                                for (user in tripUsers) {
+                                    if (selectedPerson == user.id) {
+                                        Log.d("eeeee", user.balance.toString())
+                                        user.balance = user.balance - value
+                                    }
+                                }
+
+                                tripRef.child(tripID.toString()).child("tripUsers").setValue(
+                                    tripUsers
+                                )
+
+
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+
+                    //Start
+                    var TripGIT: Trip = Trip()
+                    val tripsRef = DatabaseConnection.db.getReference("trips")
+                    tripsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            isLoading = false
+                            for (childSnapshot in snapshot.children) {
+                                Log.d("eeee", "${childSnapshot.key}")
+                                Log.d("eeee", "${tripID}")
+
+                                val trip = childSnapshot.getValue(Trip::class.java)
+                                if (trip != null) {
+                                    if (childSnapshot.key == tripID) {
+                                        TripGIT = trip
+                                        Log.d("eeee", "${tripID}")
+                                        Log.d("eeee", trip.tripName)
+                                        Log.d("eeee", TripGIT.tripName)
+                                    }
+
+                                }
+                                selectedPerson = ""
+                                value= 0.0
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+                    //END
+
+
+//                    jak sie uda to:
+
+                    if (!isLoading) {
+                        transferData(TripGIT, tripID)
+                    } else {
+                        isLoadingAnimation = true
+                    }
+
+
+
                 } else {
                     showADDError = true
                 }
@@ -130,6 +196,13 @@ fun TransferFunds(
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
+        if (!isLoading) {
+            navController.popBackStack()
+            showADD = true
+            isLoading = true
+        }
+        if (isLoading) LoadingAnimation()
+
         if (showADDError) {
             Toast.makeText(
                 LocalContext.current, stringResource(R.string.toastNull),
@@ -200,8 +273,17 @@ fun Preview_MultipleRadioButtons() {
 
     val isSelectedItem: (String) -> Boolean = { selectedValue.value == it }
     val onChangeState: (String) -> Unit = { selectedValue.value = it }
-//TODO()tu zmienic na liste osob w wycieczce
-    val items = DatabaseConnection.friendList
+
+
+    val itemstemp= tripUsers.toMutableList()
+    var user = User_in_trip()
+    for (item in itemstemp){
+        if (item.id==Firebase.auth.currentUser?.email.toString()){
+            user=item
+        }
+    }
+    itemstemp.remove(user)
+    val items = itemstemp
     Column(Modifier.padding(8.dp)) {
 //        Text(text = "Selected value: ${selectedValue.value.ifEmpty { "NONE" }}")
         items.forEach { item ->
@@ -209,11 +291,11 @@ fun Preview_MultipleRadioButtons() {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .selectable(
-                        selected = isSelectedItem(item.email),
+                        selected = isSelectedItem(item.id),
                         onClick = {
-                            onChangeState(item.email)
-                            selectedPerson=item.email
-                                  },
+                            onChangeState(item.id)
+                            selectedPerson = item.id
+                        },
                         role = Role.RadioButton
                     )
                     .padding(8.dp)
@@ -227,7 +309,7 @@ fun Preview_MultipleRadioButtons() {
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         RadioButton(
-                            selected = isSelectedItem(item.email),
+                            selected = isSelectedItem(item.id),
                             onClick = null,
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = Color.White,
@@ -237,7 +319,7 @@ fun Preview_MultipleRadioButtons() {
                         )
                         Spacer(modifier = Modifier.width(25.dp))
                         Text(
-                            text = item.firstName + " " + item.lastName,
+                            text = item.id,
                             color = Color.White,
                             fontSize = 25.sp,
                             fontFamily = FontFamily(
@@ -250,16 +332,6 @@ fun Preview_MultipleRadioButtons() {
                     Divider(color = Color.White, thickness = 2.dp)
 
                 }
-
-
-//                RadioButton(
-//                    selected = isSelectedItem(item.email),
-//                    onClick = null
-//                )
-//                Text(
-//                    text = item.firstName,
-//                    modifier = Modifier.fillMaxWidth()
-//                )
             }
         }
     }

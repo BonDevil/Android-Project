@@ -9,12 +9,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
+var isLoading=true
+
 class DatabaseConnection {
     companion object {
         val db =
             FirebaseDatabase.getInstance("https://androidteamproject-37498-default-rtdb.europe-west1.firebasedatabase.app/")
         var friendList = mutableStateListOf<User>()
-        var tripList = mutableStateListOf<Trip>()
+        var tripList = mutableStateListOf<Pair<Trip,String?>>()
     }
 
     @Composable
@@ -64,14 +66,16 @@ class DatabaseConnection {
         tripsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (childSnapshot in snapshot.children) {
+                    Log.d("eee", "${childSnapshot.key}")
                     val trip = childSnapshot.getValue(Trip::class.java)
                     if (trip != null) {
                         for (tripUser in trip.tripUsers) {
                             Log.d("eo", "aaaaabbbbbb$trip")
                             if (tripUser.id == currentUserEmail) {
-                                tripList.add(trip)
+                                tripList.add(Pair(trip,childSnapshot.key))
                             }
                         }
+
                     }
                 }
             }
@@ -80,5 +84,36 @@ class DatabaseConnection {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+
+    fun loadTrip():Trip  {
+        var TripGIT:Trip=Trip()
+        val tripsRef = db.getReference("trips")
+        tripsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                isLoading = false
+                for (childSnapshot in snapshot.children) {
+                    Log.d("eeee", "${childSnapshot.key}")
+                    Log.d("eeee", "${tripID}")
+
+                    val trip = childSnapshot.getValue(Trip::class.java)
+                    if (trip != null) {
+                        if(childSnapshot.key== tripID) {
+                            TripGIT = trip
+                            Log.d("eeee", "${tripID}")
+                            Log.d("eeee", trip.tripName)
+                            Log.d("eeee", TripGIT.tripName)
+                        }
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+        return TripGIT
     }
 }

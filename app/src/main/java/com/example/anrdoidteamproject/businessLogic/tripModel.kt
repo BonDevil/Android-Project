@@ -2,7 +2,7 @@ package com.example.anrdoidteamproject.businessLogic
 
 import java.lang.Double.min
 
-public var tripID: Int = 0
+public var tripID: String? = ""
 public var tripName: String = "test"
 public var tripDescription: String = ""
 public var plannedAmount: Double = 100.0
@@ -24,7 +24,7 @@ public var cat6transport: Double = 0.0
 
 public var TotalAmount: Double = 0.0
 
-public lateinit var persons: List<User_in_trip>
+public lateinit var tripUsers: List<User_in_trip>
 
 public var persons2: ArrayList<String> = ArrayList()
 public var personsUser_In_Trip_inCreate: ArrayList<User_in_trip> =ArrayList()
@@ -38,15 +38,11 @@ public var cat4atractionsBalance = min((cat4atractions / cat4atractionsMax), (1.
 public var cat5planeBalance = min((cat5plane / cat5planeMax), (1.0)).toFloat()
 public var cat6transportBalance = min((cat6transport / cat6transportMax), (1.0)).toFloat()
 
-public var historyEmptySample = listOf(
-    Expenditure(),
-)
-
 public var historyReturnSample = listOf(
     TransferMoney(),
 )
 
-public var expenses: List<Expenditure> = historyEmptySample
+public var expenses: ArrayList<Expenditure> = ArrayList()
 
 public var historyReturns: List<TransferMoney> = historyReturnSample
 
@@ -69,10 +65,8 @@ public var cat5planeBalanceTotalALL = min((cat5plane / TotalAmount), (1.0)).toFl
 public var cat6transportBalanceTotalALL = min((cat6transport / TotalAmount), (1.0)).toFloat()
 
 
-fun transferData(trip:Trip){
-    //TODO()
-    //to trzeba zmienic
-    tripID = 0
+fun transferData(trip:Trip,key:String?){
+    tripID = key
 
     tripName=trip.tripName
     tripDescription= trip.tripDescription
@@ -125,7 +119,5 @@ fun transferData(trip:Trip){
 
     historyReturns=trip.historyReturns
 
-
-//TODO()
-//    persons=trip.persons
+    tripUsers=trip.tripUsers
 }

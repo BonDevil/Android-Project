@@ -111,6 +111,7 @@ fun AddTrip(
                         ) {
                             val tripRef = DatabaseConnection.db.getReference("trips")
                             val newTripRef = tripRef.push()
+
                             newTripRef.setValue(
                                 Trip(
                                     tripName,
@@ -124,7 +125,7 @@ fun AddTrip(
                                     cat5planeMax = catplane * plannedAmount.toDouble() * 0.01,
                                     cat6transportMax = cattransport * plannedAmount.toDouble() * 0.01,
                                     tripUsers = personsUser_In_Trip_inCreate,
-                                    expenses = listOf(),
+                                    expenses = ArrayList(),
                                     historyReturns = listOf()
                                 )
                             )

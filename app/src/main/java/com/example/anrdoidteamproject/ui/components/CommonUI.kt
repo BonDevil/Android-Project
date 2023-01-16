@@ -276,6 +276,7 @@ fun topBar22(message: String, message2: String, onClick: () -> Unit = {}) {
         modifier = Modifier
             .background(Color(44, 57, 100))
             .fillMaxHeight(0.075f)
+            .fillMaxWidth()
     ) {
 
         Column(modifier = Modifier.fillMaxWidth(0.5f), horizontalAlignment = Alignment.CenterHorizontally,) {

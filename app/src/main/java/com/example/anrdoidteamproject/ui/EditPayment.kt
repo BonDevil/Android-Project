@@ -181,7 +181,7 @@ fun EditPayment(
 
 
                         Divider(color = Color.White, thickness = 2.dp)
-                        Listpersons3(DatabaseConnection.friendList)
+                        //Listpersons3(DatabaseConnection.friendList)
                     }
                 }
             }

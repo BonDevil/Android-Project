@@ -22,7 +22,7 @@ class Trip {
 
     public var TotalAmount: Double = 0.0
 
-    public var expenses: List<Expenditure> = listOf()
+    public var expenses: ArrayList<Expenditure> = ArrayList()
 
     public var tripUsers: List<User_in_trip> = listOf()
 
@@ -41,7 +41,7 @@ class Trip {
         cat5planeMax: Double,
         cat6transportMax: Double,
         tripUsers: List<User_in_trip>,
-        expenses: List<Expenditure>,
+        expenses: ArrayList<Expenditure>,
         historyReturns: List<TransferMoney>,
     ) {
         this.tripName = tripName
@@ -73,7 +73,7 @@ class Trip {
         cat4atractionsMax: Double,
         cat5planeMax: Double,
         cat6transportMax: Double,
-        expenses: List<Expenditure>,
+        expenses: ArrayList<Expenditure>,
         historyReturns: List<TransferMoney>,
     ) {
         this.tripName = tripName

@@ -26,9 +26,11 @@ import com.example.anrdoidteamproject.ui.theme.*
 
 @Composable
 fun TripCard(
-    trip: Trip,
+    tuple: Pair<Trip,String?>,
     navController: NavController = rememberNavController(),
 ) {
+    var trip = tuple.first
+    var key = tuple.second
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -39,7 +41,7 @@ fun TripCard(
             OutlinedButton(
                 onClick = {
 
-                    transferData(trip)
+                    transferData(trip,key)
                     navController.navigate(AppScreens.Stats.name)
 
                 },
@@ -67,7 +69,7 @@ fun TripCard(
 
 
 @Composable
-fun ListTrips(trips: List<Trip>, navController: NavController = rememberNavController()) {
+fun ListTrips(trips: List<Pair<Trip,String?>>, navController: NavController = rememberNavController()) {
     LazyColumn {
         trips.map { item { TripCard(it, navController) } }
     }
@@ -115,15 +117,7 @@ fun TripsList(
             ) {
 
                 ListTrips(trips = DatabaseConnection.tripList, navController)
-                //Preview_MultipleRadioButtonsTrip()
             }
-//            Row(
-//            ) {
-//                PromptButton(
-//                    label = R.string.Szczegóły,
-//                    onClick = statsButtonOnClick
-//                )
-//            }
 
         }
 
@@ -131,89 +125,6 @@ fun TripsList(
 
 }
 
-@Composable
-fun Preview_MultipleRadioButtonsTrip() {
-    val selectedValue = remember { mutableStateOf("") }
-
-    val isSelectedItem: (String) -> Boolean = { selectedValue.value == it }
-    val onChangeState: (String) -> Unit = { selectedValue.value = it }
-
-    val items = DatabaseConnection.tripList
-    Column(Modifier.padding(8.dp)) {
-//        Text(text = "Selected value: ${selectedValue.value.ifEmpty { "NONE" }}")
-        items.forEach { item ->
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .selectable(
-                        selected = isSelectedItem(item.tripName),
-                        onClick = {
-                            onChangeState(item.tripName)
-                            selectedPerson = item.tripName
-                            transferData(item)
-                        },
-                        role = Role.RadioButton
-                    )
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        RadioButton(
-                            selected = isSelectedItem(item.tripName),
-                            onClick = null,
-                            colors = RadioButtonDefaults.colors(
-                                selectedColor = Color.White,
-                                unselectedColor = Color.White,
-                                disabledColor = Color.LightGray
-                            )
-                        )
-                        Spacer(modifier = Modifier.width(15.dp))
-//                        OutlinedButton(
-//                            onClick = {
-//
-//                                transferData(item)
-//
-//
-//                            },
-//                            Modifier.width(200.dp),
-//                            colors = ButtonDefaults.buttonColors(
-//                                backgroundColor = Color(24, 31, 54),
-//                                disabledBackgroundColor = Color(70, 99, 255),
-//                            )
-//                        ) {
-                        Text(
-                            text = item.tripName,
-                            color = Color.White,
-                            fontSize = 40.sp,
-                            fontFamily = FontFamily(
-                                Font(R.font.century_gothic)
-                            )
-                        )
-
-//                        }
-
-
-                    }
-                    Divider(color = Color.White, thickness = 2.dp)
-
-                }
-
-
-//                RadioButton(
-//                    selected = isSelectedItem(item.email),
-//                    onClick = null
-//                )
-//                Text(
-//                    text = item.firstName,
-//                    modifier = Modifier.fillMaxWidth()
-//                )
-            }
-        }
-    }
-}
 
 
 //object SampleData_trip {

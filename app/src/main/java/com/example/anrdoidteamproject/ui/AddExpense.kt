@@ -3,6 +3,7 @@ package com.example.anrdoidteamproject.ui
 import android.annotation.SuppressLint
 import android.os.Build
 import android.provider.ContactsContract.Data
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
@@ -35,17 +36,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.R
-import com.example.anrdoidteamproject.businessLogic.DatabaseConnection
-import com.example.anrdoidteamproject.businessLogic.Trip
-import com.example.anrdoidteamproject.businessLogic.User
-import com.example.anrdoidteamproject.businessLogic.User_in_trip
+import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 private var category = "food"
 private var list: ArrayList<String> = ArrayList()
 private var listUserInTrip: ArrayList<User_in_trip> = ArrayList()
+private var selectedIndexG: Int = 0
 
 @Composable
 fun DropdownCategories() {
@@ -97,6 +99,7 @@ fun DropdownCategories() {
         }
     }
     category = items[selectedIndex].toString()
+    selectedIndexG = selectedIndex
 }
 
 @SuppressLint("UnrememberedMutableState")
@@ -108,11 +111,13 @@ fun AddExpense(
     settingsButtonOnClick: () -> Unit = {},
     navController: NavController = rememberNavController()
 
-    ) {
+) {
     var expenseName = mutableStateOf("")
     var expenseSUM = mutableStateOf("")
     var showADDError by remember { mutableStateOf(false) }
     var showADD by remember { mutableStateOf(false) }
+    var isLoadingAnimation by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
     Scaffold(
         bottomBar = {
             bottomBar(
@@ -124,7 +129,118 @@ fun AddExpense(
         topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
-                if (!expenseSUM.value.isNullOrEmpty() && !expenseName.value.isNullOrEmpty()&& expenseSUM.value.toDouble()!=0.0) {
+                if (!expenseSUM.value.isNullOrEmpty() && !expenseName.value.isNullOrEmpty() && expenseSUM.value.toDouble() != 0.0 && !listUserInTrip.isEmpty()) {
+                    val tripRef = DatabaseConnection.db.getReference("trips")
+
+
+                    var expensesTemp: ArrayList<Expenditure>
+
+                    var ex: Expenditure = Expenditure(
+                        paying_person = Firebase.auth.currentUser?.email.toString(),
+                        category = category,
+                        value = expenseSUM.value.toDouble(),
+                        name = expenseName.value.toString()
+                    )
+
+                    expensesTemp = expenses
+
+                    tripRef.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (expenseSUM.value.toDouble() != 0.0) {
+
+
+                                var size = list.size
+                                var balanceChange = expenseSUM.value.toDouble() / size
+
+                                for (usertemp in list) {
+                                    for (user in tripUsers) {
+                                        if (usertemp == user.id) {
+                                            user.balance = user.balance - balanceChange
+                                        }
+                                    }
+                                }
+
+                                for (user in tripUsers) {
+                                    if (Firebase.auth.currentUser?.email.toString() == user.id) {
+                                        Log.d("eeeee", user.balance.toString())
+                                        user.balance = user.balance + expenseSUM.value.toDouble()
+                                    }
+                                }
+                                list.clear()
+
+
+
+
+                                expensesTemp.add(ex)
+
+
+                                tripRef.child(tripID.toString()).child("totalAmount")
+                                    .setValue(TotalAmount + expenseSUM.value.toDouble())
+
+                                val newTripRef = tripRef.child(tripID.toString()).child("expenses")
+                                newTripRef.setValue(
+                                    expensesTemp
+                                )
+
+                                tripRef.child(tripID.toString()).child("tripUsers").setValue(
+                                    tripUsers
+                                )
+
+
+                            }
+
+                            //Add to groups
+                            when (selectedIndexG) {
+                                0 -> {
+                                    tripRef.child(tripID.toString()).child("cat1food").setValue(
+                                        cat1food + expenseSUM.value.toDouble()
+                                    )
+                                }
+                                1 -> {
+                                    tripRef.child(tripID.toString()).child("cat2sleep").setValue(
+                                        cat2sleep + expenseSUM.value.toDouble()
+                                    )
+                                }
+                                2 -> {
+                                    tripRef.child(tripID.toString()).child("cat3drink").setValue(
+                                        cat3drink + expenseSUM.value.toDouble()
+                                    )
+                                }
+                                3 -> {
+                                    tripRef.child(tripID.toString()).child("cat4atractions")
+                                        .setValue(
+                                            cat4atractions + expenseSUM.value.toDouble()
+                                        )
+                                }
+                                4 -> {
+                                    tripRef.child(tripID.toString()).child("cat5plane").setValue(
+                                        cat5plane + expenseSUM.value.toDouble()
+                                    )
+                                }
+                                5 -> {
+                                    tripRef.child(tripID.toString()).child("cat6transport")
+                                        .setValue(
+                                            cat6transport + expenseSUM.value.toDouble()
+                                        )
+                                }
+
+                            }
+
+
+
+                            selectedIndexG = 100
+                            expenseSUM.value = "0"
+
+
+                        }
+
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
+
                     val myExpense = com.example.anrdoidteamproject.businessLogic.Expenditure(
                         paying_person = Firebase.auth.currentUser?.email.toString(),
                         category = category,
@@ -138,15 +254,58 @@ fun AddExpense(
                     list
 
 
+                    //Start
+
+                    var TripGIT: Trip = Trip()
+                    val tripsRef = DatabaseConnection.db.getReference("trips")
+                    tripsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            isLoading = false
+                            for (childSnapshot in snapshot.children) {
+                                Log.d("eeee", "${childSnapshot.key}")
+                                Log.d("eeee", "${tripID}")
+
+                                val trip = childSnapshot.getValue(Trip::class.java)
+                                if (trip != null) {
+                                    if (childSnapshot.key == tripID) {
+                                        TripGIT = trip
+                                        Log.d("eeee", "${tripID}")
+                                        Log.d("eeee", trip.tripName)
+                                        Log.d("eeee", TripGIT.tripName)
+                                    }
+
+                                }
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+
+
+                    //END
+
+
                     //jak sie uda to:
-                    listUserInTrip.clear()
-                    list.clear()
-                    showADD=true
-                    navController.popBackStack()
+                    var trip = DatabaseConnection().loadTrip()
+                    if (!isLoading) {
+                        Log.d("eeeee", trip.tripName)
+                        transferData(TripGIT, tripID)
+                        listUserInTrip.clear()
+                        list.clear()
+
+                    } else {
+                        isLoadingAnimation = true
+                    }
+
+
+                } else {
+                    showADDError = true
                 }
-                else{
-                    showADDError=true
-                }
+
+//                TotalAmount +=expenseSUM.value.toDouble()
+//                transferData( DatabaseConnection().loadTrip() , tripID)
 
 
             }
@@ -155,6 +314,12 @@ fun AddExpense(
         modifier = Modifier.background(color = Color(0xff181f36))
 
     ) {
+        if (!isLoading) {
+            navController.popBackStack()
+            showADD = true
+            isLoading = true
+        }
+        if (isLoading) LoadingAnimation()
         if (showADDError) {
             Toast.makeText(
                 LocalContext.current, stringResource(R.string.toastNull),
@@ -227,16 +392,15 @@ fun AddExpense(
 
 //TODO()tu zmienic na liste osob w wycieczce
                 Divider(color = Color.White, thickness = 2.dp)
-                Listpersons3(DatabaseConnection.friendList)
+                Listpersons3(tripUsers)
             }
         }
     }
 }
 
 
-
 @Composable
-fun PersonCard3(user: User) {
+fun PersonCard3(user: User_in_trip) {
 
     Column(
         modifier = Modifier
@@ -245,9 +409,9 @@ fun PersonCard3(user: User) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row() {
-            CheckBoxDemo(user.email)
+            CheckBoxDemo(user.id)
             Text(
-                text = user.firstName + " " + user.lastName,
+                text = user.id,
                 color = Color.White,
                 fontSize = 25.sp,
                 fontFamily = FontFamily(
@@ -265,7 +429,7 @@ fun PersonCard3(user: User) {
 
 
 @Composable
-fun Listpersons3(user: List<User>) {
+fun Listpersons3(user: List<User_in_trip>) {
     LazyColumn(
         contentPadding = PaddingValues(vertical = 40.dp)
 
@@ -273,10 +437,6 @@ fun Listpersons3(user: List<User>) {
         user.map { item { PersonCard3(it) } }
     }
 }
-
-
-
-
 
 
 @Composable

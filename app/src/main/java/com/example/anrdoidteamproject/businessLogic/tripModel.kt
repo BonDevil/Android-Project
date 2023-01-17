@@ -1,6 +1,9 @@
 package com.example.anrdoidteamproject.businessLogic
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.lang.Double.min
+import java.time.LocalDate
 
 public var tripID: String? = ""
 public var tripName: String = "test"
@@ -44,8 +47,8 @@ public var expenses: ArrayList<Expenditure> = ArrayList()
 
 public var historyReturns: ArrayList<TransferMoney> = ArrayList()
 
-//w pozniejszej wersji do zmiany :D
-public var today = (plannedAmount / numberOfDays)
+public var today = 0.0
+
 
 
 public var cat1foodBalanceTotal = min((cat1food / plannedAmount), (1.0)).toFloat()
@@ -62,8 +65,11 @@ public var cat4atractionsBalanceTotalALL = min((cat4atractions / TotalAmount), (
 public var cat5planeBalanceTotalALL = min((cat5plane / TotalAmount), (1.0)).toFloat()
 public var cat6transportBalanceTotalALL = min((cat6transport / TotalAmount), (1.0)).toFloat()
 
+public var todayBalance = 0.0f
 
-fun transferData(trip:Trip,key:String?){
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun transferData(trip:Trip, key:String?){
     tripID = key
 
     tripName=trip.tripName
@@ -93,7 +99,8 @@ fun transferData(trip:Trip,key:String?){
     cat5planeBalance = min((cat5plane / cat5planeMax), (1.0)).toFloat()
     cat6transportBalance = min((cat6transport / cat6transportMax), (1.0)).toFloat()
 
-    today = (plannedAmount / numberOfDays)
+
+
 
 
     cat1foodBalanceTotal = min((cat1food / plannedAmount), (1.0)).toFloat()
@@ -113,10 +120,23 @@ fun transferData(trip:Trip,key:String?){
 
 
 
+
     expenses=trip.expenses
 
     historyReturns=trip.historyReturns
 
     tripUsers=trip.tripUsers
+
+    today=0.0
+    for(item in expenses){
+        if (item.date.toString()== LocalDate.now().toString())
+            today+=item.value
+    }
+
+    if (TotalAmount!=0.0){
+        todayBalance= (today/ TotalAmount).toFloat()}
+
+
+
 
 }

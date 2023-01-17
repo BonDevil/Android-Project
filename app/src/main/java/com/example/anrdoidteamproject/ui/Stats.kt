@@ -552,7 +552,7 @@ fun Stats(
                     )
                     {
                         DrawGradientCircleToday(
-                            percentage = today.toFloat(),
+                            percentage = todayBalance,
                             backgroundColor = Brush.horizontalGradient(
                                 listOf(
                                     Color(0xFF181F36),

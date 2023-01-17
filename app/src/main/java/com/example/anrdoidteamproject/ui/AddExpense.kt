@@ -196,8 +196,8 @@ fun AddExpense(
                                     tripRef.child(tripID.toString()).child("cat1food").setValue(
                                         cat1food + expenseSUM.value.toDouble()
                                     )
-                                    TotalAmount+=expenseSUM.value.toDouble()
-                                    cat1food+=expenseSUM.value.toDouble()
+                                    TotalAmount += expenseSUM.value.toDouble()
+                                    cat1food += expenseSUM.value.toDouble()
 
 
                                     transferData(
@@ -221,16 +221,17 @@ fun AddExpense(
                                             expenses,
                                             tripUsers,
                                             historyReturns
-                                        ), tripID)
-                                    isLoading=false
+                                        ), tripID
+                                    )
+                                    isLoading = false
 
                                 }
                                 1 -> {
                                     tripRef.child(tripID.toString()).child("cat2sleep").setValue(
                                         cat2sleep + expenseSUM.value.toDouble()
                                     )
-                                    TotalAmount+=expenseSUM.value.toDouble()
-                                    cat2sleep+=expenseSUM.value.toDouble()
+                                    TotalAmount += expenseSUM.value.toDouble()
+                                    cat2sleep += expenseSUM.value.toDouble()
 
                                     transferData(
                                         Trip(
@@ -253,14 +254,17 @@ fun AddExpense(
                                             expenses,
                                             tripUsers,
                                             historyReturns
-                                        ), tripID)
+                                        ), tripID
+                                    )
+                                    isLoading = false
+
                                 }
                                 2 -> {
                                     tripRef.child(tripID.toString()).child("cat3drink").setValue(
                                         cat3drink + expenseSUM.value.toDouble()
                                     )
-                                    TotalAmount+=expenseSUM.value.toDouble()
-                                    cat3drink+=expenseSUM.value.toDouble()
+                                    TotalAmount += expenseSUM.value.toDouble()
+                                    cat3drink += expenseSUM.value.toDouble()
 
                                     transferData(
                                         Trip(
@@ -283,7 +287,10 @@ fun AddExpense(
                                             expenses,
                                             tripUsers,
                                             historyReturns
-                                        ), tripID)
+                                        ), tripID
+                                    )
+                                    isLoading = false
+
                                 }
                                 3 -> {
                                     tripRef.child(tripID.toString()).child("cat4atractions")
@@ -291,8 +298,8 @@ fun AddExpense(
                                             cat4atractions + expenseSUM.value.toDouble()
                                         )
 
-                                    TotalAmount+=expenseSUM.value.toDouble()
-                                    cat4atractions+=expenseSUM.value.toDouble()
+                                    TotalAmount += expenseSUM.value.toDouble()
+                                    cat4atractions += expenseSUM.value.toDouble()
                                     transferData(
                                         Trip(
                                             tripName,
@@ -314,15 +321,18 @@ fun AddExpense(
                                             expenses,
                                             tripUsers,
                                             historyReturns
-                                        ), tripID)
+                                        ), tripID
+                                    )
+                                    isLoading = false
+
                                 }
                                 4 -> {
                                     tripRef.child(tripID.toString()).child("cat5plane").setValue(
                                         cat5plane + expenseSUM.value.toDouble()
                                     )
 
-                                    TotalAmount+=expenseSUM.value.toDouble()
-                                    cat5plane+=expenseSUM.value.toDouble()
+                                    TotalAmount += expenseSUM.value.toDouble()
+                                    cat5plane += expenseSUM.value.toDouble()
                                     transferData(
                                         Trip(
                                             tripName,
@@ -344,7 +354,10 @@ fun AddExpense(
                                             expenses,
                                             tripUsers,
                                             historyReturns
-                                        ), tripID)
+                                        ), tripID
+                                    )
+                                    isLoading = false
+
                                 }
                                 5 -> {
                                     tripRef.child(tripID.toString()).child("cat6transport")
@@ -352,8 +365,8 @@ fun AddExpense(
                                             cat6transport + expenseSUM.value.toDouble()
                                         )
 
-                                    TotalAmount+=expenseSUM.value.toDouble()
-                                    cat6transport+=expenseSUM.value.toDouble()
+                                    TotalAmount += expenseSUM.value.toDouble()
+                                    cat6transport += expenseSUM.value.toDouble()
                                     transferData(
                                         Trip(
                                             tripName,
@@ -375,7 +388,10 @@ fun AddExpense(
                                             expenses,
                                             tripUsers,
                                             historyReturns
-                                        ), tripID)
+                                        ), tripID
+                                    )
+                                    isLoading = false
+
                                 }
 
                             }
@@ -416,7 +432,8 @@ fun AddExpense(
             navController.popBackStack()
             navController.popBackStack()
             navController.navigate(
-                AppScreens.Stats.name)
+                AppScreens.Stats.name
+            )
             showADD = true
             isLoading = true
         }

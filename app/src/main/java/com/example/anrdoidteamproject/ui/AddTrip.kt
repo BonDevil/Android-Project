@@ -44,7 +44,6 @@ var cattransport = 16.0
 
 
 var tripNameG = ""
-var tripDescriptionG = ""
 var plannedAmountG = ""
 var numberOfDaysG = ""
 
@@ -58,7 +57,6 @@ fun AddTrip(
 ) {
 
     var tripName by remember { mutableStateOf(tripNameG) }
-    var tripDescription by remember { mutableStateOf(tripDescriptionG) }
     var plannedAmount by remember { mutableStateOf(plannedAmountG) }
     var numberOfDays by remember { mutableStateOf(numberOfDaysG) }
     var expanded by remember { mutableStateOf(false) }
@@ -80,7 +78,6 @@ fun AddTrip(
                     expanded = !expanded
 
                     tripNameG = tripName
-                    tripDescriptionG = tripDescription
                     plannedAmountG = plannedAmount.toString()
                     numberOfDaysG = numberOfDays.toString()
                 },
@@ -106,7 +103,7 @@ fun AddTrip(
                         Log.d("eee", persons2.toString())
                         Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
 
-                        if (!tripName.isNullOrEmpty() && !tripDescription.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
+                        if (!tripName.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
                             !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0
                         ) {
                             val tripRef = DatabaseConnection.db.getReference("trips")
@@ -115,7 +112,6 @@ fun AddTrip(
                             newTripRef.setValue(
                                 Trip(
                                     tripName,
-                                    tripDescription,
                                     plannedAmount = plannedAmount.toDouble(),
                                     numberOfDays.toInt(),
                                     cat1foodMax = catfood * plannedAmount.toDouble() * 0.01,
@@ -131,7 +127,6 @@ fun AddTrip(
                             )
 
                             tripNameG = ""
-                            tripDescriptionG = ""
                             plannedAmountG = ""
                             numberOfDaysG = ""
                             showADD = true
@@ -208,30 +203,6 @@ fun AddTrip(
                         .heightIn(min = 56.dp),
 
                     )
-
-//                trip description
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(
-                    text = stringResource(R.string.opis),
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily(
-                        Font(R.font.century_gothic)
-                    ),
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                TextField(
-                    value = tripDescription,
-                    onValueChange = { tripDescription = it },
-                    modifier = Modifier
-                        .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-                        .background(Color(217, 217, 217), RoundedCornerShape(10))
-                        .heightIn(min = 56.dp),
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Next
-                    )
-                )
 
 //                trip planned amount
                 Spacer(modifier = Modifier.height(20.dp))

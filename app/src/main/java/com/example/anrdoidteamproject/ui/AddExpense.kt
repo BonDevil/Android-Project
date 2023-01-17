@@ -136,12 +136,6 @@ fun AddExpense(
 
                     var expensesTemp: ArrayList<Expenditure>
 
-                    var ex: Expenditure = Expenditure(
-                        paying_person = Firebase.auth.currentUser?.email.toString(),
-                        category = category,
-                        value = expenseSUM.value.toDouble(),
-                        name = expenseName.value.toString()
-                    )
 
                     expensesTemp = expenses
 
@@ -149,6 +143,12 @@ fun AddExpense(
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             if (expenseSUM.value.toDouble() != 0.0) {
 
+                                var ex: Expenditure = Expenditure(
+                                    paying_person = Firebase.auth.currentUser?.email.toString(),
+                                    category = selectedIndexG,
+                                    value = expenseSUM.value.toDouble(),
+                                    name = expenseName.value.toString()
+                                )
 
                                 var size = list.size
                                 var balanceChange = expenseSUM.value.toDouble() / size

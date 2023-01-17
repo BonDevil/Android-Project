@@ -3,6 +3,7 @@ package com.example.anrdoidteamproject.ui
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -12,11 +13,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.*
 import com.example.anrdoidteamproject.ui.theme.PromptButton
@@ -28,20 +33,48 @@ import java.lang.Math.sin
 
 @Composable
 fun DrawGradientCircles(
+    navController: NavController = rememberNavController(),
+    cat: Int,
     modifier: Modifier = Modifier,
     percentage: Float,
     fillColor: Color,
     backgroundColor: Brush,
     strokeWidth: Dp,
-    image: Int
+    image: Int,
 
-) {
+
+    ) {
     //TODO:smaller icons
     var image = ImageBitmap.imageResource(id = image)
     Canvas(
         modifier = Modifier
             .size(150.dp)
             .padding(20.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    when (cat) {
+                        0 -> {
+                            expensescattemp = expensescat1
+                        }
+                        1 -> {
+                            expensescattemp = expensescat2
+                        }
+                        2 -> {
+                            expensescattemp = expensescat3
+                        }
+                        3 -> {
+                            expensescattemp = expensescat4
+                        }
+                        4 -> {
+                            expensescattemp = expensescat5
+                        }
+                        5 -> {
+                            expensescattemp = expensescat6
+                        }
+                    }
+                    navController.navigate(AppScreens.HistoryCategory.name)
+                })
+            }
     ) {
 
         val canvasWidth = size.width
@@ -96,7 +129,8 @@ fun DrawGradientCircleToday(
     percentage: Float,
     backgroundColor: Brush,
     strokeWidth: Dp,
-    total: String
+    total: String,
+    navController: NavController = rememberNavController(),
 
 ) {
     val text = stringResource(id = R.string.dzisiaj)
@@ -104,6 +138,10 @@ fun DrawGradientCircleToday(
         modifier = Modifier
             .size(200.dp)
             .padding(20.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    expensescattemp= expensestoday
+                    navController.navigate(AppScreens.HistoryCategory.name)})}
     ) {
 
         drawContext.canvas.nativeCanvas.apply {
@@ -180,9 +218,10 @@ fun DrawGradientCircle(
     backgroundColor: Brush,
     strokeWidth: Dp,
     total: String,
+    navController: NavController = rememberNavController()
 
 
-    ) {
+) {
 
 
     Canvas(
@@ -190,6 +229,9 @@ fun DrawGradientCircle(
 //            .size(200.dp)
             .aspectRatio(1f)
             .padding(20.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = { navController.navigate(AppScreens.Balance.name) })
+            }
     ) {
 
         val canvasWidth = size.width
@@ -292,6 +334,7 @@ fun gridcat(
     percentage4: Float,
     percentage5: Float,
     percentage6: Float,
+    navController: NavController = rememberNavController()
 ) {
     Column(
         modifier = Modifier
@@ -321,7 +364,9 @@ fun gridcat(
 //                    Color(android.graphics.Color.parseColor("#90A4AE")),
                     strokeWidth = 10.dp,
 
-                    image = R.drawable.food
+                    image = R.drawable.food,
+                    cat = 0,
+                    navController = navController
                 )
             }
             Box(
@@ -339,7 +384,9 @@ fun gridcat(
                         )
                     ),
                     strokeWidth = 10.dp,
-                    image = R.drawable.sleep
+                    image = R.drawable.sleep,
+                    cat = 1,
+                    navController = navController
                 )
             }
             Box(
@@ -357,7 +404,9 @@ fun gridcat(
                         )
                     ),
                     strokeWidth = 10.dp,
-                    image = R.drawable.drink
+                    image = R.drawable.drink,
+                    cat = 2,
+                    navController = navController
                 )
             }
         }
@@ -380,7 +429,9 @@ fun gridcat(
                         )
                     ),
                     strokeWidth = 10.dp,
-                    image = R.drawable.gift
+                    image = R.drawable.gift,
+                    cat = 3,
+                    navController = navController
                 )
             }
             Box(
@@ -398,7 +449,9 @@ fun gridcat(
                         )
                     ),
                     strokeWidth = 10.dp,
-                    image = R.drawable.plane
+                    image = R.drawable.plane,
+                    cat = 4,
+                    navController = navController
                 )
             }
             Box(
@@ -416,7 +469,9 @@ fun gridcat(
                         )
                     ),
                     strokeWidth = 10.dp,
-                    image = R.drawable.train
+                    image = R.drawable.train,
+                    cat = 5,
+                    navController = navController
                 )
             }
         }
@@ -429,6 +484,7 @@ fun Stats(
     homeButtonOnClick: () -> Unit = {},
     settingsButtonOnClick: () -> Unit = {},
     bilansButton: () -> Unit = {},
+    navController: NavController = rememberNavController(),
 
     addExpense: () -> Unit = {},
 //    tripName: String
@@ -499,7 +555,7 @@ fun Stats(
                             ),
                             strokeWidth = 30.dp,
                             //total = String.format("%.2f", TotalAmount)
-                            total = TotalAmount.toString()
+                            total = TotalAmount.toString(), navController = navController
                         )
                     } else {
                         DrawGradientCircle(
@@ -517,7 +573,7 @@ fun Stats(
                             ),
                             strokeWidth = 30.dp,
 //                            total = String.format("%.2f", TotalAmount)
-                                    total = TotalAmount.toString()
+                            total = TotalAmount.toString(), navController = navController
                         )
                     }
                 }
@@ -537,6 +593,7 @@ fun Stats(
                         percentage4 = cat4atractionsBalance,
                         percentage5 = cat5planeBalance,
                         percentage6 = cat6transportBalance,
+                        navController = navController
                     )
                 }
 
@@ -560,7 +617,8 @@ fun Stats(
                                 )
                             ),
                             strokeWidth = 20.dp,
-                            total = String.format("%.2f", today)
+                            total = String.format("%.2f", today),
+                            navController = navController
                         )
                     }
                     //TODO: circle button?

@@ -44,6 +44,16 @@ public var cat6transportBalance = min((cat6transport / cat6transportMax), (1.0))
 
 
 public var expenses: ArrayList<Expenditure> = ArrayList()
+public var expensescat1: ArrayList<Expenditure> = ArrayList()
+public var expensescat2: ArrayList<Expenditure> = ArrayList()
+public var expensescat3: ArrayList<Expenditure> = ArrayList()
+public var expensescat4: ArrayList<Expenditure> = ArrayList()
+public var expensescat5: ArrayList<Expenditure> = ArrayList()
+public var expensescat6: ArrayList<Expenditure> = ArrayList()
+public var expensestoday: ArrayList<Expenditure> = ArrayList()
+
+
+public var expensescattemp: ArrayList<Expenditure> = expensescat1
 
 public var historyReturns: ArrayList<TransferMoney> = ArrayList()
 
@@ -127,11 +137,41 @@ fun transferData(trip:Trip, key:String?){
 
     tripUsers=trip.tripUsers
 
+    expensestoday = ArrayList()
     today=0.0
     for(item in expenses){
-        if (item.date.toString()== LocalDate.now().toString())
+        if (item.date.toString()== LocalDate.now().toString()){
             today+=item.value
+            expensestoday.add(item)
+        }
+
     }
+
+
+    expensescat1 = ArrayList()
+    expensescat2 = ArrayList()
+    expensescat3 = ArrayList()
+    expensescat4 = ArrayList()
+    expensescat5 = ArrayList()
+    expensescat6 = ArrayList()
+    for(item in expenses){
+        when (item.category) {
+            0 -> {
+                expensescat1.add(item)}
+            1 -> {
+                expensescat2.add(item)}
+            2 -> {
+                expensescat3.add(item)}
+            3 -> {
+                expensescat4.add(item)}
+            4 -> {
+                expensescat5.add(item)}
+            5 -> {
+                expensescat6.add(item)}
+        }
+    }
+
+
 
     if (TotalAmount!=0.0){
         todayBalance= (today/ TotalAmount).toFloat()}

@@ -11,7 +11,7 @@ class Expenditure {
 
 
     public var paying_person: String = ""
-    public var category: String = "cat1food"
+    public var category: Int = 0
     public var value: Double = 0.0
     public var name: String = ""
     public var date: String = ""
@@ -20,7 +20,7 @@ class Expenditure {
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(
         paying_person: String,
-        category: String,
+        category: Int,
         value: Double,
         name: String,
 //        persons: List<Int>,
@@ -39,7 +39,7 @@ class Expenditure {
     constructor(
         constructortestowytest:String,
         paying_person: String,
-        category: String,
+        category: Int,
         value: Double,
         name: String,
 //        persons: List<Int>,

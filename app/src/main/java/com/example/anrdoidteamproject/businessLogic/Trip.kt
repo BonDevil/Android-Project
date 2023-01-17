@@ -31,7 +31,6 @@ class Trip {
 
     constructor(
         tripName: String,
-        tripDescription: String,
         plannedAmount: Double,
         numberOfDays: Int,
         cat1foodMax: Double,
@@ -45,7 +44,6 @@ class Trip {
         historyReturns: ArrayList<TransferMoney>,
     ) {
         this.tripName = tripName
-        this.tripDescription = tripDescription
         this.plannedAmount = plannedAmount
         this.numberOfDays = numberOfDays
         this.cat1foodMax = cat1foodMax

@@ -42,6 +42,7 @@ enum class AppScreens() {
     TripsList,
     UserInfo,
     Invitations,
+    HistoryCategory,
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -212,6 +213,7 @@ fun MainApp(
                 settingsButtonOnClick = settingsButtonOnClick,
                 addExpense = addExpense,
                 bilansButton = balanceButton,
+                navController = navController
                 //tripName = " "
             )
         }
@@ -234,6 +236,13 @@ fun MainApp(
         }
         composable(AppScreens.Invitations.name) {
             InvitationsList(
+                userInfoButtonOnClick = userInfoButtonOnClick,
+                homeButtonOnClick = homeButtonOnClick,
+                settingsButtonOnClick = settingsButtonOnClick,
+            )
+        }
+        composable(AppScreens.HistoryCategory.name) {
+            HistoryCategory(
                 userInfoButtonOnClick = userInfoButtonOnClick,
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,

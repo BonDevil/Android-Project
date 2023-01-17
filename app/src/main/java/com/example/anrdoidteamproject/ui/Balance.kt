@@ -29,6 +29,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barCornerSize
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barSpacing
@@ -272,6 +275,7 @@ fun Balance(
     settingsButtonOnClick: () -> Unit = {},
     topbarButton: () -> Unit = {},
     transferFunds: () -> Unit = {},
+    navController: NavController = rememberNavController()
 ) {
 
     Scaffold(
@@ -286,7 +290,10 @@ fun Balance(
             topBar21(
                 message = stringResource(R.string.historia),
                 message2 = stringResource(R.string.bilans),
-                onClick = topbarButton,
+                onClick = {
+                    navController.popBackStack()
+                    navController.navigate(AppScreens.History.name)
+                          },
             )
         },
         floatingActionButton = {

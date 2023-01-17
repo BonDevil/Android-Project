@@ -154,7 +154,8 @@ fun MainApp(
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
                 topbarButton = historyButton,
-                transferFunds = transferFundsButton
+                transferFunds = transferFundsButton,
+                        navController = navController
             )
         }
         composable(AppScreens.ChooseFriends.name) {
@@ -187,7 +188,8 @@ fun MainApp(
                 homeButtonOnClick = homeButtonOnClick,
                 settingsButtonOnClick = settingsButtonOnClick,
                 topbarButton = balanceButton,
-                historyReturnsButton= historyReturnsButton
+                historyReturnsButton= historyReturnsButton,
+                navController = navController
             )
         }
         composable(AppScreens.HistoryReturns.name) {
@@ -197,6 +199,7 @@ fun MainApp(
                 settingsButtonOnClick = settingsButtonOnClick,
                 topbarButton = balanceButton,
                 HistoryButton=historyButton,
+                navController = navController
             )
         }
         composable(AppScreens.MenuPayment.name) {

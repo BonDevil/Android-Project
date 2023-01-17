@@ -17,6 +17,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.Expenditure
 import com.example.anrdoidteamproject.businessLogic.TransferMoney
@@ -34,6 +37,7 @@ fun HistoryReturns(
     settingsButtonOnClick: () -> Unit = {},
     topbarButton: () -> Unit = {},
     HistoryButton: () -> Unit = {},
+    navController: NavController = rememberNavController()
 ) {
 
     Scaffold(
@@ -48,12 +52,14 @@ fun HistoryReturns(
             topBar22(
                 message = stringResource(R.string.historia),
                 message2 = stringResource(R.string.bilans),
-                onClick = topbarButton
+                onClick = { navController.popBackStack()
+                navController.popBackStack()
+                navController.navigate(AppScreens.Balance.name)}
             )
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = HistoryButton,
+                onClick = {navController.popBackStack()},
                 shape = RectangleShape,
                 backgroundColor = Color(26, 51, 101),
             ) {

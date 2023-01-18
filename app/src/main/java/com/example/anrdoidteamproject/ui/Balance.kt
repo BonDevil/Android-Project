@@ -2,16 +2,14 @@ package com.example.anrdoidteamproject.ui
 
 import android.graphics.BlurMaskFilter
 import android.util.Half.abs
+import android.util.Log
 import android.view.MotionEvent
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 //import androidx.compose.foundation.layout.ColumnScopeInstance.weight
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,6 +39,7 @@ import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
 import com.example.anrdoidteamproject.businessLogic.Expenditure
 import com.example.anrdoidteamproject.businessLogic.User_in_trip
+import com.example.anrdoidteamproject.businessLogic.maxiii
 import com.example.anrdoidteamproject.businessLogic.tripUsers
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barCornerSize
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barSpacing
@@ -66,14 +65,18 @@ var users = listOf(u1,u2,u3,u4)
 fun PreviewBarGraph() {
     //Preview for 3 bars per group
 
-        Box(modifier = Modifier
-            .rotate(90f)
+        Column(
+            modifier = Modifier
+                .rotate(90f)
+                .verticalScroll(rememberScrollState())
+                .horizontalScroll(rememberScrollState()),
 //            .padding(24.dp)
-            )
+
+        )
             {
             BarGraph(
                 //dla testu z wartościami wyżej
-                 barGroups = BalanceForBars(persons = users),
+                 barGroups = BalanceForBars(persons = tripUsers),
 
                 //dla testu z bazą
 //                barGroups = BalanceForBars(persons = tripUsers),
@@ -119,8 +122,8 @@ var maximum=0.0
 //)
 
 private object BarChartDefaults {
-    const val barVisualMinThreshold = -150
-    const val barVisualMaxThreshold = 150
+    val barVisualMinThreshold = -150
+    val barVisualMaxThreshold = 150
 
     val barWidth = 67.dp
     val barSpacing = 1.dp
@@ -179,10 +182,14 @@ fun ChartBarGroup(
 
 
             values.forEachIndexed { index, item ->
-                val (realPercentage, color) = item
+                var (realPercentage, color) = item
 //                realPercentage=
                 val yOffset: Int
-                val percentage = realPercentage.coerceIn(barVisualMinThreshold + 1, barVisualMaxThreshold - 1)
+                var percentage = (realPercentage/ maxiii *100).toInt()
+                Log.d("eeeee", maxiii.toString())
+//                Log.d("eeeeee", percentage2.toString())
+                Log.d("eeeee", realPercentage.toString())
+//                percentage = realPercentage.coerceIn(barVisualMinThreshold + 1, barVisualMaxThreshold - 1)
 
                 yOffset = if (percentage >= 0) {
                     abs(barVisualMinThreshold)
@@ -199,7 +206,7 @@ fun ChartBarGroup(
 //                }
 
                     GroupLabel(
-                        text = (label+"\n"+value.toString()+" zl"),
+                        text = (label+"\n"+value.toString()),
                             translation = -50f,
                     )
 
@@ -303,7 +310,7 @@ fun ChartBar(
 ) {
     val shape=RoundedCornerShape(topStart = if(percentage<=0) 0.dp else barCornerSize,topEnd = if(percentage<=0) 0.dp else barCornerSize,bottomStart = if(percentage<=0) barCornerSize else 0.dp,bottomEnd = if(percentage<=0) barCornerSize else 0.dp)
     val brush=if(percentage<=0) Brush.verticalGradient(listOf(color,Color(0xFF181F36))) else Brush.verticalGradient(listOf(Color(0xFF181F36),color))
-    Box(
+    Column(
         modifier = modifier
             .clip(shape)
             .height(abs(percentage).dp)
@@ -313,7 +320,8 @@ fun ChartBar(
 //            .shadow(Color.White,100.dp,100.dp,100.dp,100.dp,100.dp,modifier)
             .background(brush)
 
-    )
+    ){}
+
 }
 
 data class BarGroup(
@@ -368,14 +376,16 @@ fun Balance(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .background(color = Color(0xff181f36))
+                .background(color = Color(0xff181f36)),
 //                .verticalScroll(rememberScrollState())
 //                .weight(1f,false)
+
+
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.4f)
+                    .fillMaxHeight(0.5f)
                     .background(color = Color(0xff181f36)),
 
             ) {
@@ -398,25 +408,25 @@ fun Balance(
 //                }
 
             }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.3f)
-                    .background(color = Color(0xff181f36)),
-                verticalAlignment = Alignment.Bottom
-            ) {
-
-            }
-            //TODO: add list of payments
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .background(color = Color(0xff181f36)),
-                verticalAlignment = Alignment.Bottom
-            ) {
-                DebtCard()
-            }
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .fillMaxHeight(0.3f)
+//                    .background(color = Color(0xff181f36)),
+//                verticalAlignment = Alignment.Bottom
+//            ) {
+//
+//            }
+//            //TODO: add list of payments
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .fillMaxHeight()
+//                    .background(color = Color(0xff181f36)),
+//                verticalAlignment = Alignment.Bottom
+//            ) {
+//                DebtCard()
+//            }
         }
 
     }

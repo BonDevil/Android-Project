@@ -154,7 +154,7 @@ fun ExpenditureCard(expenditure: Expenditure) {
             Column() {
                 Text(
                     text = expenditure.paying_person,
-                    color = Color.White,
+                    color = Color.Red,
                     fontSize = 20.sp,
                     fontFamily = FontFamily(
                         Font(R.font.century_gothic)

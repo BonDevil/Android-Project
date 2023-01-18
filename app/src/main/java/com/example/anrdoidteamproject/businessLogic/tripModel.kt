@@ -2,8 +2,11 @@ package com.example.anrdoidteamproject.businessLogic
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.ui.graphics.Color
+import com.example.anrdoidteamproject.ui.BarGroup
 import java.lang.Double.min
 import java.time.LocalDate
+import kotlin.math.abs
 
 public var tripID: String? = ""
 public var tripName: String = "test"
@@ -24,6 +27,7 @@ public var cat3drink: Double = 0.0
 public var cat4atractions: Double = 0.0
 public var cat5plane: Double = 0.0
 public var cat6transport: Double = 0.0
+public var maxiii:Double=0.0
 
 
 public var TotalAmount: Double = 0.0
@@ -178,5 +182,11 @@ fun transferData(trip:Trip, key:String?){
 
 
 
+
+    maxiii= abs(tripUsers[0].balance)
+    for (i in tripUsers) {
+
+        if(abs(i.balance) >maxiii) maxiii= abs(i.balance)
+    }
 
 }

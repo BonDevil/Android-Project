@@ -7,6 +7,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 //import androidx.compose.foundation.layout.ColumnScopeInstance.weight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,6 +39,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.Expenditure
 import com.example.anrdoidteamproject.businessLogic.User_in_trip
 import com.example.anrdoidteamproject.businessLogic.tripUsers
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barCornerSize
@@ -410,15 +412,82 @@ fun Balance(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
-                    .background(color = Color(0xff000000)),
+                    .background(color = Color(0xff181f36)),
                 verticalAlignment = Alignment.Bottom
             ) {
-
+                DebtCard()
             }
         }
 
     }
 }
+@Composable
+//fun DebtCard(expenditure: Expenditure) {
+fun DebtCard() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp),
+
+        ) {
+        Row(modifier = Modifier.align(Alignment.Start)) {
+            Text(
+//                                text = expenditure.name,
+                text = "Name",
+                color = Color.White,
+                fontSize = 25.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                )
+            )
+        }
+        Row(modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically) {
+
+            Column(modifier = Modifier,
+            horizontalAlignment = Alignment.Start) {
+                Text(
+//                    text = stringResource(R.string.zaplacone_przez),
+                    text = "powinienie(na) zwrócić",
+                    color = Color.White,
+                    fontSize = 15.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    )
+                )
+            }
+            Column(horizontalAlignment = Alignment.End) {
+                Text(
+                    text = "20",
+                    color = Color(0xFF5980FF),
+                    fontSize = 25.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    )
+                )
+            }
+        }
+
+
+        Row(modifier = Modifier.align(Alignment.Start)) {
+            Text(
+                text = "Nataliia Matynenko",
+                color = Color.White,
+                fontSize = 25.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.century_gothic)
+                )
+            )
+        }
+        Divider(color = Color.White, thickness = 2.dp)
+
+    }
+
+}
+
+
+
 
 @Composable
 fun BalanceForBars(persons: List<User_in_trip>) : List<BarGroup> {

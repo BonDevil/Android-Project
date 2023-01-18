@@ -107,48 +107,60 @@ fun HistoryPreview() {
 fun ExpenditureCard(expenditure: Expenditure) {
     Column(
         modifier = Modifier
-            .fillMaxSize().padding(10.dp),
+            .fillMaxSize()
+            .padding(10.dp),
 
     ) {
-        Row(modifier = Modifier.align(Alignment.Start)) {
-            Text(
-                text = expenditure.name,
-                color = Color.White,
-                fontSize = 30.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
+        Row(modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically) {
+            Column() {
+                Text(
+                    text = expenditure.name,
+                    color = Color(0xFF5980FF),
+                    fontSize = 25.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    )
                 )
-            )
-        }
-        Row(modifier = Modifier.align(Alignment.End)) {
+            }
+
+
+        Column(modifier = Modifier) {
             Text(
                 text = expenditure.value.toString(),
-                color = Color.Cyan,
-                fontSize = 40.sp,
+                color = Color(0xFF5980FF),
+                fontSize = 25.sp,
                 fontFamily = FontFamily(
                     Font(R.font.century_gothic)
                 )
             )
         }
+    }
+        Row(modifier = Modifier.fillMaxWidth(),
 
-        Row(modifier = Modifier.align(Alignment.Start)) {
-            Text(
-                text = stringResource(R.string.zaplacone_przez),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
+            verticalAlignment = Alignment.CenterVertically) {
+
+            Column() {
+                Text(
+                    text = stringResource(R.string.zaplacone_przez)+" ",
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    )
                 )
-            )
-            Spacer(modifier = Modifier.width(6.dp))
-            Text(
-                text = expenditure.paying_person,
-                color = Color.Red,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(
-                    Font(R.font.century_gothic)
+            }
+            Column() {
+                Text(
+                    text = expenditure.paying_person,
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily(
+                        Font(R.font.century_gothic)
+                    )
                 )
-            )
+            }
 
 //            Spacer(modifier = Modifier.width(6.dp))
 //

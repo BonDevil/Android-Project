@@ -7,7 +7,10 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+//import androidx.compose.foundation.layout.ColumnScopeInstance.weight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,11 +31,15 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
 import com.example.anrdoidteamproject.R
+import com.example.anrdoidteamproject.businessLogic.User_in_trip
+import com.example.anrdoidteamproject.businessLogic.tripUsers
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barCornerSize
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barSpacing
 import com.example.anrdoidteamproject.ui.BarChartDefaults.barVisualMaxThreshold
@@ -43,9 +50,15 @@ import com.example.anrdoidteamproject.ui.BarChartDefaults.groupBarContainerHeigh
 import com.example.anrdoidteamproject.ui.theme.*
 import kotlin.math.abs
 
-
-
-
+//dla testu
+var u1=User_in_trip("Piotr\nGrygoruk",60.3)
+var u2=User_in_trip("Jakub\nRoszkowski",100.0)
+var u3=User_in_trip("Nataliia\nMartynenko",-30.5)
+var u4=User_in_trip("Piotr\nGrygoruk",60.3)
+var u5=User_in_trip("Jakub\nRoszkowski",100.1)
+var u6=User_in_trip("Nataliia\nMartynenko",-30.5)
+var users = listOf(u1,u2,u3,u4)
+//
 
 @Composable
 fun PreviewBarGraph() {
@@ -57,49 +70,57 @@ fun PreviewBarGraph() {
             )
             {
             BarGraph(
-                barGroups = mockedGraphData,
+                //dla testu z wartościami wyżej
+                 barGroups = BalanceForBars(persons = users),
+
+                //dla testu z bazą
+//                barGroups = BalanceForBars(persons = tripUsers),
+
+
+                //nevermind
+//                barGroups = mockedGraphData,
                 onGroupSelectionChanged = {}
             )
 
     }
 }
-
-val mockedGraphData = listOf(
-    BarGroup(
-        label = "Jakub\nRoszkowski",
-        values = listOf(
-            //we will have value/color pairs where the value will be between 100/-100
-            //we need to add 3 values so we can have 3 bars
-            67 to Color(0xFF00FD84),
-        )
-
-    ),
-    BarGroup(
-        label = "Nataliia\nMartynenko",
-        values = listOf(
-            45 to Color(0xFF00FD84),
-        )
-    ),
-    BarGroup(
-        label = "Piotr\nGrygoruk",
-        values = listOf(
-            70 to Color(0xFF00FD84),
-        )
-    ),
-    BarGroup(
-        label = "Jan\nKowalski",
-        values = listOf(
-
-            -70 to Color(0xFFFF5858),
-        )
-    )
-)
+var maximum=0.0
+//var mockedGraphData = listOf(
+//    BarGroup(
+//        label = "Jakub\nRoszkowski",
+//        values = listOf(
+//            //we will have value/color pairs where the value will be between 100/-100
+//            //we need to add 3 values so we can have 3 bars
+//            67 to Color(0xFF00FD84),
+//        )
+//
+//    ),
+//    BarGroup(
+//        label = "Nataliia\nMartynenko",
+//        values = listOf(
+//            45 to Color(0xFF00FD84),
+//        )
+//    ),
+//    BarGroup(
+//        label = "Piotr\nGrygoruk",
+//        values = listOf(
+//            70 to Color(0xFF00FD84),
+//        )
+//    ),
+//    BarGroup(
+//        label = "Jan\nKowalski",
+//        values = listOf(
+//
+//            -70 to Color(0xFFFF5858),
+//        )
+//    )
+//)
 
 private object BarChartDefaults {
     const val barVisualMinThreshold = -150
     const val barVisualMaxThreshold = 150
 
-    val barWidth = 50.dp
+    val barWidth = 67.dp
     val barSpacing = 1.dp
     val barCornerSize = 5.dp
 
@@ -128,6 +149,7 @@ fun BarGraph(
             }
             ChartBarGroup(
                 label = item.label,
+                value = item.value,
                 values = item.values
             )
 //            Spacer(modifier = Modifier.weight(1f).border(5.dp,Color.White,RoundedCornerShape(5.dp)))
@@ -141,22 +163,22 @@ fun BarGraph(
 fun ChartBarGroup(
     modifier: Modifier = Modifier,
     label: String,
+    value: Double,
     values: List<Pair<Int, Color>>,
 ) {
+
     Column(
         modifier = modifier
-            .height(groupBarAndLabelContainerHeight),
+            .height(groupBarAndLabelContainerHeight)
+            .border(1.dp, Color.White, RectangleShape),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        GroupLabel(
-            text = label
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Row(
-            modifier = Modifier.height(groupBarContainerHeight), verticalAlignment = Alignment.Bottom
-        ) {
+
+
+
             values.forEachIndexed { index, item ->
                 val (realPercentage, color) = item
+//                realPercentage=
                 val yOffset: Int
                 val percentage = realPercentage.coerceIn(barVisualMinThreshold + 1, barVisualMaxThreshold - 1)
 
@@ -167,6 +189,22 @@ fun ChartBarGroup(
                 } else {
                     0
                 }
+//                if(percentage<=0){
+//                    GroupLabel(
+//                        text = (label+"\n"+value.toString()+" zl"),
+//                        translation = -50f,
+//                    )
+//                }
+
+                    GroupLabel(
+                        text = (label+"\n"+value.toString()+" zl"),
+                            translation = -50f,
+                    )
+
+                Spacer(modifier = Modifier.weight(1f))
+                Row(
+                    modifier = Modifier.height(groupBarContainerHeight), verticalAlignment = Alignment.Bottom
+                ) {
                 Column(
                     modifier = Modifier.fillMaxHeight(),
                     verticalArrangement = Arrangement.Bottom
@@ -176,7 +214,14 @@ fun ChartBarGroup(
                         percentage = percentage,
                         color = color
                     )
+
                     Spacer(modifier = Modifier.height(yOffset.dp))
+//                    if(percentage>0){
+//                        GroupLabel(
+//                            text = (label+"\n"+value.toString()+" zl"),
+//                            translation = 50f,
+//                        )
+//                    }
                 }
                 if (index in 0 until values.size - 1) {
                     Spacer(modifier = Modifier.width(barSpacing))
@@ -191,19 +236,24 @@ fun ChartBarGroup(
 @Composable
 private fun GroupLabel(
     text: String,
+    translation: Float,
     color: Color=Color.White,
 ) {
     Text(
         modifier = Modifier
-            .rotate(-90f),
-
-
-
+            .rotate(-90f)
+            .graphicsLayer {
+                translationX = translation
+            }
+            .zIndex(2f),
         text = text,
         color = color,
         fontFamily = FontFamily(
             Font(R.font.century_gothic)
         ),
+//        style = TextStyle(
+//            fontSize = 10.sp,
+//        )
     )
 }
 fun Modifier.shadow(
@@ -256,7 +306,7 @@ fun ChartBar(
             .clip(shape)
             .height(abs(percentage).dp)
             .width(barWidth)
-            .border(1.dp,color,shape)
+            .border(1.dp, color, shape)
 //            .shadow(5.dp,shape,true)
 //            .shadow(Color.White,100.dp,100.dp,100.dp,100.dp,100.dp,modifier)
             .background(brush)
@@ -266,6 +316,7 @@ fun ChartBar(
 
 data class BarGroup(
     val label: String,
+    val value: Double,
     val values: List<Pair<Int, Color>>
 )
 @Composable
@@ -316,6 +367,8 @@ fun Balance(
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .background(color = Color(0xff181f36))
+//                .verticalScroll(rememberScrollState())
+//                .weight(1f,false)
         ) {
             Row(
                 modifier = Modifier
@@ -367,7 +420,28 @@ fun Balance(
     }
 }
 
+@Composable
+fun BalanceForBars(persons: List<User_in_trip>) : List<BarGroup> {
 
+    var bars: MutableList<BarGroup> = mutableListOf()
+    var color:Color
+    var max= abs(persons[0].balance)
+    for (i in persons) {
+        color=if(i.balance<=0) Color(0xFFFF5858) else(Color(0xFF00FD84))
+        bars.add(BarGroup(
+            label = i.id,
+            value=i.balance,
+            values = listOf(
+                (i.balance).toInt() to color,
+            ))
+        )
+        if(abs(i.balance)>max) max=abs(i.balance)
+    }
+//    mockedGraphData=bars
+    maximum=max
+//    return mockedGraphData
+    return bars
+}
 @Preview
 @Composable
 fun BalancePreview() {

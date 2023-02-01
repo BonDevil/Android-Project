@@ -130,6 +130,13 @@ fun AddExpense(
         topBar = { topBar(message = stringResource(R.string.dodaj_wydatek)) },
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
+
+                try {
+                    expenseSUM.value.toDouble()
+                }
+                catch (e: NumberFormatException) {expenseSUM.value= ""
+                }
+
                 if (!expenseSUM.value.isNullOrEmpty() && !expenseName.value.isNullOrEmpty() && expenseSUM.value.toDouble() != 0.0 && !listUserInTrip.isEmpty()) {
                     val tripRef = DatabaseConnection.db.getReference("trips")
 

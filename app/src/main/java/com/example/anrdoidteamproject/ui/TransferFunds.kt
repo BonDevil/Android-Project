@@ -40,7 +40,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
-var value: Double = 0.0
+var value: String = "0.0"
 var selectedPerson: String = ""
 
 @SuppressLint("UnrememberedMutableState")
@@ -111,34 +111,40 @@ fun TransferFunds(
         floatingActionButton = {
             ConfirmButton(confirmOnClick = {
 
-                if (value.toString().isNotEmpty() && value != 0.0 && selectedPerson != "") {
+                try {
+                    value.toDouble()
+                }
+                catch (e: NumberFormatException) {value= "0.0"
+                }
+
+                if (value.toString().isNotEmpty() && value.toDouble() != 0.0 && selectedPerson != "") {
 
                     val tripRef = DatabaseConnection.db.getReference("trips")
 
                     var TransferTemp: ArrayList<TransferMoney> =ArrayList()
 
                     var ex: TransferMoney = TransferMoney(Firebase.auth.currentUser?.email.toString(),
-                        selectedPerson, value)
+                        selectedPerson, value.toDouble())
 
                     TransferTemp = historyReturns
 
 
                     tripRef.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            if (value != 0.0) {
+                            if (value.toDouble() != 0.0) {
 
                                 TransferTemp.add(ex)
                                 Log.d("eeeee", selectedPerson.toString())
                                 for (user in tripUsers) {
                                     if (Firebase.auth.currentUser?.email.toString() == user.id) {
                                         //Log.d("eeeee", user.balance.toString())
-                                        user.balance = user.balance + value
+                                        user.balance = user.balance + value.toDouble()
                                     }
                                 }
                                 for (user in tripUsers) {
                                     if (selectedPerson == user.id) {
                                         Log.d("eeeee", user.balance.toString())
-                                        user.balance = user.balance - value
+                                        user.balance = user.balance - value.toDouble()
                                     }
                                 }
 
@@ -179,7 +185,7 @@ fun TransferFunds(
 
                                 }
                                 selectedPerson = ""
-                                value= 0.0
+                                value= "0.0"
                             }
                         }
 
@@ -274,8 +280,8 @@ fun TextFieldWithLabel1(
         textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
     )
     if (fieldValue.value.toString().isNotEmpty())
-        value = fieldValue.value.toString().toDouble()
-    else value = 0.0
+        value = fieldValue.value.toString()
+    else value = "0.0"
 
 }
 

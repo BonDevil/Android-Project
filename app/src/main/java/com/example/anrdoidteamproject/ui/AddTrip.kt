@@ -103,6 +103,18 @@ fun AddTrip(
                         Log.d("eee", persons2.toString())
                         Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
 
+                        try {
+                            numberOfDays.toInt()
+                        }
+                        catch (e: NumberFormatException) {numberOfDays= ""
+                        }
+
+                        try {
+                            plannedAmount.toDouble()
+                        }
+                        catch (e: NumberFormatException) {plannedAmount= ""
+                        }
+
                         if (!tripName.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
                             !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0
                         ) {

@@ -53,7 +53,6 @@ fun Register(
             var email by remember { mutableStateOf("") }
             var password by remember { mutableStateOf("") }
             var repeatPassword by remember { mutableStateOf("") }
-            var phoneNumber by remember { mutableStateOf("") }
             var passwordVisibility by remember { mutableStateOf(false) }
             var repeatPasswordVisibility by remember { mutableStateOf(false) }
             val auth by lazy { Firebase.auth }
@@ -177,18 +176,7 @@ fun Register(
                         else PasswordVisualTransformation()
                     )
                 }
-                Spacer(modifier = Modifier.height(15.dp))
-//      Text field for phone number
-                TextField(value = phoneNumber, onValueChange = { newText ->
-                    phoneNumber = newText
-                }, keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Phone, imeAction = ImeAction.Done
-                ), textStyle = TextStyle(color = Color.White, fontSize = 16.sp), label = {
-                    Text(
-                        stringResource(R.string.telefon),
-                        color = Color.White,
-                    )
-                })
+
                 Spacer(modifier = Modifier.height(60.dp))
                 PromptButton(label = R.string.rejestracja_zacheta, onClick = {
                     if (password.length >= 6 && password.equals(repeatPassword)) {
@@ -197,7 +185,7 @@ fun Register(
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("eo", "createUserWithEmail:success")
-                                    val myUser = User(firstName, lastName, phoneNumber, email)
+                                    val myUser = User(firstName, lastName, email)
                                     val reference = DatabaseConnection.db.getReference("Users")
                                     val hashedEmail = email.hashCode().toString()
                                     reference.child(hashedEmail).setValue(myUser)

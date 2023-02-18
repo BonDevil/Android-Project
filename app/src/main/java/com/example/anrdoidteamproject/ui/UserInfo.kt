@@ -40,7 +40,7 @@ import com.google.firebase.ktx.Firebase
 private var emailAddress: String = ""
 private var firstName: String = ""
 private var lastName: String = ""
-private var phoneNumber: String = ""
+
 
 @Composable
 fun UserInfo(
@@ -62,7 +62,6 @@ fun UserInfo(
             val myUser = dataSnapshot.getValue(User::class.java)
             Log.d("eo", "$dataSnapshot")
             if (myUser != null) {
-                phoneNumber = myUser!!.phoneNumber
                 lastName = myUser!!.lastName
                 firstName = myUser!!.firstName
             } else
@@ -137,16 +136,7 @@ fun UserInfo(
                         text = lastName,
                     )
 
-//              show phone number
-                    Spacer(modifier = Modifier.height(15.dp))
-                    Text(
-                        style = TextStyle(color = Color.White, fontSize = 24.sp),
-                        text = stringResource(id = R.string.telefon),
-                    )
-                    Text(
-                        style = TextStyle(color = Color.White, fontSize = 24.sp),
-                        text = phoneNumber,
-                    )
+
                     Spacer(modifier = Modifier.height(15.dp))
                     PromptButton(
                         label = R.string.wylogowanie,

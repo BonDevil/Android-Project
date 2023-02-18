@@ -211,7 +211,6 @@ fun AddExpense(
                                         Trip(
                                             tripName,
                                             plannedAmount,
-                                            numberOfDays,
                                             cat1foodMax,
                                             cat2sleepMax,
                                             cat3drinkMax,
@@ -244,7 +243,6 @@ fun AddExpense(
                                         Trip(
                                             tripName,
                                             plannedAmount,
-                                            numberOfDays,
                                             cat1foodMax,
                                             cat2sleepMax,
                                             cat3drinkMax,
@@ -277,7 +275,6 @@ fun AddExpense(
                                         Trip(
                                             tripName,
                                             plannedAmount,
-                                            numberOfDays,
                                             cat1foodMax,
                                             cat2sleepMax,
                                             cat3drinkMax,
@@ -311,7 +308,6 @@ fun AddExpense(
                                         Trip(
                                             tripName,
                                             plannedAmount,
-                                            numberOfDays,
                                             cat1foodMax,
                                             cat2sleepMax,
                                             cat3drinkMax,
@@ -344,7 +340,6 @@ fun AddExpense(
                                         Trip(
                                             tripName,
                                             plannedAmount,
-                                            numberOfDays,
                                             cat1foodMax,
                                             cat2sleepMax,
                                             cat3drinkMax,
@@ -378,7 +373,6 @@ fun AddExpense(
                                         Trip(
                                             tripName,
                                             plannedAmount,
-                                            numberOfDays,
                                             cat1foodMax,
                                             cat2sleepMax,
                                             cat3drinkMax,

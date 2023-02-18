@@ -45,7 +45,7 @@ var cattransport = 16.0
 
 var tripNameG = ""
 var plannedAmountG = ""
-var numberOfDaysG = ""
+
 
 @Composable
 fun AddTrip(
@@ -58,7 +58,6 @@ fun AddTrip(
 
     var tripName by remember { mutableStateOf(tripNameG) }
     var plannedAmount by remember { mutableStateOf(plannedAmountG) }
-    var numberOfDays by remember { mutableStateOf(numberOfDaysG) }
     var expanded by remember { mutableStateOf(false) }
     var expandedcat by remember { mutableStateOf(false) }
     var showADDError by remember { mutableStateOf(false) }
@@ -79,7 +78,6 @@ fun AddTrip(
 
                     tripNameG = tripName
                     plannedAmountG = plannedAmount.toString()
-                    numberOfDaysG = numberOfDays.toString()
                 },
                 backgroundColor = Color.White
             ) {
@@ -103,11 +101,7 @@ fun AddTrip(
                         Log.d("eee", persons2.toString())
                         Log.d("eee", personsUser_In_Trip_inCreate.get(0).id.toString())
 
-                        try {
-                            numberOfDays.toInt()
-                        }
-                        catch (e: NumberFormatException) {numberOfDays= ""
-                        }
+
 
                         try {
                             plannedAmount.toDouble()
@@ -116,7 +110,7 @@ fun AddTrip(
                         }
 
                         if (!tripName.isNullOrEmpty() && !plannedAmount.isNullOrEmpty() &&
-                            !numberOfDays.isNullOrEmpty() && plannedAmount.toDouble() != 0.0 && numberOfDays.toInt() != 0
+                            plannedAmount.toDouble() != 0.0
                         ) {
                             val tripRef = DatabaseConnection.db.getReference("trips")
                             val newTripRef = tripRef.push()
@@ -125,7 +119,6 @@ fun AddTrip(
                                 Trip(
                                     tripName,
                                     plannedAmount = plannedAmount.toDouble(),
-                                    numberOfDays.toInt(),
                                     cat1foodMax = catfood * plannedAmount.toDouble() * 0.01,
                                     cat2sleepMax = catsleep * plannedAmount.toDouble() * 0.01,
                                     cat3drinkMax = catdrink * plannedAmount.toDouble() * 0.01,
@@ -140,7 +133,6 @@ fun AddTrip(
 
                             tripNameG = ""
                             plannedAmountG = ""
-                            numberOfDaysG = ""
                             showADD = true
                             navController.popBackStack()
                         } else {
@@ -241,30 +233,7 @@ fun AddTrip(
                     )
                 )
 
-//                planned number of days
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(
-                    text = stringResource(R.string.ilosc_dni),
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily(
-                        Font(R.font.century_gothic)
-                    ),
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                TextField(
-                    value = numberOfDays,
-                    onValueChange = { numberOfDays = it },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Done
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth(0.3f)
-                        .border(2.dp, Color(89, 128, 255), RoundedCornerShape(10))
-                        .background(Color(217, 217, 217), RoundedCornerShape(10))
-                        .heightIn(min = 56.dp),
-                )
+
                 Spacer(modifier = Modifier.height(15.dp))
                 PromptButton(
                     label = R.string.kategorie_przycisk,

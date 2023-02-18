@@ -12,7 +12,6 @@ public var tripID: String? = ""
 public var tripName: String = "test"
 public var tripDescription: String = ""
 public var plannedAmount: Double = 100.0
-public var numberOfDays: Int = 1
 
 public var cat1foodMax: Double = 1.0
 public var cat2sleepMax: Double = 1.0
@@ -89,7 +88,6 @@ fun transferData(trip:Trip, key:String?){
     tripName=trip.tripName
     tripDescription= trip.tripDescription
     plannedAmount=trip.plannedAmount
-    numberOfDays=trip.numberOfDays
     TotalAmount=trip.TotalAmount
 
     cat1foodMax=trip.cat1foodMax

@@ -360,13 +360,15 @@ fun Balance(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = transferFunds,
-                backgroundColor = Color.White
+                backgroundColor = Color(26, 51, 101)
             ) {
                 Icon(
-                    painterResource(id = R.drawable.img_dolar),
-                    tint = Color(0xFF5AFAFF),
+                    painterResource(id = R.drawable.add_refund),
+                    tint = Color(0xFF5980FF),
                     contentDescription = null,
                 )
+//                Text(text = stringResource(R.string.dodaj_wydatek), color = Color.White,
+//                    fontSize = 20.sp)
             }
         },
         modifier = Modifier.background(color = Color(0xff181f36))

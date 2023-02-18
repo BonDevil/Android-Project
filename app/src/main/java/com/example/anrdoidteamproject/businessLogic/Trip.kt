@@ -4,7 +4,6 @@ class Trip {
     public var tripName: String = ""
     public var tripDescription: String = ""
     public var plannedAmount: Double = 0.0
-    public var numberOfDays: Int = 0
 
     public var cat1foodMax: Double = 0.0
     public var cat2sleepMax: Double = 0.0
@@ -32,7 +31,6 @@ class Trip {
     constructor(
         tripName: String,
         plannedAmount: Double,
-        numberOfDays: Int,
         cat1foodMax: Double,
         cat2sleepMax: Double,
         cat3drinkMax: Double,
@@ -45,7 +43,6 @@ class Trip {
     ) {
         this.tripName = tripName
         this.plannedAmount = plannedAmount
-        this.numberOfDays = numberOfDays
         this.cat1foodMax = cat1foodMax
         this.cat2sleepMax = cat2sleepMax
         this.cat3drinkMax = cat3drinkMax
@@ -64,7 +61,6 @@ class Trip {
         tripName: String,
         tripDescription: String,
         plannedAmount: Double,
-        numberOfDays: Int,
         cat1foodMax: Double,
         cat2sleepMax: Double,
         cat3drinkMax: Double,
@@ -77,7 +73,6 @@ class Trip {
         this.tripName = tripName
         this.tripDescription = tripDescription
         this.plannedAmount = plannedAmount
-        this.numberOfDays = numberOfDays
         this.cat1foodMax = cat1foodMax
         this.cat2sleepMax = cat2sleepMax
         this.cat3drinkMax = cat3drinkMax
@@ -101,7 +96,6 @@ class Trip {
     constructor(
         tripName: String,
         plannedAmount: Double,
-        numberOfDays: Int,
         cat1foodMax: Double,
         cat2sleepMax: Double,
         cat3drinkMax: Double,
@@ -121,7 +115,6 @@ class Trip {
     ) {
         this.tripName = tripName
         this.plannedAmount = plannedAmount
-        this.numberOfDays = numberOfDays
         this.cat1foodMax = cat1foodMax
         this.cat2sleepMax = cat2sleepMax
         this.cat3drinkMax = cat3drinkMax

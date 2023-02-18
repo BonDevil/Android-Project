@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.anrdoidteamproject.AppScreens
@@ -502,13 +503,16 @@ fun Stats(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = addExpense,
-                backgroundColor = Color.White
+                backgroundColor = Color(26, 51, 101)
             ) {
                 Icon(
-                    painterResource(id = R.drawable.img_dolar),
+                    painterResource(id = R.drawable.add_expense_img),
                     tint = Color(0xFF5980FF),
                     contentDescription = null,
+
                 )
+//                Text(text = stringResource(R.string.zwroc_koszty), color = Color.White,
+//                    fontSize = 20.sp)
             }
         },
 
